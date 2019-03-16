@@ -1,0 +1,23 @@
+<ul class="nav flex-column">
+    <li class="nav-item ">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="#"><i class="fas fa-fire"></i> tous les evenements <span class="float-right mt-1 badge badge-pill badge-success">{{totalEvent}}</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="#"><i class="fas fa-rss"></i> evenements inscris <span class="float-right mt-1 badge badge-pill badge-success">{{subscribedEvents}}</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="#"><i class="fas fa-list"></i> evenements organises <span class="float-right mt-1 badge badge-pill badge-success">{{myEventNbr}}</span></a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="#"><i class="fas fa-bookmark"></i> evenements enregistres <span class="float-right mt-1 badge badge-pill badge-success">10</span></a>
+    </li>              
+</ul>
+<hr>
+<h5>list des categories :</h5>
+<div class="mt-2 mb-2">
+    <div class="list-group">
+        {% for i in categories %}
+        <a class="list-group-item list-group-item-action" id="cat_{{i.id}}" href="#">{{i.nom}}</a>
+        {% endfor %}
+    </div>
+</div>

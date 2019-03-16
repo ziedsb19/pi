@@ -1,0 +1,8 @@
+evenements_homepage:
+    path:     /
+    defaults: { _controller: evenementsBundle:Evenement:index }
+
+evenements_add_event:
+    path:     /add
+    defaults: { _controller: evenementsBundle:Evenement:add }
+

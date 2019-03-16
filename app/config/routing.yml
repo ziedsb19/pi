@@ -1,0 +1,19 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+evenements:
+    resource: "@evenementsBundle/Resources/config/routing.yml"
+    prefix:   /evenement
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+tech_events:
+    resource: "@techEventsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+
+

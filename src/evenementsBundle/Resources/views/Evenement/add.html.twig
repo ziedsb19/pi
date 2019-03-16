@@ -1,0 +1,98 @@
+{% extends 'evenementsBundle::evenement.html.twig' %}
+
+{% block evenement_body %}
+    <h2>Ajouter votre evenement </h2>
+    <hr>
+    <div class="row ">
+        <div class="col-md-10 ">
+            {% for item in app.session.flashbag.get("form_error") %}
+                <div class="alert alert-danger fadeOut">
+                    <p>{{item}}</p>
+                </div>
+            {% endfor %}
+            {{form_start(form)}}
+                <div class="row">
+                    <div class="form-group col">
+                    {{form_label(form.titre)}}
+                    {{form_widget(form.titre)}}
+                    <div class="invalid-feedback">entrer un titre valide</div>
+                    </div>
+                    <div class="form-group col">
+                        {{form_label(form.date)}}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            {{form_widget(form.date)}}
+                            <div class="invalid-feedback">entrer une date valide</div>
+                         </div>   
+                    </div>          
+                </div>   
+                <div class="row">
+                    <div class="form-group col">
+                        {{form_label(form.adresse)}}
+                        {{form_widget(form.adresse)}}
+                        <div class="invalid-feedback">entrer un adresse valide</div>
+                    </div>    
+                </div>          
+                <div class="form-group">
+                    {{form_label(form.description)}}
+                    {{form_widget(form.description)}}
+                </div>                
+                <div class="row">
+                    <div class="form-group col">
+                        {{form_label(form.prix)}}
+                        {{form_widget(form.prix)}}
+                        <div class="invalid-feedback">entrer un prix valide</div>
+                    </div>                                
+                    <div class="form-group col">
+                        {{form_label(form.billetsRestants)}}
+                        {{form_widget(form.billetsRestants)}}
+                        <div class="invalid-feedback">entrer un nombre de billets valide</div>
+                    </div>   
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        {{form_label(form.categories)}}
+                    </div>    
+                    <div class=" row col-md-10">
+                    {% for c in form.categories %}
+                        <div class="form-check form-check-inline">
+                             <div class="custom-control custom-checkbox my-1 mr-sm-2 col">
+                                    {{form_widget(c)}}
+                                    {{form_label(c)}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group mt-1">
+                    {{form_widget(form.imageFile)}}
+                </div>  
+                <hr>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox my-1 mr-sm-2 ">
+                        <input type="checkbox" class="custom-control-input" id="termsAgree">
+                        <label class="custom-control-label" for="termsAgree">J'accepte les termes et conditions</label>
+                    </div>
+                </div >
+                <div class="row ">       
+                    <div class="form-group col">
+                        {{form_widget(form.captcha)}}
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary btn-block mt-1"><i class="fas fa-check-square"></i> valider l'evenement</button>
+                    </div>
+                </div>          
+            {{form_end(form)}}
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-4"> 
+        <a class="btn btn-outline-secondary" href="{{path('evenements_homepage')}}"><i class="fas fa-arrow-circle-left"></i> retour </a>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{asset('js/evenements/add.js')}}"> </script>
+{% endblock %}

@@ -1,0 +1,7 @@
+admin_evenement:
+    path:   /evenement
+    defaults: { _controller: AdminBundle:AdminEvenement:evenement}
+
+evenements_add_categorie:
+    path:     /ajouterCat
+    defaults: { _controller: AdminBundle:AdminEvenement:addCat }
