@@ -2,26 +2,21 @@
 
 {% block body %}
     <div class="alert alert-success fadeOut" role="alert">
-        <button type="button" class="close float-right" aria-label="Close">
+        <button type="button" class="close float-right closeJs" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>      
-        <script>
-          $('.close').click(function(){
-            $(this).parent().slideUp(500);
-          });
-        </script>
       <h4 class="alert-heading"> page d'evenement</h4>
       <p> evenements :)</p>
     </div>
+
     <div class="row m-2">
       <div class="col-md-3 pr-5 ">        
         {% block evenement_nav%}
           {{render(controller('evenementsBundle:Evenement:agregate'))}} 
-          <h5>Evenements récents:</h5>
-          <hr>
         {% endblock %}
           <a class="btn btn-primary btn-block" href="{{path('evenements_add_event')}}"><i class="fas fa-calendar-week"></i> Ajouter un evenement</a>
       </div>
+
       <div class="col-md-9">
         {% block evenement_body%}
         <div class="d-flex align-items-center">
@@ -29,7 +24,50 @@
           <button class="btn btn-primary ml-2"><i class="fas fa-search"></i> rechercher</button>
         </div>  
           <hr>
+        <div class="row">
+          <div class="col-md-8">
+              {% for e in evenements %}
+              <div class="card mb-3 shadow rounded" >
+                  <div class="row no-gutters">
+                    <div class="col-md-5">
+                      <img src="{{asset('images/evenements/'~e.urlImage)}}" class="img-fluid ">
+                    </div>
+                    <div class="col-md-7">
+                      <div class="card-body pb-1">
+                          <small class="text-muted float-right">mis à jour le {{e.dateModification |date('d/m/y')}}</small>
+                          <div>    
+                            <h5 class="card-title">{{e.titre}}</h5>
+                            <small class="card-subtitle text-muted">{{e.user.username}} - {{e.adresse}} - </small>
+                            <span class="float-right"><small class="text-muted">{{e.date | date('d/m/y')}}</small> <span><i class="fas fa-calendar-alt" style="; color : {% if e.date > date()%} green {%else%} red {% endif%};"></i></span></span>
+                          </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-end">
+                          <div>
+                            <a class="mr-2"><i class="far fa-bookmark" style="font-size:20px"></i></a>
+                            <a class="mr-2"><i class="far fa-flag" style="font-size:20px"></i></a>
+                            <a class="mr-2"><i class="fas fa-share-alt" style="font-size:20px"></i></a>
+                          </div>
+                          <div>
+                            <button class="btn btn-primary btn-sm">afficher detaills <i class="fas fa-arrow-alt-circle-right"></i></button>
+                          </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+
+          <div class="col-md-4"></div>
+          </div>  
         {% endblock %}
-      </div>    
+      </div>
+
     </div>
+{% endblock %}
+
+{% block javascript %}
+ {{parent()}}
+  <script src="{{asset('js/evenements/eventBase.js')}}">
+  </script>
 {% endblock %}

@@ -94,5 +94,6 @@
 {% endblock %}
 
 {% block javascript %}
+    {{parent()}}
     <script src="{{asset('js/evenements/add.js')}}"> </script>
 {% endblock %}

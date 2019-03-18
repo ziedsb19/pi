@@ -13,7 +13,10 @@ class EvenementController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('evenementsBundle::evenement.html.twig');
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository("evenementsBundle:Evenement");
+        $evenements = $repos->findAll();
+        return $this->render('evenementsBundle::evenement.html.twig', array("evenements"=>$evenements));
     }
 
     public function addAction(Request $req){
