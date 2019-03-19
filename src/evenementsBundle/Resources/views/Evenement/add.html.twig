@@ -3,8 +3,7 @@
 {% block evenement_body %}
     <h2>Ajouter votre evenement </h2>
     <hr>
-    <div class="row ">
-        <div class="col-md-10 ">
+        <div class="col-md-12 ">
             {% for item in app.session.flashbag.get("form_error") %}
                 <div class="alert alert-danger fadeOut">
                     <p>{{item}}</p>
@@ -77,7 +76,7 @@
                     </div>
                 </div >
                 <div class="row ">       
-                    <div class="form-group col">
+                    <div class="form-group col-md-7">
                         {{form_widget(form.captcha)}}
                     </div>
                     <div class="col">
@@ -86,11 +85,6 @@
                 </div>          
             {{form_end(form)}}
         </div>
-    </div>
-    <hr>
-    <div class="row mt-4"> 
-        <a class="btn btn-outline-secondary" href="{{path('evenements_homepage')}}"><i class="fas fa-arrow-circle-left"></i> retour </a>
-    </div>
 {% endblock %}
 
 {% block javascript %}

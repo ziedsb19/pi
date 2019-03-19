@@ -1,0 +1,17 @@
+<div class="list-group">
+    {% for e in events %}
+        <a href="#" class="list-group-item list-group-item-action ">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1 text-truncate ">{{e.titre}}</h6>
+                <small class="float-right">{{e.date|localizeddate('medium', 'none', 'null', null)}}</small>
+            </div>
+            {% if e.description is empty %}
+            <p style="font-size: 14px;" >pas de description pour cet évenement</p>
+            {% else %}
+            <p class="mb-1 truncate" style="font-size: 14px" >{{e.description}}</p>
+            {% endif %}
+            <small class="text-muted">{{e.adresse}}</small>
+        </a>
+    {% endfor %}
+</div>
+

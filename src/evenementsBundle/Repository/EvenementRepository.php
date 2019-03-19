@@ -29,4 +29,14 @@ class EvenementRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->_em->createQuery("select count(i) from evenementsBundle:Inscription i join i.user u join i.evenement e where e.disponibilite =1 and u.id = ".$userId);
         return $query->getSingleScalarResult();
     }
+
+    public function lastEvents($limit){
+        $query= $this->_em->createQuery("select e from evenementsBundle:Evenement e where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1 order by e.dateModification desc")->setMaxResults($limit);
+        return $query->getResult();
+    }
+
+    public function allEvents(){
+        $query= $this->_em->createQuery("select e,u from evenementsBundle:Evenement e join e.user u where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1 order by e.date DESC");
+        return $query->getResult();
+    }
 }

@@ -15,7 +15,7 @@ class EvenementController extends Controller
     {
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository("evenementsBundle:Evenement");
-        $evenements = $repos->findAll();
+        $evenements = $repos->allEvents();
         return $this->render('evenementsBundle::evenement.html.twig', array("evenements"=>$evenements));
     }
 
@@ -48,7 +48,18 @@ class EvenementController extends Controller
         $myEventNbr = $repos->myEvents($this->getUser()->getId());
         $subscribedEventNbr = $repos->subscribedEvents($this->getUser()->getId());
         return $this->render("evenementsBundle:Evenement:agregate.html.twig",
-            array("totalEvent"=>$totalEvent, "myEventNbr"=>$myEventNbr, "subscribedEvents"=> $subscribedEventNbr, "categories"=>$categories));
+            array("totalEvent"=>$totalEvent,
+                "myEventNbr"=>$myEventNbr,
+                "subscribedEvents"=> $subscribedEventNbr,
+                "categories"=>$categories));
+    }
+
+    public function lastEventsAction(){
+        $orm=$this->getDoctrine()->getManager();
+        $repos=$orm->getRepository('evenementsBundle:Evenement');
+        //$events=$repos->findBy(array(),array('dateModification'=>'desc'),3);
+        $events=$repos->lastEvents(3);
+        return $this->render("evenementsBundle:Evenement:lastEvents.html.twig", array("events"=>$events));
     }
 
 }
