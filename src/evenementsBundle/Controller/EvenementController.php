@@ -6,17 +6,40 @@ namespace evenementsBundle\Controller;
 use evenementsBundle\Entity\Evenement;
 use evenementsBundle\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class EvenementController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository("evenementsBundle:Evenement");
-        $evenements = $repos->allEvents();
-        return $this->render('evenementsBundle::evenement.html.twig', array("evenements"=>$evenements));
+
+        if ($request->query->get("sortBy")==2){
+            $query = $repos->allEventsByDateModif();
+        }
+
+        elseif ($request->query->get("sortBy")==3){
+            $query = $repos->allEventsByDate();
+        }
+        else {
+            $query = $repos->allEventsByViews();
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $evenements = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6
+        );
+        return $this->render('evenementsBundle:Evenement:evenements.html.twig', array("evenements"=>$evenements));
     }
 
     public function addAction(Request $req){
@@ -60,6 +83,21 @@ class EvenementController extends Controller
         //$events=$repos->findBy(array(),array('dateModification'=>'desc'),3);
         $events=$repos->lastEvents(3);
         return $this->render("evenementsBundle:Evenement:lastEvents.html.twig", array("events"=>$events));
+    }
+
+    public function searchAction(Request $req){
+        if ($req->isXmlHttpRequest()){
+            $orm= $this->getDoctrine()->getManager();
+            $repos = $orm->getRepository("evenementsBundle:Evenement");
+            $encoders = [new JsonEncoder()];
+            $normalizers = [new ObjectNormalizer()];
+            $serializer = new Serializer($normalizers, $encoders);
+
+            $events = $repos->search($req->get("search"));
+            $jsonContent = $serializer->serialize($events, 'json', array("attributes"=>["id","titre","urlImage","date","adresse"]));
+            return new response($jsonContent);
+        }
+        throw new NotFoundHttpException();
     }
 
 }

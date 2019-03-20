@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new techEventsBundle\techEventsBundle(),
             new evenementsBundle\evenementsBundle(),
             new AdminBundle\AdminBundle(),

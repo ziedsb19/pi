@@ -101,6 +101,13 @@ class Evenement
     /**
      * @var int
      *
+     * @ORM\Column(name="vues", type="integer", nullable=true)
+     */
+    private $vues;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="disponibilite", type="smallint")
      */
     private $disponibilite;
@@ -119,6 +126,7 @@ class Evenement
         $this->categories= new ArrayCollection();
         $this->evenementSauvegarde = new ArrayCollection();
         $this->disponibilite=1;
+        $this->vues=0;
     }
 
     /**
@@ -449,5 +457,29 @@ class Evenement
     public function getEvenementSauvegardes()
     {
         return $this->evenementSauvegardes;
+    }
+
+    /**
+     * Set vues
+     *
+     * @param integer $vues
+     *
+     * @return Evenement
+     */
+    public function setVues($vues)
+    {
+        $this->vues = $vues;
+
+        return $this;
+    }
+
+    /**
+     * Get vues
+     *
+     * @return integer
+     */
+    public function getVues()
+    {
+        return $this->vues;
     }
 }
