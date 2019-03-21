@@ -100,4 +100,26 @@ class EvenementController extends Controller
         throw new NotFoundHttpException();
     }
 
+    public function bookmarkAction (Request $req){
+        if ($req->isXmlHttpRequest()){
+            $orm=$this->getDoctrine()->getManager();
+            $repos= $orm->getRepository("evenementsBundle:Evenement");
+            $event= $repos->find($req->get("id"));
+            if ($event != null){
+                $arrayEs = $event->getEvenementSauvegardes()->toArray();
+                if (!in_array($this->getUser(),$arrayEs)) {
+                    $event->addEvenementSauvegarde($this->getUser());
+                    $orm->flush();
+                    return new Response("saved");
+                }
+                else{
+                    $event->removeEvenementSauvegarde($this->getUser());
+                    $orm->flush();
+                    return new Response("deleted");
+                }
+            }
+            return new Response("no");
+        }
+        throw new NotFoundHttpException();
+    }
 }
