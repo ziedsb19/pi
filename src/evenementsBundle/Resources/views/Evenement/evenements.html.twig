@@ -53,12 +53,12 @@
         <hr>
         <div class="d-flex justify-content-between ">
             <div>
-                <a data-toggle="tooltip" data-placement="top" title="partager l'evenement" role="button"><i
+                <a data-toggle="tooltip" data-placement="top" title="partager l'evenement" id="share_{{e.id}}" style="color: #2a4d69; cursor: pointer;"><i
                         class="fas fa-share-alt mr-3"></i></a>
-                <a data-toggle="tooltip" data-placement="top" class="bookmark" id="bookmark_{{e.id}}"
-                    title="ajouter à la liste des favoris" role="button"><i
+                <a  style="color: #2a4d69; cursor: pointer;" data-toggle="tooltip" data-placement="top" class="bookmark" id="bookmark_{{e.id}}"
+                    title="ajouter à la liste des favoris" ><i
                         class="{% if app.user in e.evenementSauvegardes %} fas {% else %} far {% endif %} fa-bookmark mr-3"></i></a>
-                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top"
+                <a style="color: #2a4d69; cursor: pointer;"ata-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top"
                     title="autre options" role="button" id="autre_{{e.id}}"><i class="fas fa-ellipsis-v mr-3"></i></a>
                 <div class="dropdown-menu" aria-labelledby="autre_{{e.id}}">
                     <button class="dropdown-item" href="#" {% if e.user ==  app.user %}disabled{% endif %} ><i class="fas fa-ban"></i> signaler l'evenement</button>
@@ -75,7 +75,7 @@
         {{ knp_pagination_render(evenements) }}
     </div>
 </div>
-<div style="display : none;" class="fixed-bottom col-md-6 alert alert-primary alert-dismissible" role="alert"
+<div style="display : none; " class="fixed-bottom col-md-6 alert alert-primary alert-dismissible" role="alert"
     id="alertBookmark">
     <p></p>
 </div>

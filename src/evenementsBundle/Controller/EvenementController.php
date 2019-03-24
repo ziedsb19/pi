@@ -42,6 +42,7 @@ class EvenementController extends Controller
         return $this->render('evenementsBundle:Evenement:evenements.html.twig', array("evenements"=>$evenements));
     }
 
+
     public function addAction(Request $req){
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -93,7 +94,7 @@ class EvenementController extends Controller
             $normalizers = [new ObjectNormalizer()];
             $serializer = new Serializer($normalizers, $encoders);
 
-            $events = $repos->search($req->get("search"));
+            $events = $repos->findBy(array("disponibilite"=>1));
             $jsonContent = $serializer->serialize($events, 'json', array("attributes"=>["id","titre","urlImage","date","adresse"]));
             return new response($jsonContent);
         }

@@ -47,7 +47,7 @@ class EvenementRepository extends \Doctrine\ORM\EntityRepository
         return $query;
     }
 
-    public function search ($str){
-        return $this->_em->createQuery("select e from evenementsBundle:Evenement e where e.titre like '$str%'")->getResult();
-    }
+    //public function search ($str){
+    //    return $this->_em->createQuery("select e from evenementsBundle:Evenement e where e.titre like '$str%'")->getResult();
+    //}
 }
