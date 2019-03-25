@@ -26,15 +26,15 @@
     <div class="col-md-5">
         <img src="{{asset('images/evenements/'~e.urlImage)}}" class="img-fluid" style="position: relative;">
         {% if e.prix==0 %}
-        <div class="shadow p-2 rounded bg-white" style="position:absolute ; top: 10px; right: 10px;">
+        <div class="shadow p-2 rounded bg-white custom_label">
             <small>Gratuit</small></div>
         {% endif %}
     </div>
     <div class="col-md-7 ">
-        <div class="">
+        <div >
             <small class="float-right text-muted text-right"><i>publié le {{e.dateModification |date('d/m/y')}}</i><br>
                 <cite>{{e.user.username}}</cite></small>
-            <h6 class="w-50" id="event_{{e.id}}">{{e.titre}}</h6>
+            <h6 class="w-50" id="event_{{e.id}}" data-id="{{e.id}}">{{e.titre}}</h6>
             <small class="text-muted"><i class="fas fa-calendar-alt"></i>
                 {{e.date|localizeddate('long', 'long', 'null', null)}}</small><br>
             <small class="text-muted"><i class="fas fa-map-marker-alt"></i> {{e.adresse}}</small><br>
@@ -52,13 +52,13 @@
         </div>
         <hr>
         <div class="d-flex justify-content-between ">
-            <div>
-                <a data-toggle="tooltip" data-placement="top" title="partager l'evenement" id="share_{{e.id}}" style="color: #2a4d69; cursor: pointer;"><i
+            <div id="icon_toolbar">
+                <a data-toggle="tooltip" data-placement="top" title="partager l'evenement" id="share_{{e.id}}" data-id="{{e.id}}"><i
                         class="fas fa-share-alt mr-3"></i></a>
-                <a  style="color: #2a4d69; cursor: pointer;" data-toggle="tooltip" data-placement="top" class="bookmark" id="bookmark_{{e.id}}"
-                    title="ajouter à la liste des favoris" ><i
+                <a  data-toggle="tooltip" data-placement="top" class="bookmark" id="bookmark_{{e.id}}"
+                    title="ajouter à la liste des favoris" data-id="{{e.id}}" ><i
                         class="{% if app.user in e.evenementSauvegardes %} fas {% else %} far {% endif %} fa-bookmark mr-3"></i></a>
-                <a style="color: #2a4d69; cursor: pointer;"ata-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top"
+                <a  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top"
                     title="autre options" role="button" id="autre_{{e.id}}"><i class="fas fa-ellipsis-v mr-3"></i></a>
                 <div class="dropdown-menu" aria-labelledby="autre_{{e.id}}">
                     <button class="dropdown-item" href="#" {% if e.user ==  app.user %}disabled{% endif %} ><i class="fas fa-ban"></i> signaler l'evenement</button>
