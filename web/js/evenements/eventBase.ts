@@ -67,13 +67,14 @@ function changeBack (){
 $(document).ready(function () {
     $('.closeJs').click(function(){
         $(this).parent().slideUp(500);
-    });      
+    });  
+    $(document).click(function(){
+        $(".hiddenItems").hide();
+      });
+
       $("#search").click(function(e){
         e.stopPropagation();
         $("#searchList").show();
-      });
-      $(document).click(function(){
-        $("#searchList").hide();
       });
 
 });

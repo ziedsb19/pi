@@ -29,6 +29,12 @@ class Evenement
     private $evenementSauvegardes;
 
     /**
+     * @ORM\ManyToMany(targetEntity="techEventsBundle\Entity\User")
+     * ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
+     */
+    private $evenementsSignales;
+
+    /**
      * @ORM\ManyToMany(targetEntity="evenementsBundle\Entity\Categorie" )
      */
     private $categories;
@@ -457,5 +463,29 @@ class Evenement
     public function getEvenementSauvegardes()
     {
         return $this->evenementSauvegardes;
+    }
+
+    /**
+     * Set vues
+     *
+     * @param integer $vues
+     *
+     * @return Evenement
+     */
+    public function setVues($vues)
+    {
+        $this->vues = $vues;
+
+        return $this;
+    }
+
+    /**
+     * Get vues
+     *
+     * @return integer
+     */
+    public function getVues()
+    {
+        return $this->vues;
     }
 }

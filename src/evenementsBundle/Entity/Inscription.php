@@ -19,6 +19,7 @@ class Inscription
 
     /**
      * @ORM\ManyToOne(targetEntity="evenementsBundle\Entity\Evenement")
+     * ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      */
     private $evenement;
 

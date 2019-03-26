@@ -482,4 +482,5 @@ class Evenement
     {
         return $this->vues;
     }
+
 }

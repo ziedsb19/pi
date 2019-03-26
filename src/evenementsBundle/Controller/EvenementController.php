@@ -4,6 +4,7 @@ namespace evenementsBundle\Controller;
 
 
 use evenementsBundle\Entity\Evenement;
+use evenementsBundle\Entity\EventSignales;
 use evenementsBundle\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -121,6 +122,28 @@ class EvenementController extends Controller
             }
             return new Response("no");
         }
+        throw new NotFoundHttpException();
+    }
+
+    public function reportAction(Request $req, $id){
+        if ($req->isXmlHttpRequest()){
+            $orm= $this->getDoctrine()->getManager();
+            $repos= $orm->getRepository('evenementsBundle:Evenement');
+            $event = $repos->find($id);
+            if ($event != null){
+                $eventSig = new EventSignales();
+                $eventSig->setUser($this->getUser());
+                $eventSig->setEvenement($event);
+                $eventSig->setSujet($req->get('sujet'));
+                $eventSig->setDescription($req->get('description'));
+                $orm->persist($eventSig);
+                $orm->flush();
+                return new Response("yes");
+            }
+            else
+                return new Response("no");
+        }
+
         throw new NotFoundHttpException();
     }
 }

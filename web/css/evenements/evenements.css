@@ -50,3 +50,18 @@ div.form-check-inline label
     color: #2a4d69;
     cursor: pointer;
 }
+
+.share_link
+{
+    z-index: 1000; 
+    position: absolute;
+    display: none;
+    margin: 0.125rem 0 0;
+    font-size: 0.9rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;       
+}
