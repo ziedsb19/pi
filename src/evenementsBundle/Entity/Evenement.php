@@ -92,6 +92,13 @@ class Evenement
     private $adresse;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lat_lng", type="string", length=255, nullable=true)
+     */
+    private $latLng;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="billets_restants", type="integer", nullable=true)
@@ -127,6 +134,7 @@ class Evenement
         $this->evenementSauvegarde = new ArrayCollection();
         $this->disponibilite=1;
         $this->vues=0;
+        $this->urlImage="default.png";
     }
 
     /**
@@ -483,4 +491,28 @@ class Evenement
         return $this->vues;
     }
 
+
+    /**
+     * Set latLng
+     *
+     * @param string $latLng
+     *
+     * @return Evenement
+     */
+    public function setLatLng($latLng)
+    {
+        $this->latLng = $latLng;
+
+        return $this;
+    }
+
+    /**
+     * Get latLng
+     *
+     * @return string
+     */
+    public function getLatLng()
+    {
+        return $this->latLng;
+    }
 }

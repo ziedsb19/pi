@@ -53,6 +53,9 @@ class EvenementController extends Controller
 
             if($form->handleRequest($req)->isValid()) {
                 $evenement->setUser($this->getUser());
+                if ($req->query->get('lat') != null){
+                    $evenement->setLatLng($req->query->get('lat')."/".$req->query->get('lng')."");
+                }
                 $orm->persist($evenement);
                 $orm->flush();
                 return $this->redirectToRoute("evenements_homepage");

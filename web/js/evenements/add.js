@@ -1,3 +1,40 @@
+var coords;
+var prixE;
+prixE = $('#evenementsbundle_evenement_prix');
+var items;
+items = [$("#evenementsbundle_evenement_titre"), $("#evenementsbundle_evenement_date"), $("#evenementsbundle_evenement_adresse")];
+function submitForm(e, href) {
+    var test = true;
+    items.forEach(function (el) {
+        if (!el.val()) {
+            test = false;
+            //@ts-ignore
+            var elId = el.attr("id").substring(27);
+            console.log(elId);
+            el.addClass("is-invalid");
+            $("#evenement_" + elId + "_help").removeClass("text-muted");
+            $("#evenement_" + elId + "_help").css("color", "#dc3545");
+        }
+    });
+    if (!$('#termsAgree').is(':checked')) {
+        $('#termsAgree').addClass("is-invalid");
+        test = false;
+    }
+    if (prixE.hasClass("is-invalid")) {
+        test = false;
+    }
+    console.log(test);
+    if (test) {
+        //@ts-ignore
+        if (coords)
+            $("form").attr('action', href + "?lat=" + coords.lat + "&lng=" + coords.lng);
+        console.log($("form").attr("action"));
+    }
+    else {
+        e.preventDefault();
+    }
+}
+;
 $(document).ready(function () {
     //@ts-ignore
     $('#evenementsbundle_evenement_date').flatpickr({
@@ -12,28 +49,10 @@ $(document).ready(function () {
         apiKey: '6a82a5c26661368dcc17e5f84ff981e3',
         container: document.querySelector('#evenementsbundle_evenement_adresse')
     });
-    var prixE;
-    prixE = $('#evenementsbundle_evenement_prix');
-    var items;
-    items = [$("#evenementsbundle_evenement_titre"), $("#evenementsbundle_evenement_date"), $("#evenementsbundle_evenement_adresse")];
-    $('form').submit(function (e) {
-        items.forEach(function (el) {
-            if (!el.val()) {
-                e.preventDefault();
-                //@ts-ignore
-                var elId = el.attr("id").substring(27);
-                console.log(elId);
-                el.addClass("is-invalid");
-                $("#evenement_" + elId + "_help").removeClass("text-muted");
-                $("#evenement_" + elId + "_help").css("color", "#dc3545");
-            }
-        });
-        if (!$('#termsAgree').is(':checked')) {
-            $('#termsAgree').addClass("is-invalid");
-            e.preventDefault();
-        }
-        if (prixE.hasClass("is-invalid"))
-            e.preventDefault();
+    //@ts-ignore
+    placesAutocomplete.on('change', function (e) {
+        coords = e.suggestion.latlng;
+        console.log(coords);
     });
     items.forEach(function (el) {
         el.blur(function (e) {

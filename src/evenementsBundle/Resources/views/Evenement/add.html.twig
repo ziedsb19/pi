@@ -9,7 +9,7 @@
         <p>{{item}}</p>
     </div>
     {% endfor %}
-    {{form_start(form)}}
+    {{form_start(form, {attr: {onSubmit:"submitForm(event, '"~path('evenements_add_event')~"' )"}})}}
     <div class="row">
         <div class="form-group col">
             {{form_label(form.titre)}}

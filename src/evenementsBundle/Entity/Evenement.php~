@@ -29,12 +29,6 @@ class Evenement
     private $evenementSauvegardes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="techEventsBundle\Entity\User")
-     * ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
-     */
-    private $evenementsSignales;
-
-    /**
      * @ORM\ManyToMany(targetEntity="evenementsBundle\Entity\Categorie" )
      */
     private $categories;
@@ -96,6 +90,13 @@ class Evenement
      * @ORM\Column(name="adresse", type="string", length=255)
      */
     private $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lat_lng", type="string", length=255, nullable=true)
+     */
+    private $latLng;
 
     /**
      * @var int
@@ -488,4 +489,5 @@ class Evenement
     {
         return $this->vues;
     }
+
 }
