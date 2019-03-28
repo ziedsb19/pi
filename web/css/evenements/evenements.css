@@ -63,5 +63,16 @@ div.form-check-inline label
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;       
+    border-radius: 0.25rem;        
+}
+
+.maps
+{
+    position: absolute;
+    top: 20px;
+    left: 250px;
+    height: 250px;
+    width: 300px;
+    display: none;
+    z-index: 500;
 }

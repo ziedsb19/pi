@@ -38,4 +38,33 @@ function copy(event) {
     document.execCommand('copy');
 }
 $(document).ready(function () {
+    //@ts-ignore
+    $(".adresse").hover(function (e) {
+        var target = e.target;
+        var targetId = target.dataset.id;
+        var mapDiv = $(".maps[data-id='" + targetId + "']");
+        mapDiv.val("");
+        $(target).css("text-decoration", "underline");
+        $(mapDiv).show();
+        var latLng = mapDiv.attr("data-latlng");
+        if (latLng) {
+            var array = latLng.split('/').map(function (i) { return Number(i); });
+            //@ts-ignore
+            var map = L.map(mapDiv.attr('id'), {
+                center: array,
+                zoom: 13
+            });
+            //@ts-ignore
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            //@ts-ignore    
+            L.marker(array).addTo(map);
+        }
+    }, function (e) {
+        var target = e.target;
+        var targetId = target.dataset.id;
+        $(target).css("text-decoration", "none");
+        $(".maps[data-id='" + targetId + "']").hide();
+    });
 });

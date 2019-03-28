@@ -42,4 +42,34 @@ function copy(event: Event){
 
 
 $(document).ready(function () {
+    //@ts-ignore
+    $(".adresse").hover((e: Event)=>{
+        let target = <HTMLElement> e.target;
+        let targetId = target.dataset.id;
+        let mapDiv =  $(".maps[data-id='"+targetId+"']");
+        mapDiv.val("");
+        $(target).css("text-decoration", "underline");
+        $(mapDiv).show();
+        let latLng = <string> mapDiv.attr("data-latlng");
+        if (latLng){
+            let array = latLng.split('/').map((i)=>{return Number(i)});
+            //@ts-ignore
+            var map = L.map(mapDiv.attr('id'), {
+                center: array,
+                zoom: 13
+            });
+            //@ts-ignore
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+            //@ts-ignore    
+            L.marker(array).addTo(map);
+        }
+    },
+    (e: Event)=>{
+        let target = <HTMLElement> e.target;
+        let targetId = target.dataset.id;
+        $(target).css("text-decoration", "none");
+        $(".maps[data-id='"+targetId+"']").hide();
+    });
 });
