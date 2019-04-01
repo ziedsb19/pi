@@ -1,0 +1,17 @@
+{% extends 'evenementsBundle::evenement.html.twig' %}
+
+{% block evenement_body%}
+<h4>{{event.titre}}</h4>
+<hr>
+<div class="row">
+    <div class="col-md-7">
+        <img src="{{asset('images/evenements/'~event.urlImage)}}"  class="img-fluid"/>
+    </div>
+    <div class="col-md-5">
+        {% if event.user == app.user %}
+            <a class="btn btn-info" href="{{path('evenements_update_event',{id:event.id})}}"><i class="fas fa-edit"></i> modifier </a>
+            <a class="btn btn-danger" href="#" ><i class="fas fa-trash-alt"></i> supprimer </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

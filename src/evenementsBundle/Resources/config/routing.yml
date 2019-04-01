@@ -2,9 +2,21 @@ evenements_homepage:
     path:     /
     defaults: { _controller: evenementsBundle:Evenement:index }
 
+evenements_show_event:
+    path:     /event/{id}
+    defaults: { _controller: evenementsBundle:Evenement:show }
+    requirements:
+        id: '[1-9][0-9]*'
+
 evenements_add_event:
     path:     /add
     defaults: { _controller: evenementsBundle:Evenement:add }
+
+evenements_update_event:
+    path:     /update/{id}
+    defaults: { _controller: evenementsBundle:Evenement:update }
+    requirements:
+        id: '[1-9][0-9]*'
 
 evenements_search_event:
     path:     /search

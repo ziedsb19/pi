@@ -1,12 +1,20 @@
 var truncateList;
+var truncateList2;
 var jsonArray;
 truncateList = document.getElementsByClassName("truncate");
 for (var i = 0; i < truncateList.length; i++) {
+    truncateList[i].textContent = trunc(truncateList[i], 200);
+}
+truncateList2 = document.getElementsByClassName("truncate2");
+for (var i = 0; i < truncateList2.length; i++) {
+    truncateList2[i].textContent = trunc(truncateList2[i], 24);
+}
+function trunc(obj, pos) {
     //@ts-ignore
-    if (truncateList[i].textContent.length > 200) {
+    if (obj.textContent.length > pos)
         //@ts-ignore
-        truncateList[i].textContent = truncateList[i].textContent.substr(0, 200).concat("...");
-    }
+        return obj.textContent.substr(0, pos).concat("....");
+    return obj.textContent;
 }
 function search(href) {
     $.post(href, function (data) {

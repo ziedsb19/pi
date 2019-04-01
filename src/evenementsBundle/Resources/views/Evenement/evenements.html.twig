@@ -38,7 +38,7 @@
         <div style="position: relative">
             <small class="float-right text-muted text-right"><i>publié le {{e.dateModification |date('d/m/y')}}</i><br>
                 <cite>{{e.user.username}}</cite></small>
-            <h6 class="w-50" id="event_{{e.id}}" data-id="{{e.id}}">{{e.titre}}</h6>
+            <h6 class="w-50 truncate2" id="event_{{e.id}}" data-id="{{e.id}}">{{e.titre}}</h6>
             <small class="text-muted"><i class="fas fa-calendar-alt"></i>
                 {{e.date|localizeddate('long', 'long', 'null', null)}}</small><br>
             <small class="text-muted adresse" data-id="{{e.id}}"><i class="fas fa-map-marker-alt"></i> {{e.adresse}}</small><br>
@@ -72,7 +72,7 @@
                             class="far fa-envelope"></i> contacter l'organisateur</button>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary btn-sm">afficher les details <i class="fas fa-caret-right"></i></a>
+            <a href="{{path('evenements_show_event',{id: e.id})}}" class="btn btn-primary btn-sm">afficher les details <i class="fas fa-caret-right"></i></a>
         </div>
         <div data-id="{{e.id}}" class="share_link col-md-11 p-3 hiddenItems shareDiv">
             <h6>Copier le lien et le partager</h6>

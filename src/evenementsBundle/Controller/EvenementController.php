@@ -5,12 +5,11 @@ namespace evenementsBundle\Controller;
 
 use evenementsBundle\Entity\Evenement;
 use evenementsBundle\Entity\EventSignales;
+use evenementsBundle\Form\EvenementEditType;
 use evenementsBundle\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -43,6 +42,36 @@ class EvenementController extends Controller
         return $this->render('evenementsBundle:Evenement:evenements.html.twig', array("evenements"=>$evenements));
     }
 
+    public function showAction($id){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event){
+            return $this->render('evenementsBundle:Evenement:evenement.html.twig', array("event"=>$event));
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function updateAction($id, Request $req){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event)
+            if($event->getUser()==$this->getUser()){
+                $form= $this->createForm(EvenementEditType::class, $event);
+                if ($req->isMethod('post')){
+                   // $event->setDateModification(new \DateTime());
+                    $form->handleRequest($req);
+                    $orm->flush($event);
+                    return $this->redirectToRoute('evenements_show_event', array('id'=>$id));
+                }
+                else {
+                    return $this->render('evenementsBundle:Evenement:update.html.twig', array("form" => $form->createView()));
+                }
+            }
+
+        throw new NotFoundHttpException();
+    }
 
     public function addAction(Request $req){
         $evenement = new Evenement();
