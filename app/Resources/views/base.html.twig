@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% block aditional_meta %}
     {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
@@ -13,7 +15,26 @@
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- lib -->
+    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
+	  <script src="{{asset('lib/superfish/hoverIntent.js')}}"></script>
+	  <script src="{{asset('lib/superfish/superfish.min.js')}}"></script>
+	  <script src="{{asset('lib/wow/wow.min.js')}}"></script>
+	  <script src="{{asset('lib/venobox/venobox.min.js')}}"></script>
+	  <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+	  <!-- Contact Form JavaScript File -->
+	  <script src="{{asset('contactform/contactform.js')}}"></script>  
+    <!-- main js-->
+    <script src="{{asset('js/main.js')}}"></script>
+
+    <link href="{{asset('lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="{{asset('lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/venobox/venobox.css" rel="stylesheet')}}">
+    <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.1"></script>
@@ -29,47 +50,103 @@
 </head>
 <body>
     {% block header %}
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{path('tech_events_homepage')}}">techEvents</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                  <a class="nav-link" href="{{path('evenements_homepage')}}">Evenements <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">actualites</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
-                </li>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">admin</a>
-                        <div class="dropdown-menu" aria-labelledby="adminDropDown">
-                                <a class="dropdown-item" href="{{path('admin_evenement')}}">gerer les evenements</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">gerer les utilisateurs</a>
-                        </div>
-                    </li>
-                {% endif %}
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-            <div class="ml-3">
-                <a class="btn btn-outline-danger" href="{{path('fos_user_security_logout')}}" ><i class="fas fa-sign-out-alt"></i> deconnexion </a>
-            </div>
-          </nav>
-    </header>
+  <header id="header" class="sticky-top">
+    <div class="container">
+      <div id="logo" class="pull-left">
+        <h1><a href="{{path('tech_events_homepage')}}"><span>Tech</span>Events</a></h1>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="{{path('evenements_homepage')}}">Evenements</a></li>
+          <li><a href="#speakers">Actualites</a></li>
+          <li><a href="#schedule">forum</a></li>
+          <li><a href="#venue">sponsoring</a></li>
+          <li><a href="#hotels">dhiaModule</a></li>
+          {% if is_granted('ROLE_ADMIN') %}
+              <li>
+                  <a class="dropdown-toggle" href="#" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">admin</a>
+                  <div class="dropdown-menu" aria-labelledby="adminDropDown">
+                          <a class="dropdown-item" href="{{path('admin_evenement')}}">gerer les evenements</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">gerer les utilisateurs</a>
+                  </div>
+              </li>
+          {% endif %}
+          <li class="buy-tickets"><a href="{{path('fos_user_security_logout')}}"><i class="fas fa-sign-out-alt"></i> Deconnexion</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
     {% endblock %}
     {% block body %}
+    {% endblock %}
+    {% block footer %}
+      <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <img src="img/logo.png" alt="TheEvenet">
+            <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>TheEvent</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
     {% endblock %}
 </body>
 </html>

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="row m-2">
+<div class="row m-2 mt-3 mb-3">
   <div class="col-md-3 pr-5 ">
     {% block evenement_nav%}
     {{render(controller('evenementsBundle:Evenement:agregate'))}}
@@ -27,7 +27,7 @@
         </ul>
       </div>
     </div>
-    <hr>
+    <br>
 
     <div class="row">
       <div class="col-md-8">
@@ -41,6 +41,7 @@
     </div>
 
   </div>
+</div>
   {% endblock %}
 
   {% block javascript %}

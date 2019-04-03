@@ -17,7 +17,7 @@ $(document).ready(function () {
     //@ts-ignore
     placesAutocomplete.on('change', function (e) {
         coords = e.suggestion.latlng;
-        console.log(coords);
+        console.log("test" + coords);
     });
     items.forEach(function (el) {
         el.blur(function (e) {

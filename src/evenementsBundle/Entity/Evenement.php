@@ -126,6 +126,13 @@ class Evenement
      */
     private $dateModification;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
 
     public function __construct()
     {
@@ -134,7 +141,6 @@ class Evenement
         $this->evenementSauvegarde = new ArrayCollection();
         $this->disponibilite=1;
         $this->vues=0;
-        $this->urlImage="default.png";
     }
 
     /**
@@ -514,5 +520,29 @@ class Evenement
     public function getLatLng()
     {
         return $this->latLng;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Evenement
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

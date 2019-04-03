@@ -28,7 +28,11 @@
 {% for e in evenements %}
 <div class="row mb-3 mt-1 shadow rounded p-3">
     <div class="col-md-5">
-        <img src="{{asset('images/evenements/'~e.urlImage)}}" class="img-fluid" style="position: relative;">
+        {% if e.urlImage == null %}
+            <img src="{{asset('images/evenements/default.png')}}" class="img-fluid" style="position: relative;">
+        {% else %}
+            <img src="{{asset('images/evenements/'~e.urlImage)}}" class="img-fluid" style="position: relative;">
+        {% endif %}
         {% if e.prix==0 %}
         <div class="shadow p-2 rounded bg-white custom_label">
             <small>Gratuit</small></div>
@@ -140,7 +144,6 @@
         {{ knp_pagination_render(evenements) }}
     </div>
 </div>
-<div class="row">{{ socialButtons() }}</div>
 <div style="display : none; " class="fixed-bottom col-md-6 alert alert-primary alert-dismissible" role="alert"
     id="alertBookmark">
     <p></p>

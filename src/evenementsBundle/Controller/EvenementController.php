@@ -60,7 +60,7 @@ class EvenementController extends Controller
             if($event->getUser()==$this->getUser()){
                 $form= $this->createForm(EvenementEditType::class, $event);
                 if ($req->isMethod('post')){
-                   // $event->setDateModification(new \DateTime());
+                    $event->setUpdatedAt(new \DateTime());
                     $form->handleRequest($req);
                     $orm->flush($event);
                     return $this->redirectToRoute('evenements_show_event', array('id'=>$id));

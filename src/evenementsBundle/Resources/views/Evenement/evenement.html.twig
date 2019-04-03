@@ -5,7 +5,11 @@
 <hr>
 <div class="row">
     <div class="col-md-7">
-        <img src="{{asset('images/evenements/'~event.urlImage)}}"  class="img-fluid"/>
+        {% if event.urlImage == null %}
+            <img src="{{asset('images/evenements/default.png')}}" class="img-fluid" style="position: relative;">
+        {% else %}
+            <img src="{{asset('images/evenements/'~event.urlImage)}}" class="img-fluid" style="position: relative;">
+        {% endif %}
     </div>
     <div class="col-md-5">
         {% if event.user == app.user %}

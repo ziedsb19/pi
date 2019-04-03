@@ -35,8 +35,14 @@ function fill(imageRef) {
         var date;
         //@ts-ignore
         date = new Date(i.date.timestamp * 1000);
+        var urlImage;
+        if (i.urlImage)
+            urlImage = imageRef + i.urlImage;
+        else
+            urlImage = imageRef + "default.png";
+        console.log(urlImage);
         var liItem = $('<li class="d-flex p-2 align-items-center border-bottom"></li>');
-        var divItem1 = $('<div class="col-md-2"> <img src="' + imageRef + i.urlImage + '" class="img-fluid"> </div>');
+        var divItem1 = $('<div class="col-md-2"> <img src="' + urlImage + '" class="img-fluid"> </div>');
         var divItem2 = $('<div class="col-md-10"></div>');
         var divItem3 = $('<div class="d-flex justify-content-between"></div>');
         var spanItem = $('<span> ' + i.titre + '</span> ');

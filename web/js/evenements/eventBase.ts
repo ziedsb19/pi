@@ -48,9 +48,14 @@ function fill (imageRef : string){
         let date : Date;
         //@ts-ignore
         date = new Date(i.date.timestamp*1000);
-
+        let urlImage : string;
+        if (i.urlImage)
+            urlImage = imageRef+i.urlImage;
+        else
+            urlImage= imageRef+"default.png";    
+        console.log(urlImage);
         let liItem = $('<li class="d-flex p-2 align-items-center border-bottom"></li>');
-        let divItem1 = $('<div class="col-md-2"> <img src="'+imageRef+i.urlImage+'" class="img-fluid"> </div>');
+        let divItem1 = $('<div class="col-md-2"> <img src="'+urlImage+'" class="img-fluid"> </div>');
         let divItem2 = $('<div class="col-md-10"></div>');
         let divItem3 = $('<div class="d-flex justify-content-between"></div>');
         let spanItem = $('<span> '+i.titre+'</span> ');

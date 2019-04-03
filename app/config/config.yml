@@ -91,8 +91,8 @@ vich_uploader:
             upload_destination: 'images/evenements/'
             namer : vich_uploader.namer_uniqid
             inject_on_load: false
-            delete_on_update: false
-            delete_on_remove: false
+            delete_on_update: true
+            delete_on_remove: true
 
 gregwar_captcha: ~
 
