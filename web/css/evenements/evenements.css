@@ -90,3 +90,31 @@ div.form-check-inline label
 {
     padding-right: 0px;
 }
+
+#details_bar
+{
+    font-size: 14px;
+}
+
+#details_bar .custom
+{
+    color: #0e1b4d;
+}
+
+#icon_bar_toolbar a 
+{
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-custom
+{
+    background-color: #0e1b4d;
+    color: #fff;
+}
+
+.btn-custom:hover
+{
+    background-color: #0e1b4d;
+    color: #fff;
+}
