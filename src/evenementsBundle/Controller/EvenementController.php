@@ -61,6 +61,9 @@ class EvenementController extends Controller
                 $form= $this->createForm(EvenementEditType::class, $event);
                 if ($req->isMethod('post')){
                     $event->setUpdatedAt(new \DateTime());
+                    if ($req->query->get('lat') != null){
+                        $event->setLatLng($req->query->get('lat')."/".$req->query->get('lng')."");
+                    }
                     $form->handleRequest($req);
                     $orm->flush($event);
                     return $this->redirectToRoute('evenements_show_event', array('id'=>$id));

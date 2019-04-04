@@ -85,3 +85,8 @@ div.form-check-inline label
     display: none;
     z-index: 500;
 }
+
+#vues_evenements
+{
+    padding-right: 0px;
+}

@@ -48,7 +48,7 @@
             <small class="text-muted adresse" data-id="{{e.id}}"><i class="fas fa-map-marker-alt"></i> {{e.adresse}}</small><br>
             <div class="maps" data-id="{{e.id}}" data-latlng="{{e.latLng}}" id="maps_{{e.id}}"></div>
             <div class="row">
-                <small class="text-muted col-md-3"><i class="fas fa-eye"></i> {{e.vues}} vues</small>
+                <small class="text-muted col-md-3" id="vues_evenements"><i class="fas fa-eye"></i> {{e.vues}} vues</small>
                 <div class="col-md-9">
                     {% if e.categories is not empty %}
                     <small class="text-muted"><i class="fas fa-tag"></i></small>

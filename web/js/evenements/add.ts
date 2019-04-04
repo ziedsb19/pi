@@ -14,7 +14,6 @@ function submitForm (e: Event, href:string) {
             test= false;
             //@ts-ignore
             let elId =<string> el.attr("id").substring(27);
-            console.log(elId);
             el.addClass("is-invalid");
             $("#evenement_"+elId+"_help").removeClass("text-muted");
             $("#evenement_"+elId+"_help").css("color","#dc3545");
@@ -29,7 +28,6 @@ function submitForm (e: Event, href:string) {
     if (prixE.hasClass("is-invalid")){
         test = false;
     }
-    console.log(test);
 
     if (test){
         //@ts-ignore
