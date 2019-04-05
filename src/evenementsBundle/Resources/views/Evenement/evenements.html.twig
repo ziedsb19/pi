@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block evenement_body %}
-<div class="mb-2 d-flex justify-content-between align-items-center">
-    <div class="col-md-6">
+<div class="mb-2 d-flex justify-content-between align-items-center ">
+    <div class="col-md-6 p-0">
         <select class="form-control" id="tri">
             <option value="1" {% if (app.request.get('sortBy') != 3 or app.request.get('sortBy') != 2 ) %} selected
                 {% endif %}><i class="fas fa-fire"></i> evenements les plus attendus</option>

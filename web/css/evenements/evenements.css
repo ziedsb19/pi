@@ -20,7 +20,7 @@ div.form-check-inline label
 {
     position: absolute;
     display: none;
-    left: 30px;
+    left: 0px;
     z-index: 1000;
     min-width: 10rem;
     margin: 0.125rem 0 0;
@@ -40,6 +40,7 @@ div.form-check-inline label
 #searchList ul li:hover
 {
     background-color: #ECECEC;
+    cursor: pointer;
 }
 #searchList > div 
 {
@@ -113,8 +114,37 @@ div.form-check-inline label
     color: #fff;
 }
 
+.btn-custom-pink
+{
+    background-color: #f82249;
+    color: #fff;
+}
+
+.btn-custom-pink:hover
+{
+    background-color: #f82249;
+    color: #fff;
+}
+
 .btn-custom:hover
 {
     background-color: #0e1b4d;
     color: #fff;
+}
+
+.custom-contact
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f82249;
+}
+
+.bookmark-info
+{
+    background-color:#0e1b4d;
+    color: #f82249;
+    display: none;
 }

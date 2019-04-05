@@ -22,7 +22,7 @@ function search(href) {
         console.log(jsonArray);
     });
 }
-function fill(imageRef) {
+function fill(imageRef, path) {
     var filtredArray = [];
     var searchVal = $("#search").val();
     var ulItem = $('#searchList ul');
@@ -40,7 +40,6 @@ function fill(imageRef) {
             urlImage = imageRef + i.urlImage;
         else
             urlImage = imageRef + "default.png";
-        console.log(urlImage);
         var liItem = $('<li class="d-flex p-2 align-items-center border-bottom"></li>');
         var divItem1 = $('<div class="col-md-2"> <img src="' + urlImage + '" class="img-fluid"> </div>');
         var divItem2 = $('<div class="col-md-10"></div>');
@@ -53,6 +52,9 @@ function fill(imageRef) {
         liItem.append(divItem1, divItem2);
         ulItem.append(liItem);
         liItem.hover(changeBack);
+        liItem.click(function () {
+            window.location.href = path.replace("999", String(i.id));
+        });
     });
 }
 ;

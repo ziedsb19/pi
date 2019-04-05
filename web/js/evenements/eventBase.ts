@@ -4,7 +4,6 @@ interface evenement{
     adresse: string,
     urlImage: string
 }
-
 var truncateList : HTMLCollectionOf<Element>;
 var truncateList2 : HTMLCollectionOf<Element>;
 var jsonArray : evenement[];    
@@ -34,7 +33,7 @@ function search(href : string){
     });
 }
 
-function fill (imageRef : string){
+function fill (imageRef : string, path: string){
     let filtredArray=[];
     let searchVal =<string> $("#search").val();
     let ulItem = $('#searchList ul');
@@ -53,7 +52,6 @@ function fill (imageRef : string){
             urlImage = imageRef+i.urlImage;
         else
             urlImage= imageRef+"default.png";    
-        console.log(urlImage);
         let liItem = $('<li class="d-flex p-2 align-items-center border-bottom"></li>');
         let divItem1 = $('<div class="col-md-2"> <img src="'+urlImage+'" class="img-fluid"> </div>');
         let divItem2 = $('<div class="col-md-10"></div>');
@@ -67,6 +65,9 @@ function fill (imageRef : string){
         liItem.append(divItem1, divItem2);
         ulItem.append(liItem);
         liItem.hover(changeBack);
+        liItem.click(function(){
+            window.location.href =  path.replace("999",String(i.id));
+        })
     });
 };
 
@@ -80,6 +81,7 @@ function changeBack (){
     }
 
 $(document).ready(function () {
+    
     $('.closeJs').click(function(){
         $(this).parent().slideUp(500);
     });  

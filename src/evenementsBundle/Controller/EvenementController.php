@@ -45,9 +45,17 @@ class EvenementController extends Controller
     public function showAction($id){
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $esRepos= $orm->getRepository('evenementsBundle:EventSignales');
+        $inscriRepos= $orm->getRepository('evenementsBundle:Inscription');
         $event = $repos->find($id);
+        $eventSig= null;
+        $inscription=$inscriRepos->findBy(array('evenement'=>$event));
         if ($event){
-            return $this->render('evenementsBundle:Evenement:evenement.html.twig', array("event"=>$event));
+            if ($this->getUser()!=$event->getUser()){
+                $eventSig= $esRepos->findOneBy(array('evenement'=>$event, 'user'=>$this->getUser()));
+            }
+            return $this->render('evenementsBundle:Evenement:evenement.html.twig',
+                array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription));
         }
         throw new NotFoundHttpException();
     }
