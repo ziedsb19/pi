@@ -1,7 +1,8 @@
 var pElt = document.getElementById('new_line');
 //@ts-ignore
 var re = new RegExp(/\./, 'g');
-console.log(re);
+var fileInput = document.getElementById('file');
+var fileList = [];
 //@ts-ignore
 pElt.innerHTML = pElt.textContent.replace(re, ".<br>");
 function bookmark(event, id, href) {
@@ -18,3 +19,57 @@ function bookmark(event, id, href) {
         divElt.slideDown(400).delay(3000).slideUp(400);
     });
 }
+function addImage() {
+    $("input[type=file]").click();
+}
+$(fileInput).change(function (e) {
+    var fileL = fileInput.files;
+    if (fileL) {
+        var _loop_1 = function (i) {
+            var reader = new FileReader();
+            //@ts-ignore
+            fileList.push(fileL.item(i));
+            //@ts-ignore
+            reader.readAsDataURL(fileL.item(i));
+            reader.onload = function (e) {
+                var xtimes = $('<div class="d-flex justify-content-center align-items-center" ><i class="fas fa-times" style="display: none;"></i></div>');
+                //@ts-ignore
+                var image = $('<img src="' + e.target.result + '" width="100%" height="100" />');
+                var div = $('<div class="p-0 m-1" style="position: relative; width: 22%;"></div>');
+                div.append(image, xtimes);
+                $("#images-container").append(div);
+                xtimes.click(function () {
+                    div.remove();
+                    //@ts-ignore
+                    fileList.splice(fileList.indexOf(fileL.item(i)), 1);
+                    showButt();
+                });
+                div.hover(function () {
+                    xtimes.addClass('times');
+                    xtimes.children().show();
+                }, function () {
+                    xtimes.children().hide();
+                    xtimes.removeClass('times');
+                });
+            };
+        };
+        for (var i = 0; i < fileL.length; i++) {
+            _loop_1(i);
+        }
+    }
+    showButt();
+});
+function showButt() {
+    if (fileList.length != 0)
+        $("#submit_images").show();
+    else
+        $("#submit_images").hide();
+}
+$('document').ready(function () {
+    $("#submit_images").click(function () {
+        var data = new FormData();
+        fileList.forEach(function (f) {
+            data.append('file[]', f);
+        });
+    });
+});

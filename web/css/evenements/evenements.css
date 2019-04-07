@@ -148,3 +148,16 @@ div.form-check-inline label
     color: #f82249;
     display: none;
 }
+.times
+{
+    position: absolute;
+    right: 0;
+    top:0;
+    color: white;
+    background-color: #212529;
+    opacity:0.8;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    cursor: pointer;
+}
