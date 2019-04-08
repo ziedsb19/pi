@@ -66,11 +66,40 @@ function showButt(){
         $("#submit_images").hide();
 }
 
-$('document').ready(function(){
-    $("#submit_images").click(function(){
-        let data = new FormData();
-        fileList.forEach((f)=>{
-            data.append('file[]',f);
-        });
-    })
-})
+function submitImages(href: string){
+    let data = new FormData();
+    fileList.forEach((f)=>{
+        data.append('file[]',f);
+    });
+    jQuery.ajax({
+        url: href,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function(data){
+            console.log(data);
+            if (data=="yes")
+                location.reload();
+        }
+    });
+
+}
+
+$('#images > div').hover(function(e){
+    $(e.target).siblings().first().addClass("times");
+    $(e.target).siblings().first().children().first().show();
+},function(e){
+    console.log(e.target);
+    $(e.target).removeClass("times");
+    $(e.target).children().first().hide();
+}); 
+
+//@ts-ignore
+function deleteImage (e,href: string){
+    $(e.target).parent().parent().remove();
+    $.get(href,function(data){
+        console.log(data);
+    });
+}

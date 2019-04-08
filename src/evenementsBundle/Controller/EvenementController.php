@@ -5,8 +5,10 @@ namespace evenementsBundle\Controller;
 
 use evenementsBundle\Entity\Evenement;
 use evenementsBundle\Entity\EventSignales;
+use evenementsBundle\Entity\ImageEvenement;
 use evenementsBundle\Form\EvenementEditType;
 use evenementsBundle\Form\EvenementType;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,15 +49,17 @@ class EvenementController extends Controller
         $repos = $orm->getRepository('evenementsBundle:Evenement');
         $esRepos= $orm->getRepository('evenementsBundle:EventSignales');
         $inscriRepos= $orm->getRepository('evenementsBundle:Inscription');
+        $imageRepos = $orm->getRepository('evenementsBundle:ImageEvenement');
         $event = $repos->find($id);
-        $eventSig= null;
-        $inscription=$inscriRepos->findBy(array('evenement'=>$event));
         if ($event){
+            $eventSig= null;
+            $inscription=$inscriRepos->findBy(array('evenement'=>$event));
+            $images = $imageRepos->findBy(array("evenement"=>$event));
             if ($this->getUser()!=$event->getUser()){
                 $eventSig= $esRepos->findOneBy(array('evenement'=>$event, 'user'=>$this->getUser()));
             }
             return $this->render('evenementsBundle:Evenement:evenement.html.twig',
-                array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription));
+                array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription, "images"=>$images));
         }
         throw new NotFoundHttpException();
     }
@@ -187,6 +191,48 @@ class EvenementController extends Controller
                 return new Response("no");
         }
 
+        throw new NotFoundHttpException();
+    }
+    
+    public function addImageAction(Request $req, $id){
+        $dossier= $this->getParameter('kernel.project_dir')."/web/images/evenements_dossier/";
+        if ($req->isXmlHttpRequest()) {
+            $orm= $this->getDoctrine()->getManager();
+            $imageRepos=$orm->getRepository('evenementsBundle:ImageEvenement');
+            $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+            for ($i=0; $i<sizeof($_FILES['file']['name']);$i++){
+                $ext = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
+                $file_name= uniqid().".".$ext;
+                $file_tmp= $_FILES['file']['tmp_name'][$i];
+                if (move_uploaded_file($file_tmp, $dossier.$file_name)){
+                    $image= new ImageEvenement();
+                    $image->setEvenement($eventRepos->find($id));
+                    $image->setUrl($file_name);
+                    $orm->persist($image);
+                }
+                else{
+                    throw new Exception();
+                }
+            }
+            $orm->flush();
+            return new Response("yes");
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function deleteImageAction(Request $req, $id){
+        $dossier= $this->getParameter('kernel.project_dir')."/web/images/evenements_dossier/";
+        if ($req->isXmlHttpRequest()){
+            $orm=$this->getDoctrine()->getManager();
+            $repos= $orm->getRepository('evenementsBundle:ImageEvenement');
+            $image = $repos->find($id);
+            if ($image) {
+                unlink($dossier.$image->getUrl());
+                $orm->remove($image);
+                $orm->flush();
+            }
+            return new Response("yes");
+        }
         throw new NotFoundHttpException();
     }
 }

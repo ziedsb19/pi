@@ -30,5 +30,14 @@ evenements_report_event:
     path:     /report/{id}
     defaults: { _controller: evenementsBundle:Evenement:report }
 
+evenements_add_image:
+    path:     /add_image/{id}
+    defaults: { _controller: evenementsBundle:Evenement:addImage }
+    requirements:
+        id: '[1-9][0-9]*'
 
-
+evenements_delete_image:
+    path:     /delete_image/{id}
+    defaults: { _controller: evenementsBundle:Evenement:deleteImage }
+    requirements:
+        id: '[1-9][0-9]*'
