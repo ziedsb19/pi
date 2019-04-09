@@ -103,3 +103,47 @@ function deleteImage (e,href: string){
         console.log(data);
     });
 }
+
+function signalerEvent(event: Event, href: string){
+    event.preventDefault();
+    let formElement = <HTMLFormElement>event.target;
+    let textAreaElement = $(formElement).children().children("textarea");
+    //@ts-ignore
+    if (textAreaElement.val().length <25){
+        if (!$(textAreaElement).hasClass("is-invalid"))
+            $(textAreaElement).addClass("is-invalid");
+        $(textAreaElement).siblings('small').first().removeClass("text-muted");
+        $(textAreaElement).siblings('small').first().css('color','#dc3545');    
+    }
+    else {
+        if ($(textAreaElement).hasClass("is-invalid"))
+            $(textAreaElement).removeClass("is-invalid");
+         if (!$(textAreaElement).siblings('small').first().hasClass("text-muted")) 
+            $(textAreaElement).siblings('small').first().addClass("text-muted");  
+        $.post(href, $(formElement).serialize(), function(data){
+            $(".bookmark-info strong").first().html("evenement signalé avec succes");
+            $(".bookmark-info").first().slideDown(400).delay(3000).slideUp(400);    
+        });
+        //@ts-ignore
+        $("#signalModal").modal('hide');
+        $("#signal_butt").attr("disabled","true");    
+    }    
+}
+
+function copy(event: Event){
+    event.stopPropagation();
+    //@ts-ignore
+    let inputElement = document.getElementById('copy_link');
+    console.log(inputElement);
+    //@ts-ignore
+    inputElement.select();
+    document.execCommand('copy');
+}
+
+$('document').ready(function(){
+    $("#share").click(function(e){
+        console.log($("#share_div"));
+        $("#sh_div").toggle();
+        e.stopPropagation();
+    });
+})

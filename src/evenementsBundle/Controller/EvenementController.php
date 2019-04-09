@@ -43,6 +43,57 @@ class EvenementController extends Controller
         );
         return $this->render('evenementsBundle:Evenement:evenements.html.twig', array("evenements"=>$evenements));
     }
+    
+    public function filterAction(Request $request){
+        if ($request->isMethod('post')) {
+            if (empty($request->get('organisateur')) && empty($request->get('region')) && empty($request->get('date')) && empty($request->get('prix'))) {
+                return $this->redirectToRoute('evenements_homepage');
+            }
+            else {
+                $post_array = array("organisateur"=>"", "region"=>"", "prix"=> null, "date"=>"");
+                $orm = $this->getDoctrine()->getManager();
+                $repos = $orm->getRepository('evenementsBundle:Evenement');
+                $query = $orm->createQueryBuilder();
+                $query->select('E')
+                    ->from('evenementsBundle:Evenement', 'E')
+                    ->join('E.user','U')
+                    ->where('E.date> CURRENT_TIMESTAMP()')
+                    ->andWhere('E.disponibilite = 1');
+
+                if (!empty($request->get('prix'))){
+                    if ($request->get('prix')==2) {
+                        $query->andWhere('E.prix is null');
+                        $post_array["prix"]=2;
+                    }
+                    else {
+                        $query->andWhere('E.prix is not null');
+                        $post_array["prix"]=1;
+                    }
+                }
+                if (!empty($request->get('region'))){
+                    $query->andWhere("E.adresse = :region");
+                    $query->setParameter('region',$request->get('region'));
+                    $post_array["region"]=$request->get('region');
+                }
+                if (!empty($request->get('organisateur'))){
+                    $query->andWhere("U.username = '".$request->get('organisateur')."'");
+                    $post_array["organisateur"]=$request->get('organisateur');
+                }
+                if (!empty($request->get('date'))){
+                    $query->andWhere("date(E.date) = '".$request->get('date')."'");
+                    $post_array["date"]=$request->get('date');
+                }
+                $query->add('orderBy', 'E.vues DESC ')->add('orderBy', 'E.date ASC');
+                $evenements =$query->getQuery()->getResult();
+                $count= sizeof($evenements);
+                $evenements=array_slice($evenements,0,6);
+                return $this->render('evenementsBundle:Evenement:evenements.html.twig',
+                    array("evenements" => $evenements, "post_array"=>$post_array, "count"=>$count));
+
+            }
+        }
+        throw new NotFoundHttpException();
+    }
 
     public function showAction($id){
         $orm= $this->getDoctrine()->getManager();
@@ -102,7 +153,7 @@ class EvenementController extends Controller
                 }
                 $orm->persist($evenement);
                 $orm->flush();
-                return $this->redirectToRoute("evenements_homepage");
+                return $this->redirectToRoute("evenements_show_event", array("id"=>$evenement->getId()));
             }
             else{
                 $req->getSession()->getFlashBag()->add('form_error', "erreur lors de la validation du formulaire (captcha erreur) !");

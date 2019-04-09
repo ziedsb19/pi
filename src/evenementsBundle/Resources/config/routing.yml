@@ -2,6 +2,10 @@ evenements_homepage:
     path:     /
     defaults: { _controller: evenementsBundle:Evenement:index }
 
+evenements_homepage_filter:
+    path:     /filter
+    defaults: { _controller: evenementsBundle:Evenement:filter }
+
 evenements_show_event:
     path:     /event/{id}
     defaults: { _controller: evenementsBundle:Evenement:show }

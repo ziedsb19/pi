@@ -10,18 +10,19 @@
     {% block evenement_nav%}
     {{render(controller('evenementsBundle:Evenement:agregate'))}}
     {% endblock %}
-    <a class="btn btn-primary btn-block" href="{{path('evenements_add_event')}}"><i class="fas fa-calendar-week"></i>
+    <a class="btn custom-butt-2 btn-block" href="{{path('evenements_add_event')}}"><i class="fas fa-calendar-week"></i>
       Ajouter un evenement</a>
   </div>
 
   <div class="col-md-9 p-0">
     <div>
-      <div class=" d-flex align-items-center ">
-        <input type="input" id="search" class="form-control col-md-7" autocomplete="off" placeholder="search..." onkeyup="fill('{{asset('images/evenements/')}}','{{path('evenements_show_event',{id:999})}}')">
-        <button class="btn btn-success ml-2"><i class="fas fa-search" ></i> rechercher</button>
-        <a class="btn btn-primary ml-2" href="{{path('evenements_add_event')}}"><i class="fas fa-plus"></i> Ajouter votre evenement</a>
+      <div class=" d-flex align-items-center justify-content-between">
+        <input type="input" id="search" class="form-control col-md-8" autocomplete="off" placeholder="search..." onkeyup="fill('{{asset('images/evenements/')}}','{{path('evenements_show_event',{id:999})}}')">
+        <div class="col-md-4">
+          <a class="btn custom-butt-2 ml-2 btn-block" href="{{path('evenements_add_event')}}"><i class="fas fa-plus"></i> Ajouter votre evenement</a>
+        </div>  
       </div>
-      <div class="col-md-7 p-0 hiddenItems" id="searchList">
+      <div class="col-md-8 p-0 hiddenItems" id="searchList">
         <div class="p-1 pl-4"><span class="text-muted">vos recherches</span></div>
         <ul class="list-unstyled">             
         </ul>
@@ -35,7 +36,49 @@
         {% endblock %}
       </div>
       <div class="col-md-4 ">
-        <h5 class="ml-1">derniers evenements :</h5>
+        {% block filter %}
+          <div class="p-3 shadow mb-4" id="filter-block">
+            <h5 class="custom-contact">recherche avancée :</h5>
+            <form action="{{path('evenements_homepage_filter')}}" method="post">
+              <div class="form-group">
+                <label for="organisateur_filtre">organisateur de l'evenement</label>
+                <input type="text" name="organisateur" id="organisateur_filtre" class="form-control" 
+                placeholder="nom organisateur" {% if post_array is defined %}value="{{post_array.organisateur}}"{% endif %}>
+                <small class="form-text text-muted">chercher par organisateur</small>
+              </div>
+              <div class="form-group">
+                <label for="region_filtre">region de l'evenement</label>
+                <input type="text" name="region" id="region_filtre" class="form-control"
+                 placeholder="region de l'event" {% if post_array is defined %}value="{{post_array.region}}"{% endif %}>
+                <small class="form-text text-muted">chercher par region</small>
+              </div>
+              <div class="form-group">
+                <label for="date_filtre">date de l'evenement</label>
+                <input type="text" name="date" id="date_filtre" class="form-control"
+                 placeholder="date de l'event" {% if post_array is defined %}value="{{post_array.date}}"{% endif %}>
+                <small class="form-text text-muted">chercher par date </small>
+              </div>
+              <div class="col-md-12 p-0">
+                <div class="form-check form-check-inline">
+                  <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="prix" 
+                    id="prix_payant" value="1" {% if post_array is defined and post_array.prix ==1 %} checked {% endif %}>
+                    <label class="custom-control-label" for="prix_payant">payant</label>
+                  </div>
+                </div>
+                <div class="form-check form-check-inline">
+                  <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="prix"
+                     id="prix_gratuit" value="2" {% if post_array is defined and post_array.prix ==2 %} checked {% endif %}>
+                    <label class="custom-control-label" for="prix_gratuit">gratuit</label>
+                  </div>
+                </div>
+              </div>    
+              <button class="btn custom-butt-2 btn-block"><i class="fas fa-filter"></i> filtrer</button>
+            </form>
+          </div>
+        {% endblock %}
+          <h5 class="ml-1 custom-contact">derniers evenements :</h5>
           {{render(controller('evenementsBundle:Evenement:lastEvents'))}}
           {% block extra %}
           {%endblock %}  

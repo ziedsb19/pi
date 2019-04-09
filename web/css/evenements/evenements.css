@@ -76,6 +76,23 @@ div.form-check-inline label
     border-radius: 0.25rem;        
 }
 
+.share_link_2
+{
+    z-index: 1000; 
+    position: absolute;
+    right: 0;
+    display: none;
+    margin: 0.125rem 0 0;
+    font-size: 0.9rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    width: 50%        
+}
+
 .maps
 {
     position: absolute;
@@ -171,4 +188,27 @@ div.form-check-inline label
 #galery-container
 {
     margin-top: -30px;
+}
+
+#filter-block
+{
+}
+
+#filter-block div
+{
+    margin-bottom: 0.7rem;
+}
+
+.custom-butt-2
+{
+    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+    color: #fff;
+
+}
+
+.custom-butt-2:hover
+{
+    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+    color: #fff;
+
 }

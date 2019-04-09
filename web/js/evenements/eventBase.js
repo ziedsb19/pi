@@ -28,7 +28,7 @@ function fill(imageRef, path) {
     var ulItem = $('#searchList ul');
     ulItem.html("");
     filtredArray = jsonArray.filter(function (e) {
-        return e.titre.substring(0, searchVal.length) == searchVal;
+        return e.titre.substring(0, searchVal.length).toUpperCase() == searchVal.toUpperCase();
     }).slice(0, 5);
     console.log(filtredArray);
     filtredArray.forEach(function (i) {
@@ -75,5 +75,15 @@ $(document).ready(function () {
     $("#search").click(function (e) {
         e.stopPropagation();
         $("#searchList").show();
+    });
+    //@ts-ignore
+    $('#date_filtre').flatpickr({
+        "enableTime": false
+    });
+    //@ts-ignore
+    var placesAutocomplete = places({
+        appId: 'plJOKP8XE6QS',
+        apiKey: '6a82a5c26661368dcc17e5f84ff981e3',
+        container: document.querySelector('#region_filtre')
     });
 });

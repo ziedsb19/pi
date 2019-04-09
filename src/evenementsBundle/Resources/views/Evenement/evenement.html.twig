@@ -68,13 +68,13 @@
         <div>    
             <div class="d-flex justify-content-between ml-1 mr-1 mt-2" id="icon_wrapper">
                 <div id="icon_bar_toolbar" >
-                    <a  title="partager l'evenement" id="share_{{event.id}}" data-id="{{event.id}}" class="custom" ><i class="fas fa-share-alt mr-3"></i></a>
+                    <a  title="partager l'evenement" id="share" data-id="{{event.id}}" class="custom" ><i class="fas fa-share-alt mr-3"></i></a>
                     <a  class="bookmark custom" id="bookmark" title="{% if app.user in event.evenementSauvegardes %} enlever de la liste des favoris {% else %} ajouter à la liste des favoris {% endif %}" data-id="{{event.id}}" onclick="bookmark(event,{{event.id}},'{{path('evenements_bookmark_event')}}')"><i
                             class="{% if app.user in event.evenementSauvegardes %} fas {% else %} far {% endif %} fa-bookmark mr-3"></i></a>
                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="autre options" role="button"
                         id="autre_{{event.id}}" class="custom"><i class="fas fa-ellipsis-v mr-3"></i></a>
                     <div class="dropdown-menu" aria-labelledby="autre_{{event.id}}">
-                        <button class="dropdown-item" href="#" {% if (event.user ==  app.user) or (eventSig != null) %}disabled{% endif %}
+                        <button class="dropdown-item" href="#" id="signal_butt" {% if (event.user ==  app.user) or (eventSig != null) %}disabled{% endif %}
                             data-toggle="modal" data-target="#signalModal" ><i class="fas fa-ban"></i> signaler
                             l'evenement</button>
                         <button class="dropdown-item" href="#" {% if event.user ==  app.user %}disabled{% endif %}><i
@@ -86,6 +86,57 @@
                 {% else %}
                     <a class="btn btn-sm btn-custom" href="#" ><i class="fas fa-check"></i> inscrire</a>
                 {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="share_link_2 col-md-11 p-3 hiddenItems shareDiv" id="sh_div">
+        <h6>Copier le lien et le partager</h6>
+        <div class="input-group">
+            <input class="form-control" id="copy_link" readonly value="{{path('evenements_show_event',{id:event.id})}}">        
+            <div class="input-group-append">
+                <button title="copier le lien" class="btn btn-outline-info" onclick="copy(event)"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+        <hr>
+        <h6>ou partager avec :</h6>
+        {{ socialButtons({'googleplus':false, 'facebook':false}) }} 
+    </div>
+</div>
+<div class="modal fade" id="signalModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Signaler l'evenement {{event.titre}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" onsubmit="signalerEvent(event, '{{path('evenements_report_event', {id:event.id})}}')"
+                    data-id="{{event.id}}">
+                    <div class="form-group">
+                        <label for="sujet">sujet de signalisation</label>
+                        <select id="sujet" name="sujet" class="form-control">
+                            <option value="sujet 1">sujet 1</option>
+                            <option value="sujet 2">sujet 2</option>
+                            <option value="sujet 3">sujet 3</option>
+                            <option value="sujet 4">sujet 4</option>
+                            <option value="sujet 5">sujet 5</option>
+                        </select>
+                        <small class="text-muted form-text">veuiller choisir la raison de la signalisation</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">description</label>
+                        <textarea id="description" name="description" class="form-control" rows="3"
+                            placeholder="entrer votre description" required></textarea>
+                        <small class="text-muted form-text">entrer une description significatif et au moins 25
+                            caracteres</small>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">annuler</button>
+                <input type="submit" class="btn btn-danger" value="signaler">
+                </form>
             </div>
         </div>
     </div>
@@ -112,7 +163,7 @@
 </div>    
 <div class="row shadow p-3 mb-4" data-lat="{{event.latLng}}">
     <h6 class="m-3 col-md-12"><i class="fas fa-map-marked-alt"></i> map: </h6>
-    <div class="col-md-12" id="map" style="height: 200px;"></div>
+    <div class="col-md-12" id="map" style="height: 350px;"></div>
 </div>    
 <script>
     let coords = $('#map').parent().attr('data-lat');

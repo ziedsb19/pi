@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block evenement_body %}
+{% if app.request.attributes.get('_route') == 'evenements_homepage' %}
 <div class="mb-2 d-flex justify-content-between align-items-center ">
     <div class="col-md-6 p-0">
         <select class="form-control" id="tri">
@@ -19,11 +20,9 @@
     <span class="float-right" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
         aria-controls="filter"><i class="fas fa-sliders-h"></i></span>
 </div>
-<div class="collapse" id="filter">
-    <div class="border p-2 ">
-        <h6>Filtrer par :</h6>
-    </div>
-</div>
+{% else %}
+<div class="row alert alert-info">Resultats trouvés : {{count}} | Resultats affiches: {{evenements | length}}</div>
+{% endif %}
 
 {% for e in evenements %}
 <div class="row mb-3 mt-1 shadow rounded p-3">
@@ -88,13 +87,6 @@
             </div>
             <hr>
             <h6>ou partager avec :</h6>
-            <!--
-            <div class="d-flex justify-content-around">
-                <span><i class="fab fa-twitter-square"></i></span>
-                <span><i class="fab fa-linkedin"></i></span>
-                <span><i class="fab fa-pinterest-square"></i></span>
-            </div>
-            -->
        {{ socialButtons({'googleplus':false, 'facebook':false}) }} 
         </div>
     </div>
@@ -141,12 +133,13 @@
 {% endfor %}
 <div class="row">
     <div class="col-md-6 offset-md-3 mt-2 mb-3">
+    {% if app.request.attributes.get('_route') == 'evenements_homepage' %}
         {{ knp_pagination_render(evenements) }}
+    {% endif %}    
     </div>
 </div>
-<div style="display : none; " class="fixed-bottom col-md-6 alert alert-primary alert-dismissible" role="alert"
-    id="alertBookmark">
-    <p></p>
+<div class="fixed-bottom col-md-3 p-3 shadow bookmark-info">
+    <strong></strong>
 </div>
 <div style="display: none;" class="alert alert-danger col-md-4 fixed-bottom" role="alert" id="alert-report">
     <h6 class="alert-heading">vous avez signalé cette evenement</h6>
