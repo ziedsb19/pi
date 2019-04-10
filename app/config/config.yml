@@ -179,3 +179,8 @@ nomaya_social:
         googleplus:         "https://plus.google.com/105931415830389032796"
     theme:                  'default' # optional
 
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" 
+        options:    []

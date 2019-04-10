@@ -17,6 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class EvenementController extends Controller
 {
@@ -57,6 +58,8 @@ class EvenementController extends Controller
                 $post_array = array("organisateur"=>"", "region"=>"", "prix"=> null, "date"=>"");
                 $orm = $this->getDoctrine()->getManager();
                 $repos = $orm->getRepository('evenementsBundle:Evenement');
+                $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+                $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
                 $query = $orm->createQueryBuilder();
                 $query->select('E')
                     ->from('evenementsBundle:Evenement', 'E')
@@ -90,9 +93,9 @@ class EvenementController extends Controller
                 $query->add('orderBy', 'E.vues DESC ')->add('orderBy', 'E.date ASC');
                 $evenements =$query->getQuery()->getResult();
                 $count= sizeof($evenements);
-                $evenements=array_slice($evenements,0,6);
+            //    $evenements=array_slice($evenements,0,6);
                 return $this->render('evenementsBundle:Evenement:evenements.html.twig',
-                    array("evenements" => $evenements, "post_array"=>$post_array, "count"=>$count));
+                    array("evenements" => $evenements, "post_array"=>$post_array, "count"=>$count, "eventSig"=>$eventSig));
 
             }
         }
@@ -112,8 +115,11 @@ class EvenementController extends Controller
             $userInscri = null;
             $images = $imageRepos->findBy(array("evenement"=>$event));
             if ($this->getUser()!=$event->getUser()){
+                $event->setVues($event->getVues()+1);
                 $eventSig= $esRepos->findOneBy(array('evenement'=>$event, 'user'=>$this->getUser()));
                 $userInscri =$inscriRepos->findOneBy(array('evenement'=>$event, "user"=>$this->getUser()));
+                $orm->persist($event);
+                $orm->flush();
             }
             return $this->render('evenementsBundle:Evenement:evenement.html.twig',
                 array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription, "userIns"=>$userInscri,"images"=>$images));
@@ -176,10 +182,15 @@ class EvenementController extends Controller
         $totalEvent = $repos->evenementsNbr();
         $myEventNbr = $repos->myEvents($this->getUser()->getId());
         $subscribedEventNbr = $repos->subscribedEvents($this->getUser()->getId());
+        $savedEventsNbr = sizeof( array_filter($repos->EventsEnregistreNbr(), function($e){
+            $es = $e->getEvenementSauvegardes()->toArray();
+            return in_array($this->getUser(),$es );
+        }));
         return $this->render("evenementsBundle:Evenement:agregate.html.twig",
             array("totalEvent"=>$totalEvent,
                 "myEventNbr"=>$myEventNbr,
                 "subscribedEvents"=> $subscribedEventNbr,
+                "savedEvents"=>$savedEventsNbr,
                 "categories"=>$categories));
     }
 
@@ -348,15 +359,94 @@ class EvenementController extends Controller
         return $this->render('evenementsBundle:Evenement:eventsInscri.html.twig');
     }
 
+    public function eventsOrganiseAction(){
+        return $this->render('evenementsBundle:Evenement:eventsOrganise.html.twig');
+    }
+
+    public function eventsEnregistreAction(){
+        return $this->render('evenementsBundle:Evenement:eventsEnregistre.html.twig');
+    }
+
     public function eventsInscriConAction(Request $request){
         $orm= $this->getDoctrine()->getManager();
-        $repos = $orm->getRepository("evenementsBundle:Evenement");
         $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $inscriRepos = $orm->getRepository('evenementsBundle:Inscription');
         $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
-
-        $evenements = $repos->findBy(array("user"=>$this->getUser()));
+        $inscriptions = $inscriRepos->inscriptionRecent($this->getUser()->getId());
+        $evenements = array();
+        foreach ($inscriptions as $i){
+            array_push($evenements, $i->getEvenement());
+        }
         return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
             array("evenements"=>$evenements, "eventSig"=>$eventSig));
 
     }
+
+    public function eventsInscriConPasseAction(Request $request){
+        $orm= $this->getDoctrine()->getManager();
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $inscriRepos = $orm->getRepository('evenementsBundle:Inscription');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+        $inscriptions = $inscriRepos->inscriptionPasses($this->getUser()->getId());
+        $evenements = array();
+        foreach ($inscriptions as $i){
+            array_push($evenements, $i->getEvenement());
+        }
+        return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
+
+    }
+
+    public function eventsOrganiseConAction(Request $request){
+        $orm= $this->getDoctrine()->getManager();
+        $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+        $evenements = $eventRepos->EventsOrganiseRecents($this->getUser()->getId());
+        return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
+
+    }
+
+    public function eventsOrganiseConPasseAction(Request $request){
+        $orm= $this->getDoctrine()->getManager();
+        $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+        $evenements = $eventRepos->EventsOrganisePasses($this->getUser()->getId());
+        return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
+
+    }
+
+    public function savedAction(Request $request){
+        $orm= $this->getDoctrine()->getManager();
+        $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+        $evenements = $eventRepos->custom();
+        $evenements = array_filter($evenements, function($e) {
+            $es = $e->getEvenementSauvegardes()->toArray();
+            return in_array($this->getUser(), $es);
+        });
+        return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
+    }
+
+    public function renderPdfAction($id){
+        $orm = $this->getDoctrine()->getManager();
+        $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+        $inscriRepos = $orm->getRepository('evenementsBundle:Inscription');
+        $event = $eventRepos->find($id);
+        if ($event->getUser()==$this->getUser()){
+            $inscription= $inscriRepos->findBy(array("evenement"=>$event));
+            $html = $this->renderView('evenementsBundle:Evenement:pdf.html.twig', array("event"=>$event, "inscription"=>$inscription));
+            return new PdfResponse(
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+                'file.pdf'
+            );
+        }
+        throw new NotFoundHttpException();
+    }
+
 }

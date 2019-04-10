@@ -69,3 +69,9 @@ evenements_organises:
 evenements_enregistres:
     path:   /events_enregistre
     defaults: { _controller: evenementsBundle:Evenement:EventsEnregistre }
+
+evenements_pdf_export:
+    path:   /pdf/{id}
+    defaults: { _controller: evenementsBundle:Evenement:renderPdf }    
+    requirements:
+        id: '[1-9][0-9]*'    

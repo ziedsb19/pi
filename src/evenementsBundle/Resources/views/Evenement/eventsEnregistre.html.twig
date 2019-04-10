@@ -2,12 +2,8 @@
 
 {% block evenement_body %}
 <h5 class="custom-contact">Evenements à venir</h5>
-<div>
-    {{render(controller('evenementsBundle:Evenement:eventsInscriCon'))}}
-</div>
-<h5 class="custom-contact">Evenements passes</h5>
-<div>
-    {{render(controller('evenementsBundle:Evenement:eventsInscriConPasse'))}}
+<div >
+    {{render(controller('evenementsBundle:Evenement:saved'))}}
 </div>
 {% endblock %}
 

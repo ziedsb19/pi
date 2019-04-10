@@ -47,6 +47,37 @@ class EvenementRepository extends \Doctrine\ORM\EntityRepository
         return $query;
     }
 
+    public function EventsOrganiseRecents($id){
+        $query= $this->_em->createQuery("select e,u from evenementsBundle:Evenement e join e.user u
+         where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1 and u.id = ".$id." order by e.vues DESC , e.date ASC")->getResult();
+        return $query;
+    }
+
+    public function EventsOrganisePasses($id){
+        $query= $this->_em->createQuery("select e,u from evenementsBundle:Evenement e join e.user u
+         where e.date< CURRENT_TIMESTAMP() and e.disponibilite = 1 and u.id =".$id." order by e.vues DESC , e.date ASC")->getResult();
+        return $query;
+    }
+
+    public function EventsEnregistreRecents(){
+        $query= $this->_em->createQuery("select e,u,eu from evenementsBundle:Evenement e join e.user u join e.evenementSauvegardes eu
+         where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1  order by e.vues DESC , e.date ASC")->getResult();
+        return $query;
+    }
+
+
+    public function EventsEnregistreNbr(){
+        $query= $this->_em->createQuery("select e,u from evenementsBundle:Evenement e join e.user u join e.evenementSauvegardes eu
+         where e.disponibilite = 1 ")->getResult();
+        return $query;
+    }
+
+    public function custom(){
+        $query= $this->_em->createQuery("select e,u,c from evenementsBundle:Evenement e join e.user u join e.evenementSauvegardes eu
+         left join e.categories c where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1  order by e.vues DESC , e.date ASC")->getResult();
+        return $query;
+    }
+
     //public function search ($str){
     //    return $this->_em->createQuery("select e from evenementsBundle:Evenement e where e.titre like '$str%'")->getResult();
     //}

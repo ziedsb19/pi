@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new techEventsBundle\techEventsBundle(),
             new evenementsBundle\evenementsBundle(),

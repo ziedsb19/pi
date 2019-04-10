@@ -2,6 +2,7 @@
 
 namespace techEventsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 /**
@@ -89,6 +90,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->dateInscription = new \DateTime();
+        $this->eventsSaved = new ArrayCollection();
     }
 
     /**

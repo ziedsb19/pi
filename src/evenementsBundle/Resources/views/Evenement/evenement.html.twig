@@ -242,7 +242,7 @@
 <div class="row mt-3 mb-4 p-4 shadow">
     <div class="col-md-12 d-flex justify-content-between align-items-center mb-2">
         <h5 class="mb-0">Liste des participants</h5>
-        <button class="btn btn-info"><i class="fas fa-print"></i> imprimer</button>
+        <a class="btn btn-info" href="{{path('evenements_pdf_export',{id:event.id})}}"><i class="fas fa-print"></i> imprimer</a>
     </div>
     <table class="table mt-3">
         <thead>
@@ -255,7 +255,15 @@
             </tr>
         </thead>
         <tbody>
-
+            {% for ins in inscription %}
+            <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{ins.user.nomPrenom}}</td>
+                    <td>{{ins.user.adresse}}</td>
+                    <td>{{ins.user.email}}</td>
+                    <td>{{ins.user.numeroTel}}</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

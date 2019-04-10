@@ -10,4 +10,15 @@ namespace evenementsBundle\Repository;
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function inscriptionRecent($id){
+        return $this->_em->createQuery("select I,e,u from evenementsBundle:Inscription I join I.evenement e join I.user u
+         where e.date> CURRENT_TIMESTAMP() and e.disponibilite = 1 and u.id = ".$id)
+            ->getResult();
+    }
+
+    public function inscriptionPasses($id){
+        return $this->_em->createQuery("select I,e,u from evenementsBundle:Inscription I join I.evenement e join I.user u
+         where e.date< CURRENT_TIMESTAMP() and e.disponibilite = 1 and u.id = ".$id)
+            ->getResult();
+    }
 }
