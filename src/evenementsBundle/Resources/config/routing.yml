@@ -45,3 +45,27 @@ evenements_delete_image:
     defaults: { _controller: evenementsBundle:Evenement:deleteImage }
     requirements:
         id: '[1-9][0-9]*'
+
+evenements_toggle_inscri:
+    path:     /inscri/{id}
+    defaults: { _controller: evenementsBundle:Evenement:inscri }
+    requirements:
+        id: '[1-9][0-9]*'
+
+evenements_delete_event:
+    path:     /delete/{id}
+    defaults: { _controller: evenementsBundle:Evenement:delete }
+    requirements:
+        id: '[1-9][0-9]*'
+
+evenements_inscris:
+    path:   /events_inscri
+    defaults: { _controller: evenementsBundle:Evenement:eventsInscri }
+
+evenements_organises:
+    path:   /events_organise
+    defaults: { _controller: evenementsBundle:Evenement:eventsOrganise }
+
+evenements_enregistres:
+    path:   /events_enregistre
+    defaults: { _controller: evenementsBundle:Evenement:EventsEnregistre }

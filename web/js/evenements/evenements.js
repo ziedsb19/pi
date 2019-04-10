@@ -1,7 +1,9 @@
 function signaler(event, href) {
     event.preventDefault();
     var formElement = event.target;
+    var dataId = formElement.dataset.id;
     var textAreaElement = $(formElement).children().children("textarea");
+    var buttElt = $("button.sig_butt[data-id=" + dataId + "]");
     //@ts-ignore
     if (textAreaElement.val().length < 25) {
         if (!$(textAreaElement).hasClass("is-invalid"))
@@ -10,6 +12,7 @@ function signaler(event, href) {
         $(textAreaElement).siblings('small').first().css('color', '#dc3545');
     }
     else {
+        buttElt.attr('disabled', 'true');
         if ($(textAreaElement).hasClass("is-invalid"))
             $(textAreaElement).removeClass("is-invalid");
         if (!$(textAreaElement).siblings('small').first().hasClass("text-muted"))
@@ -18,9 +21,23 @@ function signaler(event, href) {
             console.log(data);
             //@ts-ignore
             $(formElement).parent().parent().parent().parent().modal('hide');
-            $("#alert-report").delay(1500).slideDown(400).delay(3000).slideUp(400);
+            $(".bookmark-info strong").first().html("evenement signale avec succés");
+            $(".bookmark-info").first().slideDown(400).delay(3000).slideUp(400);
         });
     }
+}
+function bookmark(event, id, href) {
+    var iElt = event.target;
+    var divElt = $(".bookmark-info").first();
+    $(iElt).toggleClass("fas");
+    $(iElt).toggleClass("far");
+    $.post(href, { id: id }, function (data) {
+        if (data == "saved")
+            $(".bookmark-info strong").first().html("evenement enregistre au favoris");
+        if (data == "deleted")
+            $(".bookmark-info strong").first().html("evenement supprimé du favoris");
+        divElt.slideDown(400).delay(3000).slideUp(400);
+    });
 }
 function showShare(element, event) {
     var shareButton = element;

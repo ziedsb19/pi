@@ -133,6 +133,26 @@ function copy(event) {
     inputElement.select();
     document.execCommand('copy');
 }
+function toggleInscri(event, href) {
+    var buttElt = event.target;
+    var spanElt = document.getElementById('inscri_nbr');
+    var dataId = buttElt.dataset.id;
+    var nbrInscri = Number(spanElt.textContent);
+    $.get(href, function (data) {
+        if (dataId == "0") {
+            $(buttElt).html();
+            $(buttElt).html('<i class="fas fa-times-circle"></i> annuler');
+            buttElt.dataset.id = "1";
+            spanElt.textContent = String(nbrInscri + 1);
+        }
+        else {
+            $(buttElt).html();
+            $(buttElt).html('<i class="fas fa-check"></i> inscrire');
+            buttElt.dataset.id = "0";
+            spanElt.textContent = String(nbrInscri - 1);
+        }
+    });
+}
 $('document').ready(function () {
     $("#share").click(function (e) {
         console.log($("#share_div"));

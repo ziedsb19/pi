@@ -1,0 +1,11 @@
+{% extends 'evenementsBundle::evenement.html.twig' %}
+
+{% block evenement_body %}
+{{render(controller('evenementsBundle:Evenement:eventsInscriCon'))}}
+{% endblock %}
+
+{% block javascript %}
+{{parent()}}
+<script src="{{asset('js/evenements/evenements.js')}}">
+</script>
+{% endblock %}

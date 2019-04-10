@@ -6,6 +6,7 @@ namespace evenementsBundle\Controller;
 use evenementsBundle\Entity\Evenement;
 use evenementsBundle\Entity\EventSignales;
 use evenementsBundle\Entity\ImageEvenement;
+use evenementsBundle\Entity\Inscription;
 use evenementsBundle\Form\EvenementEditType;
 use evenementsBundle\Form\EvenementType;
 use mysql_xdevapi\Exception;
@@ -23,6 +24,8 @@ class EvenementController extends Controller
     {
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository("evenementsBundle:Evenement");
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
 
         if ($request->query->get("sortBy")==2){
             $query = $repos->allEventsByDateModif();
@@ -41,7 +44,8 @@ class EvenementController extends Controller
             $request->query->getInt('page', 1),
             6
         );
-        return $this->render('evenementsBundle:Evenement:evenements.html.twig', array("evenements"=>$evenements));
+        return $this->render('evenementsBundle:Evenement:evenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
     }
     
     public function filterAction(Request $request){
@@ -105,12 +109,14 @@ class EvenementController extends Controller
         if ($event){
             $eventSig= null;
             $inscription=$inscriRepos->findBy(array('evenement'=>$event));
+            $userInscri = null;
             $images = $imageRepos->findBy(array("evenement"=>$event));
             if ($this->getUser()!=$event->getUser()){
                 $eventSig= $esRepos->findOneBy(array('evenement'=>$event, 'user'=>$this->getUser()));
+                $userInscri =$inscriRepos->findOneBy(array('evenement'=>$event, "user"=>$this->getUser()));
             }
             return $this->render('evenementsBundle:Evenement:evenement.html.twig',
-                array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription, "images"=>$images));
+                array("event"=>$event, "eventSig"=>$eventSig, "inscription"=>$inscription, "userIns"=>$userInscri,"images"=>$images));
         }
         throw new NotFoundHttpException();
     }
@@ -285,5 +291,72 @@ class EvenementController extends Controller
             return new Response("yes");
         }
         throw new NotFoundHttpException();
+    }
+
+    public function inscriAction(Request $req, $id){
+        if ($req->isXmlHttpRequest()){
+            $orm= $this->getDoctrine()->getManager();
+            $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+            $event = $eventRepos->find($id);
+            if ($event) {
+                $repos = $orm->getRepository('evenementsBundle:Inscription');
+                $inscri = $repos->findOneBy(array("evenement" => $event, "user" => $this->getUser()));
+                if ($inscri){
+                    $orm->remove($inscri);
+                }
+                else{
+                    $inscri= new Inscription();
+                    $inscri->setEvenement($event);
+                    $inscri->setUser($this->getUser());
+                    $orm->persist($inscri);
+                }
+                $orm->flush();
+                return new Response("yes");
+            }
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function deleteAction($id){
+        $orm= $this->getDoctrine()->getManager();
+        $repos= $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event and $event->getUser() == $this->getUser()){
+            $imagesRepos = $orm->getRepository('evenementsBundle:ImageEvenement');
+            $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+            $insciRepos = $orm->getRepository('evenementsBundle:Inscription');
+            $images=$imagesRepos->findBy(array("evenement"=>$event));
+            foreach ($images as $im){
+                $orm->remove($im);
+            }
+            $esig = $esRepos->findBy(array("evenement"=>$event));
+            foreach ($esig as $es){
+                $orm->remove($es);
+            }
+            $inscri = $insciRepos->findBy(array("evenement"=>$event));
+            foreach ($inscri as $ins){
+                $orm->remove($ins);
+            }
+            $orm->remove($event);
+            $orm->flush();
+            return $this->redirectToRoute("evenements_homepage");
+        }
+        throw  new NotFoundHttpException();
+    }
+
+    public function eventsInscriAction(){
+        return $this->render('evenementsBundle:Evenement:eventsInscri.html.twig');
+    }
+
+    public function eventsInscriConAction(Request $request){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository("evenementsBundle:Evenement");
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+
+        $evenements = $repos->findBy(array("user"=>$this->getUser()));
+        return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
+
     }
 }

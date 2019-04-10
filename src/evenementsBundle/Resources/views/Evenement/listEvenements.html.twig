@@ -1,22 +1,29 @@
 {% for e in evenements %}
 <div class="row mb-3 mt-1 shadow rounded p-3">
     <div class="col-md-5">
+        {% if e.urlImage == null %}
+        <img src="{{asset('images/evenements/default.png')}}" class="img-fluid" style="position: relative;">
+        {% else %}
         <img src="{{asset('images/evenements/'~e.urlImage)}}" class="img-fluid" style="position: relative;">
+        {% endif %}
         {% if e.prix==0 %}
-        <div class="shadow p-2 rounded bg-white" style="position:absolute ; top: 10px; right: 10px;">
+        <div class="shadow p-2 rounded bg-white custom_label">
             <small>Gratuit</small></div>
         {% endif %}
     </div>
     <div class="col-md-7 ">
-        <div class="">
+        <div style="position: relative">
             <small class="float-right text-muted text-right"><i>publié le {{e.dateModification |date('d/m/y')}}</i><br>
                 <cite>{{e.user.username}}</cite></small>
-            <h6 class="w-50" id="event_{{e.id}}">{{e.titre}}</h6>
+            <h6 class="w-50 truncate2" id="event_{{e.id}}" data-id="{{e.id}}">{{e.titre}}</h6>
             <small class="text-muted"><i class="fas fa-calendar-alt"></i>
                 {{e.date|localizeddate('long', 'long', 'null', null)}}</small><br>
-            <small class="text-muted"><i class="fas fa-map-marker-alt"></i> {{e.adresse}}</small><br>
+            <small class="text-muted adresse" data-id="{{e.id}}"><i class="fas fa-map-marker-alt"></i>
+                {{e.adresse}}</small><br>
+            <div class="maps" data-id="{{e.id}}" data-latlng="{{e.latLng}}" id="maps_{{e.id}}"></div>
             <div class="row">
-                <small class="text-muted col-md-3"><i class="fas fa-eye"></i> {{e.vues}} vues</small>
+                <small class="text-muted col-md-3" id="vues_evenements"><i class="fas fa-eye"></i> {{e.vues}}
+                    vues</small>
                 <div class="col-md-9">
                     {% if e.categories is not empty %}
                     <small class="text-muted"><i class="fas fa-tag"></i></small>
@@ -29,30 +36,86 @@
         </div>
         <hr>
         <div class="d-flex justify-content-between ">
-            <div>
-                <a data-toggle="tooltip" data-placement="top" title="partager l'evenement" role="button"><i
-                        class="fas fa-share-alt mr-3"></i></a>
+            <div id="icon_toolbar">
+                <a title="partager l'evenement" id="share_{{e.id}}" data-id="{{e.id}}"
+                    onclick="showShare(this, event)"><i class="fas fa-share-alt mr-3"></i></a>
                 <a data-toggle="tooltip" data-placement="top" class="bookmark" id="bookmark_{{e.id}}"
-                    title="ajouter à la liste des favoris" role="button"><i
+                    title="ajouter à la liste des favoris" data-id="{{e.id}}"
+                    onclick="bookmark(event,{{e.id}},'{{path('evenements_bookmark_event')}}')"><i
                         class="{% if app.user in e.evenementSauvegardes %} fas {% else %} far {% endif %} fa-bookmark mr-3"></i></a>
-                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top"
-                    title="autre options" role="button" id="autre_{{e.id}}"><i class="fas fa-ellipsis-v mr-3"></i></a>
+                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="autre options" role="button"
+                    id="autre_{{e.id}}"><i class="fas fa-ellipsis-v mr-3"></i></a>
                 <div class="dropdown-menu" aria-labelledby="autre_{{e.id}}">
-                    <button class="dropdown-item" href="#" {% if e.user ==  app.user %}disabled{% endif %} ><i class="fas fa-ban"></i> signaler l'evenement</button>
-                    <button class="dropdown-item" href="#" {% if e.user ==  app.user %}disabled{% endif %}><i class="far fa-envelope"></i> contacter l'organisateur</button>
+                    <button  class="dropdown-item sig_butt" href="#" {% if e.user ==  app.user %}disabled{% endif %}
+                        {% for es in eventSig %} {% if es.evenement == e %} disabled {% endif %} {% endfor %}
+                        data-toggle="modal" data-target="#signalModal_{{e.id}}" data-id="{{e.id}}"><i class="fas fa-ban"></i> signaler
+                        l'evenement</button>
+                    <button class="dropdown-item" href="#" {% if e.user ==  app.user %}disabled{% endif %}><i
+                            class="far fa-envelope"></i> contacter l'organisateur</button>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary btn-sm">afficher les details <i class="fas fa-caret-right"></i></a>
+            <a href="{{path('evenements_show_event',{id: e.id})}}" class="btn btn-primary btn-sm">afficher les details
+                <i class="fas fa-caret-right"></i></a>
+        </div>
+        <div data-id="{{e.id}}" class="share_link col-md-11 p-3 hiddenItems shareDiv">
+            <h6>Copier le lien et le partager</h6>
+            <div class="input-group">
+                <input class="form-control" id="copy_link" readonly
+                    value="http://localhost/pi/tech_events/web/app_dev.php/evenement/?sortBy=2">
+                <div class="input-group-append">
+                    <button title="copier le lien" class="btn btn-outline-info" onclick="copy(event)"><i
+                            class="fas fa-copy"></i></button>
+                </div>
+            </div>
+            <hr>
+            <h6>ou partager avec :</h6>
+            {{ socialButtons({'googleplus':false, 'facebook':false}) }}
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signalModal_{{e.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Signaler l'evenement {{e.titre}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" onsubmit="signaler(event, '{{path('evenements_report_event', {id:e.id})}}')"
+                    data-id="{{e.id}}">
+                    <div class="form-group">
+                        <label for="sujet">sujet de signalisation</label>
+                        <select id="sujet" name="sujet" class="form-control">
+                            <option value="sujet 1">sujet 1</option>
+                            <option value="sujet 2">sujet 2</option>
+                            <option value="sujet 3">sujet 3</option>
+                            <option value="sujet 4">sujet 4</option>
+                            <option value="sujet 5">sujet 5</option>
+                        </select>
+                        <small class="text-muted form-text">veuiller choisir la raison de la signalisation</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">description</label>
+                        <textarea id="description" name="description" class="form-control" rows="3"
+                            placeholder="entrer votre description" required></textarea>
+                        <small class="text-muted form-text">entrer une description significatif et au moins 25
+                            caracteres</small>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">annuler</button>
+                <input type="submit" class="btn btn-danger" value="signaler">
+                </form>
+            </div>
         </div>
     </div>
 </div>
 {% endfor %}
-<div class="row">
-    <div class="col-md-6 offset-md-3 mt-2 mb-3">
-        {{ knp_pagination_render(evenements) }}
-    </div>
+<div class="fixed-bottom col-md-3 p-3 shadow bookmark-info">
+    <strong></strong>
 </div>
-<div style="display : none;" class="fixed-bottom col-md-6 alert alert-primary alert-dismissible" role="alert"
-    id="alertBookmark">
-    <p></p>
+<div style="display: none;" class="alert alert-danger col-md-4 fixed-bottom" role="alert" id="alert-report">
+    <h6 class="alert-heading">vous avez signalé cette evenement</h6>
 </div>
