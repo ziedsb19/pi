@@ -64,14 +64,7 @@
           <li><a href="#venue">sponsoring</a></li>
           <li><a href="#hotels">dhiaModule</a></li>
           {% if is_granted('ROLE_ADMIN') %}
-              <li>
-                  <a class="dropdown-toggle" href="#" id="adminDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">admin</a>
-                  <div class="dropdown-menu" aria-labelledby="adminDropDown">
-                          <a class="dropdown-item" href="{{path('admin_evenement')}}">gerer les evenements</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">gerer les utilisateurs</a>
-                  </div>
-              </li>
+              <li><a href="{{path('admin_evenement')}}">admin</a></li>
           {% endif %}
           <li class="buy-tickets"><a href="{{path('fos_user_security_logout')}}"><i class="fas fa-sign-out-alt"></i> Deconnexion</a></li>
         </ul>

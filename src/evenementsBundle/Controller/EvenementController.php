@@ -364,7 +364,17 @@ class EvenementController extends Controller
     }
 
     public function eventsEnregistreAction(){
-        return $this->render('evenementsBundle:Evenement:eventsEnregistre.html.twig');
+        $orm= $this->getDoctrine()->getManager();
+        $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
+        $esRepos = $orm->getRepository('evenementsBundle:EventSignales');
+        $eventSig = $esRepos->findBy(array("user"=>$this->getUser()));
+        $evenements = $eventRepos->custom();
+        $evenements = array_filter($evenements, function($e) {
+            $es = $e->getEvenementSauvegardes()->toArray();
+            return in_array($this->getUser(), $es);
+        });
+        return $this->render('evenementsBundle:Evenement:listEvents2.html.twig',
+            array("evenements"=>$evenements, "eventSig"=>$eventSig));
     }
 
     public function eventsInscriConAction(Request $request){
@@ -418,7 +428,7 @@ class EvenementController extends Controller
             array("evenements"=>$evenements, "eventSig"=>$eventSig));
 
     }
-
+    /*
     public function savedAction(Request $request){
         $orm= $this->getDoctrine()->getManager();
         $eventRepos = $orm->getRepository('evenementsBundle:Evenement');
@@ -432,7 +442,7 @@ class EvenementController extends Controller
         return $this->render('evenementsBundle:Evenement:listEvenements.html.twig',
             array("evenements"=>$evenements, "eventSig"=>$eventSig));
     }
-
+    */
     public function renderPdfAction($id){
         $orm = $this->getDoctrine()->getManager();
         $eventRepos = $orm->getRepository('evenementsBundle:Evenement');

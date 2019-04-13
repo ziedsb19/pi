@@ -82,4 +82,15 @@ class EvenementRepository extends \Doctrine\ORM\EntityRepository
     //    return $this->_em->createQuery("select e from evenementsBundle:Evenement e where e.titre like '$str%'")->getResult();
     //}
 
+    public function getCategories(){
+        $query = $this->_em->createQuery("select count(e),c.nom from evenementsBundle:Evenement e  join e.categories c 
+        group by c");
+        return $query->getResult();
+    }
+
+    public function chart(){
+        //return $this->_em->createNamedQuery("select month(date_modification), count(e.id) from evenements e group by month(date_modification)")->getArrayResult();
+        return $this->_em->createQuery("select month(e.dateModification), count(e), from evenementsBundle:Evenement e 
+        group by month(e.dateModification)")->getArrayResult();
+    }
 }

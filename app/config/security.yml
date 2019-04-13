@@ -32,6 +32,8 @@ security:
                 provider:    fos_userbundle
                 check_path: /login_check
                 login_path: /login
+                default_target_path: /evenement
+                always_use_default_target_path: true
             logout:
                 path:   /logout
 

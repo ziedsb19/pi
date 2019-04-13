@@ -1,0 +1,114 @@
+{% extends '::admin.html.twig' %}
+
+{% block aditional_meta %}
+<link rel="stylesheet" href="{{asset('admin_events/css/event.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
+{% block sidebar %}
+<li><a class="app-menu__item" href="{{path('admin_evenement')}}"><i class="app-menu__icon fa fa-dashboard"></i><span
+            class="app-menu__label">Evenements</span></a></li>
+<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">gestion evenements</span><i
+            class="treeview-indicator fa fa-angle-right"></i></a>
+    <ul class="treeview-menu">
+        <li><a class="treeview-item" href="{{path('admin_evenement_categories')}}"><i class="icon fa fa-circle-o"></i>
+                liste
+                categories</a></li>
+        <li><a class="treeview-item" href="{{path('admin_evenement_events_signales')}}"><i
+                    class="icon fa fa-circle-o"></i> evenements signalés</a>
+        </li>
+        <li><a class="treeview-item" href="{{path('admin_evenement_events_bloques')}}"><i
+                    class="icon fa fa-circle-o"></i> evenements
+                bloques</a></li>
+    </ul>
+</li>
+{% endblock %}
+
+{% block title_h1 %}
+Gestion d'evenements
+{% endblock %}
+
+{% block aditional_path %}
+<li class="breadcrumb-item"><a href="#">Evenement</a></li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+
+    {% block event_body %}
+    <div class="col-md-7 tile mr-2">
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+                <input type="date" id="year_pickr" class="form-control">
+            </div>
+        </div>
+        <hr>
+        <canvas width="100%" id="chart_js"></canvas>
+    </div>
+    <div class="col-md-4 ml-2 tile">another chart</div>
+    {% endblock %}
+    <script>
+        $("#year_pickr").flatpickr();
+        $(document).ready(function () {
+            var dataList = new Array(12).fill(0);
+            $.get("{{path('admin_evenement_chart')}}", function (data) {
+                data = JSON.parse(data);
+                data.forEach(function (item) {
+                    dataList[Number(item.month) - 1] = Number(item.count);
+                });
+                fillChart(dataList);
+            });
+        });
+
+        function fillChart(array) {
+            var ctx = document.getElementById('chart_js').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'May', 'Juin',
+                        'Juillet', 'Aout',
+                        'Septembre',
+                        'October', 'November', 'December'
+                    ],
+                    datasets: [{
+                        label: "nombre d'evenements par annee",
+                        data: array,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+</div>
+{% endblock %}

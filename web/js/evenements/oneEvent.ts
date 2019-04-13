@@ -145,19 +145,19 @@ function toggleInscri(event: Event, href: string) {
     let spanElt = <HTMLSpanElement>document.getElementById('inscri_nbr');
     let dataId = buttElt.dataset.id;
     let nbrInscri = Number(spanElt.textContent);
+    if (dataId == "0") {
+        $(buttElt).html();
+        $(buttElt).html('<i class="fas fa-times-circle"></i> annuler');
+        buttElt.dataset.id = "1";
+        spanElt.textContent = String(nbrInscri + 1);
+    }
+    else {
+        $(buttElt).html();
+        $(buttElt).html('<i class="fas fa-check"></i> inscrire');
+        buttElt.dataset.id = "0";
+        spanElt.textContent = String(nbrInscri - 1);
+    }
     $.get(href, function (data) {
-        if (dataId == "0") {
-            $(buttElt).html();
-            $(buttElt).html('<i class="fas fa-times-circle"></i> annuler');
-            buttElt.dataset.id = "1";
-            spanElt.textContent = String(nbrInscri + 1);
-        }
-        else {
-            $(buttElt).html();
-            $(buttElt).html('<i class="fas fa-check"></i> inscrire');
-            buttElt.dataset.id = "0";
-            spanElt.textContent = String(nbrInscri - 1);
-        }
     });
 }
 

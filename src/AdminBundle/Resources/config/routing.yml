@@ -2,6 +2,18 @@ admin_evenement:
     path:   /evenement
     defaults: { _controller: AdminBundle:AdminEvenement:evenement}
 
-evenements_add_categorie:
-    path:     /ajouterCat
-    defaults: { _controller: AdminBundle:AdminEvenement:addCat }
+admin_evenement_categories:
+    path:   /evenement/categories
+    defaults: { _controller: AdminBundle:AdminEvenement:indexCategories}
+
+admin_evenement_events_signales:
+    path:   /evenement/events_signales
+    defaults: { _controller: AdminBundle:AdminEvenement:indexEvenementsSignales}
+
+admin_evenement_events_bloques:
+    path:   /evenement/events_bloques
+    defaults: { _controller: AdminBundle:AdminEvenement:chart}
+
+admin_evenement_chart:
+    path:   /evenement/chart
+    defaults: { _controller: AdminBundle:AdminEvenement:chart}

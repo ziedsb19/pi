@@ -1,0 +1,22 @@
+.custom_button {
+    background-color: #009688;
+    color: #fff;
+}
+
+.custom_button:hover {
+    background-color: #004a43;
+    color: #fff;
+}
+
+.custom_h {
+    color: #004a43;
+}
+
+.custom_text {
+    color: #00635a;
+}
+
+.badge-custom {
+    background-color: #009688;
+    color: #fff;
+}

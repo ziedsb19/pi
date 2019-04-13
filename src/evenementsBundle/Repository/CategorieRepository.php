@@ -10,7 +10,4 @@ namespace evenementsBundle\Repository;
  */
 class CategorieRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function categories(){
-        $query = $this->_em->createQuery("select c, count(c) from evenementsBundle:Categorie c join ");
-    }
 }

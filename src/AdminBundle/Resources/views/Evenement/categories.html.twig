@@ -1,0 +1,54 @@
+{% extends 'AdminBundle::adminEvent.html.twig' %}
+
+{% block title_description %}
+creer, modifier, et supprimer vos categories
+{% endblock %}
+
+{% block aditional_path %}
+{{parent()}}
+<li class="breadcrumb-item"><a href="#">categories</a></li>
+{% endblock %}
+
+{% block event_body %}
+<div class="col-md-4 ml-3 mr-3 tile">
+    <h5 class="custom_h">Categories actifs : </h5>
+    <hr>
+    <ul class="list-group">
+        {% for c in categoriesCount %}
+        <li class="list-group-item d-flex justify-content-between align-items-center"><span>{{c.nom}}</span><span
+                class="badge badge-custom badge-pill"> {{c[1]}} events </span></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="col-md-7 ml-3 tile">
+    <h5 class="custom_h">Editez vos categories :</h5>
+    <hr>
+    <div class="row mb-1">
+        <div class="col-md-6">
+            <input type="text" name="add_cat" id="add_cat" class="form-control"
+                placeholder="entrer un nom d'une categorie">
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-block custom_button">Ajouter une categorie</button>
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex flex-column">
+        {% for c in categories %}
+        <div class="d-flex justify-content-between col-md-11 m-2 ">
+            <div>
+                <strong class="mr-3 custom_text">nom categorie: </strong>
+                <span>{{c.nom | capitalize}}</span>
+            </div>
+            <div>
+                <button class="btn btn-info" data-id="{{c.id}}"><i class="fa fa-pencil-square-o"></i>
+                    modifier</button>
+                <button class="btn btn-danger" data-id="{{c.id}}"><i class="fa fa-trash"></i>
+                    supprimer</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -5,13 +5,16 @@ var fileInput = document.getElementById('file');
 var fileList = [];
 //@ts-ignore
 pElt.innerHTML = pElt.textContent.replace(re, ".<br>");
+
 function bookmark(event, id, href) {
     var iElt = event.target;
     var divElt = $(".bookmark-info").first();
     $(iElt).toggleClass("fas");
     $(iElt).toggleClass("far");
     console.log($(".bookmark-info strong"));
-    $.post(href, { id: id }, function (data) {
+    $.post(href, {
+        id: id
+    }, function (data) {
         if (data == "saved")
             $(".bookmark-info strong").first().html("evenement enregistre au favoris");
         if (data == "deleted")
@@ -19,6 +22,7 @@ function bookmark(event, id, href) {
         divElt.slideDown(400).delay(3000).slideUp(400);
     });
 }
+
 function addImage() {
     $("input[type=file]").click();
 }
@@ -59,12 +63,14 @@ $(fileInput).change(function (e) {
     }
     showButt();
 });
+
 function showButt() {
     if (fileList.length != 0)
         $("#submit_images").show();
     else
         $("#submit_images").hide();
 }
+
 function submitImages(href) {
     var data = new FormData();
     fileList.forEach(function (f) {
@@ -99,6 +105,7 @@ function deleteImage(e, href) {
         console.log(data);
     });
 }
+
 function signalerEvent(event, href) {
     event.preventDefault();
     var formElement = event.target;
@@ -109,8 +116,7 @@ function signalerEvent(event, href) {
             $(textAreaElement).addClass("is-invalid");
         $(textAreaElement).siblings('small').first().removeClass("text-muted");
         $(textAreaElement).siblings('small').first().css('color', '#dc3545');
-    }
-    else {
+    } else {
         if ($(textAreaElement).hasClass("is-invalid"))
             $(textAreaElement).removeClass("is-invalid");
         if (!$(textAreaElement).siblings('small').first().hasClass("text-muted"))
@@ -124,6 +130,7 @@ function signalerEvent(event, href) {
         $("#signal_butt").attr("disabled", "true");
     }
 }
+
 function copy(event) {
     event.stopPropagation();
     //@ts-ignore
@@ -133,25 +140,24 @@ function copy(event) {
     inputElement.select();
     document.execCommand('copy');
 }
+
 function toggleInscri(event, href) {
     var buttElt = event.target;
     var spanElt = document.getElementById('inscri_nbr');
     var dataId = buttElt.dataset.id;
     var nbrInscri = Number(spanElt.textContent);
-    $.get(href, function (data) {
-        if (dataId == "0") {
-            $(buttElt).html();
-            $(buttElt).html('<i class="fas fa-times-circle"></i> annuler');
-            buttElt.dataset.id = "1";
-            spanElt.textContent = String(nbrInscri + 1);
-        }
-        else {
-            $(buttElt).html();
-            $(buttElt).html('<i class="fas fa-check"></i> inscrire');
-            buttElt.dataset.id = "0";
-            spanElt.textContent = String(nbrInscri - 1);
-        }
-    });
+    if (dataId == "0") {
+        $(buttElt).html();
+        $(buttElt).html('<i class="fas fa-times-circle"></i> annuler');
+        buttElt.dataset.id = "1";
+        spanElt.textContent = String(nbrInscri + 1);
+    } else {
+        $(buttElt).html();
+        $(buttElt).html('<i class="fas fa-check"></i> inscrire');
+        buttElt.dataset.id = "0";
+        spanElt.textContent = String(nbrInscri - 1);
+    }
+    $.get(href, function (data) {});
 }
 $('document').ready(function () {
     $("#share").click(function (e) {
