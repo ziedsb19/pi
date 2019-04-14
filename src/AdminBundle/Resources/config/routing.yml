@@ -12,8 +12,24 @@ admin_evenement_events_signales:
 
 admin_evenement_events_bloques:
     path:   /evenement/events_bloques
-    defaults: { _controller: AdminBundle:AdminEvenement:chart}
+    defaults: { _controller: AdminBundle:AdminEvenement:addCat}
 
 admin_evenement_chart:
     path:   /evenement/chart
     defaults: { _controller: AdminBundle:AdminEvenement:chart}
+
+admin_evenement_update_cat:
+    path:   /evenement/update_cat/{id}
+    defaults: { _controller: AdminBundle:AdminEvenement:updateCat}
+    requirements:
+        id: '[1-9][0-9]*'
+
+admin_evenement_add_cat:
+    path:   /evenement/add_cat
+    defaults: { _controller: AdminBundle:AdminEvenement:addCat}
+
+admin_evenement_delete_cat:
+    path:   /evenement/add_cat/{id}
+    defaults: { _controller: AdminBundle:AdminEvenement:deleteCat}
+    requirements:
+        id: '[1-9][0-9]*'

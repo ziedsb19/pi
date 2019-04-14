@@ -31,7 +31,7 @@ class Categorie
     /**
      * @var string
      *
-     * @ORM\Column(name="couleur", type="string", length=255)
+     * @ORM\Column(name="couleur", type="string", length=255, nullable=true)
      */
     private $couleur;
 

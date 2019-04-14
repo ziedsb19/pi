@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="{{asset('admin_events/js/bootstrap-datepicker.js')}}"></script>
 {% endblock %}
 
 {% block sidebar %}
@@ -37,78 +38,59 @@ Gestion d'evenements
 
 {% block body %}
 <div class="row">
-
-    {% block event_body %}
-    <div class="col-md-7 tile mr-2">
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-md-6">
-
+            <div class="col-md-3">
+                <div class="widget-small primary"><i class="icon fa fa-users fa-3x"></i>
+                    <div class="info">
+                        <h4>utilisateurs</h4>
+                        <p><b>5</b></p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <input type="date" id="year_pickr" class="form-control">
+            <div class="col-md-3">
+                <div class="widget-small info"><i class="icon fa fa-rss fa-3x"></i>
+                    <div class="info">
+                        <h4>Evenements</h4>
+                        <p><b>25</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget-small warning"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+                    <div class="info">
+                        <h4>Inscriptions</h4>
+                        <p><b>10</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
+                    <div class="info">
+                        <h4>Favoris</h4>
+                        <p><b>500</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block event_body %}
+
+    <div class="col-md-8 tile offset-2">
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <input type="text" id="year_pickr" class="form-control" placeholder="selectionner une date">
             </div>
         </div>
         <hr>
-        <canvas width="100%" id="chart_js"></canvas>
+        <canvas width="100%" id="chart_js" data-href="{{path('admin_evenement_chart')}}"></canvas>
     </div>
-    <div class="col-md-4 ml-2 tile">another chart</div>
     {% endblock %}
     <script>
-        $("#year_pickr").flatpickr();
-        $(document).ready(function () {
-            var dataList = new Array(12).fill(0);
-            $.get("{{path('admin_evenement_chart')}}", function (data) {
-                data = JSON.parse(data);
-                data.forEach(function (item) {
-                    dataList[Number(item.month) - 1] = Number(item.count);
-                });
-                fillChart(dataList);
-            });
-        });
-
-        function fillChart(array) {
-            var ctx = document.getElementById('chart_js').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'May', 'Juin',
-                        'Juillet', 'Aout',
-                        'Septembre',
-                        'October', 'November', 'December'
-                    ],
-                    datasets: [{
-                        label: "nombre d'evenements par annee",
-                        data: array,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        }
     </script>
 </div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="{{asset('admin_events/js/adminEvent.js')}}"></script>
 {% endblock %}

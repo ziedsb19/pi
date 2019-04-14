@@ -30,7 +30,8 @@ creer, modifier, et supprimer vos categories
                 placeholder="entrer un nom d'une categorie">
         </div>
         <div class="col-md-5">
-            <button class="btn btn-block custom_button">Ajouter une categorie</button>
+            <button class="btn btn-block custom_button" onClick="addCat('{{path('admin_evenement_add_cat')}}')">Ajouter
+                une categorie</button>
         </div>
     </div>
     <hr>
@@ -42,13 +43,44 @@ creer, modifier, et supprimer vos categories
                 <span>{{c.nom | capitalize}}</span>
             </div>
             <div>
-                <button class="btn btn-info" data-id="{{c.id}}"><i class="fa fa-pencil-square-o"></i>
+                <button class="btn btn-info" data-id="{{c.id}}"
+                    onClick="update(event,'{{path('admin_evenement_update_cat',{id:c.id})}}')"><i
+                        class="fa fa-pencil-square-o"></i>
                     modifier</button>
-                <button class="btn btn-danger" data-id="{{c.id}}"><i class="fa fa-trash"></i>
+                <button class="btn btn-danger" data-id="{{c.id}} " data-toggle="modal"
+                    data-target="#delete_cat_{{c.id}}"><i class="fa fa-trash"></i>
                     supprimer</button>
+            </div>
+        </div>
+        <div class="modal fade" id="delete_cat_{{c.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Supprimer la categorie {{c.nom}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        Attention vous êtes en train de
+                        supprimer
+                        cette categorie
+                        de maniere permanente
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{path('admin_evenement_delete_cat',{id:c.id})}}" class="btn btn-danger"><i
+                                class="fas fa-trash-alt"></i> supprimer</a>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="{{asset('admin_events/js/categories.js')}}"></script>
 {% endblock %}
