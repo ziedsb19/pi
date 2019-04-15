@@ -109,7 +109,7 @@ class EvenementController extends Controller
         $inscriRepos= $orm->getRepository('evenementsBundle:Inscription');
         $imageRepos = $orm->getRepository('evenementsBundle:ImageEvenement');
         $event = $repos->find($id);
-        if ($event){
+        if ($event->getDisponibilite()==1){
             $eventSig= null;
             $inscription=$inscriRepos->findBy(array('evenement'=>$event));
             $userInscri = null;

@@ -12,7 +12,7 @@ admin_evenement_events_signales:
 
 admin_evenement_events_bloques:
     path:   /evenement/events_bloques
-    defaults: { _controller: AdminBundle:AdminEvenement:addCat}
+    defaults: { _controller: AdminBundle:AdminEvenement:eventsBloques}
 
 admin_evenement_chart:
     path:   /evenement/chart
@@ -33,3 +33,15 @@ admin_evenement_delete_cat:
     defaults: { _controller: AdminBundle:AdminEvenement:deleteCat}
     requirements:
         id: '[1-9][0-9]*'
+
+admin_evenement_block:
+    path:   /evenement/block/{id}
+    defaults: { _controller: AdminBundle:AdminEvenement:blockEvent}
+    requirements:
+        id: '[1-9][0-9]*'
+
+admin_evenement_deblock:
+    path:   /evenement/deblock/{id}
+    defaults: { _controller: AdminBundle:AdminEvenement:debloquer}
+    requirements:
+        id: '[1-9][0-9]*'        

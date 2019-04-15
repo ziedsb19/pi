@@ -1,0 +1,49 @@
+{% extends 'AdminBundle::adminEvent.html.twig' %}
+
+{% block title_description %}
+gérer les evenements Bloques
+{% endblock %}
+
+{% block aditional_path %}
+{{parent()}}
+<li class="breadcrumb-item"><a href="#">events_bloques</a></li>
+{% endblock %}
+
+{% block event_body %}
+<div class="col-md-12 tile">
+    <table id="my_table" class="table table-striped w-100">
+        <thead class="thead-dark">
+            <tr>
+                <th>Evenement</th>
+                <th>organisateur</th>
+                <th>date</th>
+                <th>adresse</th>
+                <th>date mis en ligne</th>
+                <th>operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in events %}
+            <tr >
+                <td class="text-truncate"><i class="fa fa-plus-circle custom-icon" aria-hidden="true"></i>
+                    {{e.titre}}</td>
+                <td class="text-truncate">{{e.user.nomPrenom}}</td>
+                <td class="text-truncate">{{e.date | date('d/m/yy')}}</td>
+                <td class="text-truncate">{{e.adresse}}</td>
+                <td>{{e.dateModification | date('d/m/yy')}}</td>
+                <td><a href="{{path('evenements_show_event',{id:e.id})}}">afficher</a> | <a
+                        href="{{path('admin_evenement_deblock',{id: e.id})}}">débloquer</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#my_table').DataTable({
+            "scrollX": true
+        });
+    });
+</script>
+{% endblock %}

@@ -24,3 +24,11 @@
 input {
     text-align: center;
 }
+
+.custom-icon {
+    color: green;
+}
+
+.custom-icon:hover {
+    cursor: pointer;
+}

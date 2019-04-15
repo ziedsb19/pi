@@ -16,6 +16,22 @@ class AdminEvenementController extends Controller
         return $this->render('AdminBundle::adminEvent.html.twig');
     }
 
+    public function indexEvenementsSignalesAction()
+    {
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:EventSignales');
+        $events = $repos->findAll();
+        return $this->render('AdminBundle:Evenement:eventSignales.html.twig',array("events"=>$events));
+    }
+
+    public function eventsBloquesAction()
+    {
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $events = $repos->findBy(array("disponibilite"=>0));
+        return $this->render('AdminBundle:Evenement:eventBloques.html.twig',array("events"=>$events));
+    }
+
     public function indexCategoriesAction(){
         $orm = $this->getDoctrine()->getManager();
         $repos = $orm->getRepository('evenementsBundle:Evenement');
@@ -91,6 +107,35 @@ class AdminEvenementController extends Controller
             $orm->remove($cat);
             $orm->flush();
             return $this->redirectToRoute('admin_evenement_categories');
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function blockEventAction($id){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event){
+            $reposEs = $orm->getRepository('evenementsBundle:EventSignales');
+            $eventsEs = $reposEs->findBy(array("evenement"=>$event));
+            foreach ($eventsEs as $e){
+                $orm->remove($e);
+            }
+            $event->setDisponibilite(0);
+            $orm->flush();
+            return $this->redirectToRoute('admin_evenement_events_signales');
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function debloquerAction($id){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event){
+            $event->setDisponibilite(1);
+            $orm->flush();
+            return $this->redirectToRoute('admin_evenement_events_bloques');
         }
         throw new NotFoundHttpException();
     }

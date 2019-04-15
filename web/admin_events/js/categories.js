@@ -1,24 +1,32 @@
-function update(event, href) {
-    var divElement;
+/*function update(event: Event, href: string) {
+    let divElement: JQuery<HTMLDivElement>;
     //@ts-ignore
     divElement = $(event.target).parent().parent();
     //@ts-ignore
-    var element = $(event.target).parent().siblings().first().children("span").first();
-    var content = element.text();
-    var submitButton = $('<button class="btn btn-block btn-info">valider</button>');
-    var inputElement = $('<input type="text" class="form-control" value="' + content + '">');
+    let element = $(event.target).parent().siblings().first().children("span").first();
+    let content = <string>element.text();
+    let submitButton = $('<button class="btn btn-block btn-info">valider</button>');
+    let inputElement = $('<input type="text" class="form-control" value="' + content + '">');
     //@ts-ignore
     submitButton.on('click', function () {
         $.post(href, { nom: inputElement.val() }, function (data) {
             window.location.href = window.location.href;
         });
     });
-    var firstDiv = $('<div></div>');
-    var secondDiv = $('<div class="col-md-6 pr-0"></div>');
+    let firstDiv = $('<div></div>');
+    let secondDiv = $('<div class="col-md-6 pr-0"></div>');
     divElement.children().remove();
     secondDiv.append(submitButton);
     firstDiv.append(inputElement);
     divElement.append(firstDiv, secondDiv);
+}
+*/
+function update(event, href) {
+    //@ts-ignore
+    var inputElement = $(event.target).parent().siblings().first().children().first();
+    $.post(href, { nom: inputElement.val() }, function (data) {
+        window.location.href = window.location.href;
+    });
 }
 function addCat(href) {
     if ($("#add_cat").val()) {

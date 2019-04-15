@@ -1,4 +1,4 @@
-function update(event: Event, href: string) {
+/*function update(event: Event, href: string) {
     let divElement: JQuery<HTMLDivElement>;
     //@ts-ignore
     divElement = $(event.target).parent().parent();
@@ -19,6 +19,15 @@ function update(event: Event, href: string) {
     secondDiv.append(submitButton);
     firstDiv.append(inputElement);
     divElement.append(firstDiv, secondDiv);
+}
+*/
+
+function update(event: Event, href: string) {
+    //@ts-ignore
+    let inputElement = $(event.target).parent().siblings().first().children().first();
+    $.post(href, { nom: inputElement.val() }, function (data) {
+        window.location.href = window.location.href;
+    });
 }
 
 function addCat(href: string) {

@@ -39,8 +39,7 @@ creer, modifier, et supprimer vos categories
         {% for c in categories %}
         <div class="d-flex justify-content-between col-md-11 m-2 ">
             <div>
-                <strong class="mr-3 custom_text">nom categorie: </strong>
-                <span>{{c.nom | capitalize}}</span>
+                <input type="text" value="{{c.nom}}" class="form-control" placeholder="nom du categorie">
             </div>
             <div>
                 <button class="btn btn-info" data-id="{{c.id}}"
