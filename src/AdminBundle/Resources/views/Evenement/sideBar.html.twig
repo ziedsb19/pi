@@ -1,0 +1,36 @@
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="widget-small primary"><i class="icon fa fa-users fa-3x"></i>
+                    <div class="info">
+                        <h4>utilisateurs</h4>
+                        <p><b>{{resultats[2]["count(*)"]}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget-small info"><i class="icon fa fa-rss fa-3x"></i>
+                    <div class="info">
+                        <h4>Evenements</h4>
+                        <p><b>{{resultats[0]["count(*)"]}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget-small warning"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+                    <div class="info">
+                        <h4>Inscriptions</h4>
+                        <p><b>{{resultats[3]["count(*)"]}}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
+                    <div class="info">
+                        <h4>Favoris</h4>
+                        <p><b>{{resultats[1]["count(*)"]}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

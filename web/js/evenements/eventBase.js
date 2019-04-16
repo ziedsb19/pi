@@ -1,6 +1,27 @@
 var truncateList;
 var truncateList2;
 var jsonArray;
+var eventsEnregistreReg = window.location.href.search(/(evenement\/events_enregistre)/);
+var eventsOrganiseReg = window.location.href.search(/(evenement\/events_organise)/);
+var eventsInscrisReg = window.location.href.search(/(evenement\/events_inscri)/);
+var eventsReg = window.location.href.search(/(evenement\/(\?|$))/);
+if (eventsEnregistreReg != -1) {
+    if (!$("a[data-no=4]").parent().hasClass("custom-li"))
+        $("a[data-no=4]").parent().addClass("custom-li");
+}
+if (eventsOrganiseReg != -1) {
+    if (!$("a[data-no=3]").parent().hasClass("custom-li"))
+        $("a[data-no=3]").parent().addClass("custom-li");
+}
+if (eventsInscrisReg != -1) {
+    console.log($("a[data-no=2]"));
+    if (!$("a[data-no=2]").parent().hasClass("custom-li"))
+        $("a[data-no=2]").parent().addClass("custom-li");
+}
+if (eventsReg != -1) {
+    if (!$("a[data-no=1]").parent().hasClass("custom-li"))
+        $("a[data-no=1]").parent().addClass("custom-li");
+}
 truncateList = document.getElementsByClassName("truncate");
 for (var i = 0; i < truncateList.length; i++) {
     truncateList[i].textContent = trunc(truncateList[i], 200);

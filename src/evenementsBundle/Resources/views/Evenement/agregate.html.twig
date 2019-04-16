@@ -1,17 +1,18 @@
 <ul class="nav flex-column agregate">
+    <li class="nav-item">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" data-no="1" href="{{path('evenements_homepage')}}"><i class="fas fa-fire"></i> tous les evenements <span class="float-right mt-1 badge badge-pill ">{{totalEvent}}</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" data-no="2" href="{{path('evenements_inscris')}}"><i class="fas fa-rss"></i> evenements inscris <span class="float-right mt-1 badge badge-pill ">{{subscribedEvents}}</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link shadow p-3 mb-2 bg-white rounded" data-no="3" href="{{path('evenements_organises')}}"><i class="fas fa-list"></i> evenements organises <span class="float-right mt-1 badge badge-pill ">{{myEventNbr}}</span></a>
+    </li>
     <li class="nav-item ">
-        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{path('evenements_homepage')}}"><i class="fas fa-fire"></i> tous les evenements <span class="float-right mt-1 badge badge-pill ">{{totalEvent}}</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{path('evenements_inscris')}}"><i class="fas fa-rss"></i> evenements inscris <span class="float-right mt-1 badge badge-pill ">{{subscribedEvents}}</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{path('evenements_organises')}}"><i class="fas fa-list"></i> evenements organises <span class="float-right mt-1 badge badge-pill ">{{myEventNbr}}</span></a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{path('evenements_enregistres')}}"><i class="fas fa-bookmark"></i> evenements enregistres <span class="float-right mt-1 badge badge-pill ">{{savedEvents}}</span></a>
+    <a class="nav-link shadow p-3 mb-2 bg-white rounded" data-no="4" href="{{path('evenements_enregistres')}}"><i class="fas fa-bookmark"></i> evenements enregistres <span class="float-right mt-1 badge badge-pill ">{{savedEvents}}</span></a>
     </li>              
 </ul>
+<p></p>
 <hr>
 <h5>list des categories :</h5>
 <div class="mt-2 mb-2">

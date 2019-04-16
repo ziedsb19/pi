@@ -1,5 +1,8 @@
 //@ts-ignore
 var ctx = <HTMLCanvasElement>document.getElementById('chart_js').getContext('2d');
+//@ts-ignore
+var ctx2 = document.getElementById('piChart').getContext('2d');
+var canvasPi = <HTMLCanvasElement>document.getElementById('piChart');
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
@@ -12,6 +15,21 @@ $("#year_pickr").datepicker({
 });
 
 $(document).ready(function () {
+    let inscri = Number(canvasPi.dataset.inscri);
+    let total = Number(canvasPi.dataset.total);
+    let inscrPerTotal = (inscri / total) * 100;
+    //@ts-ignore
+    var myPieChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['no evenements', 'inscriptions'],
+            datasets: [{
+                label: "inscription - events",
+                data: [100, inscrPerTotal],
+                backgroundColor: ['#004a43', '#007bff']
+            }]
+        }
+    });
     //@ts-ignore
     var dataList = new Array(12).fill(0);
     var labelArray = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'May', 'Juin',

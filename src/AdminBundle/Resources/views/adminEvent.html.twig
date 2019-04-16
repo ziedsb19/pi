@@ -41,42 +41,7 @@ Gestion d'evenements
 
 {% block body %}
 <div class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="widget-small primary"><i class="icon fa fa-users fa-3x"></i>
-                    <div class="info">
-                        <h4>utilisateurs</h4>
-                        <p><b>5</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="widget-small info"><i class="icon fa fa-rss fa-3x"></i>
-                    <div class="info">
-                        <h4>Evenements</h4>
-                        <p><b>25</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="widget-small warning"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-                    <div class="info">
-                        <h4>Inscriptions</h4>
-                        <p><b>10</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="widget-small danger"><i class="icon fa fa-star fa-3x"></i>
-                    <div class="info">
-                        <h4>Favoris</h4>
-                        <p><b>500</b></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{render(controller('AdminBundle:AdminEvenement:stats'))}}
     {% block event_body %}
 
     <div class="col-md-8 tile mb-0">
@@ -92,21 +57,8 @@ Gestion d'evenements
         <div class="tile mb-2 h-100">
             <h5 class="custom_h">pourcentage d'inscriptions totale</h5>
             <hr>
-            <canvas width="100%" height="100px" id="piChart"></canvas>
+            <canvas width="100%" height="100px" id="piChart" data-inscri="{{resultats[3]["count(*)"]}}" data-total="{{resultats[0]["count(*)"]}}"></canvas>
         </div>
-        <script>
-            var ctx2 = document.getElementById('piChart').getContext('2d');
-            var myPieChart = new Chart(ctx2, {
-                type: 'pie',
-                data: {
-                    labels: ['non Inscriptions', 'inscriptions'],
-                    datasets: [{
-                        data: [70, 30],
-                        backgroundColor: ['#004a43', '#007bff']
-                    }]
-                }
-            });
-        </script>
     </div>
     {% endblock %}
     <script>

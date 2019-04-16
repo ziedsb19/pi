@@ -11,9 +11,39 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminEvenementController extends Controller
 {
+    public function statsAction(){
+        $orm= $this->getDoctrine()->getManager();
+        $query = "
+        (select count(*)  FROM pi_tech_events.evenements) 
+        union
+        (select count(*)  FROM pi_tech_events.evenement_user)
+        union 
+        (select count(*)  FROM pi_tech_events.utilisateur)
+        union
+        (select count(*)  FROM pi_tech_events.inscription) 
+        ";
+        $statement = $orm->getConnection()->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $this->render('AdminBundle:Evenement:sideBar.html.twig',array("resultats"=>$result));
+    }
+    
     public function evenementAction()
     {
-        return $this->render('AdminBundle::adminEvent.html.twig');
+        $orm= $this->getDoctrine()->getManager();
+        $query = "
+        (select count(*)  FROM pi_tech_events.evenements) 
+        union
+        (select count(*)  FROM pi_tech_events.evenement_user)
+        union 
+        (select count(*)  FROM pi_tech_events.utilisateur)
+        union
+        (select count(*)  FROM pi_tech_events.inscription) 
+        ";
+        $statement = $orm->getConnection()->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();   
+        return $this->render('AdminBundle::adminEvent.html.twig',array("resultats"=>$result));
     }
 
     public function indexEvenementsSignalesAction()

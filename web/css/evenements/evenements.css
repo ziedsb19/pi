@@ -7,17 +7,15 @@
     color: white;
 }
 
-#evenementsbundle_evenement_captcha
-{
+#evenementsbundle_evenement_captcha {
     margin-left: 0.5rem !important;
 }
 
-div.form-check-inline label 
-{
+div.form-check-inline label {
     margin-bottom: 0;
 }
-#searchList 
-{
+
+#searchList {
     position: absolute;
     display: none;
     left: 0px;
@@ -30,40 +28,36 @@ div.form-check-inline label
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;       
+    border-radius: 0.25rem;
 }
 
-#searchList ul li span 
-{
+#searchList ul li span {
     font-size: 0.9rem;
 }
-#searchList ul li:hover
-{
+
+#searchList ul li:hover {
     background-color: #ECECEC;
     cursor: pointer;
 }
-#searchList > div 
-{
+
+#searchList>div {
     background-color: #ECECEC;
     font-size: 0.9rem;
 }
 
-.custom_label
-{
-    position:absolute ;
-    top: 10px; 
+.custom_label {
+    position: absolute;
+    top: 10px;
     right: 10px;
 }
 
-#icon_toolbar a
-{
+#icon_toolbar a {
     color: #2a4d69;
     cursor: pointer;
 }
 
-.share_link
-{
-    z-index: 1000; 
+.share_link {
+    z-index: 1000;
     position: absolute;
     display: none;
     margin: 0.125rem 0 0;
@@ -73,12 +67,11 @@ div.form-check-inline label
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;        
+    border-radius: 0.25rem;
 }
 
-.share_link_2
-{
-    z-index: 1000; 
+.share_link_2 {
+    z-index: 1000;
     position: absolute;
     right: 0;
     display: none;
@@ -90,11 +83,10 @@ div.form-check-inline label
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.25rem;
-    width: 50%        
+    width: 50%
 }
 
-.maps
-{
+.maps {
     position: absolute;
     top: 20px;
     left: 250px;
@@ -104,53 +96,44 @@ div.form-check-inline label
     z-index: 500;
 }
 
-#vues_evenements
-{
+#vues_evenements {
     padding-right: 0px;
 }
 
-#details_bar
-{
+#details_bar {
     font-size: 14px;
 }
 
-#details_bar .custom
-{
+#details_bar .custom {
     color: #0e1b4d;
 }
 
-#icon_bar_toolbar a 
-{
+#icon_bar_toolbar a {
     font-size: 16px;
     cursor: pointer;
 }
 
-.btn-custom
-{
+.btn-custom {
     background-color: #0e1b4d;
     color: #fff;
 }
 
-.btn-custom-pink
-{
+.btn-custom-pink {
     background-color: #f82249;
     color: #fff;
 }
 
-.btn-custom-pink:hover
-{
+.btn-custom-pink:hover {
     background-color: #f82249;
     color: #fff;
 }
 
-.btn-custom:hover
-{
+.btn-custom:hover {
     background-color: #0e1b4d;
     color: #fff;
 }
 
-.custom-contact
-{
+.custom-contact {
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
@@ -159,56 +142,58 @@ div.form-check-inline label
     border-bottom: 2px solid #f82249;
 }
 
-.bookmark-info
-{
-    background-color:#0e1b4d;
+.bookmark-info {
+    background-color: #0e1b4d;
     color: #f82249;
     display: none;
 }
-.times
-{
+
+.times {
     position: absolute;
     right: 0;
-    top:0;
+    top: 0;
     color: white;
     background-color: #212529;
-    opacity:0.8;
+    opacity: 0.8;
     width: 100%;
     height: 100%;
     font-size: 30px;
     cursor: pointer;
 }
 
-.images
-{
+.images {
     width: 22%;
     position: relative;
 }
 
-#galery-container
-{
+#galery-container {
     margin-top: -30px;
 }
 
-#filter-block
-{
-}
+#filter-block {}
 
-#filter-block div
-{
+#filter-block div {
     margin-bottom: 0.7rem;
 }
 
-.custom-butt-2
-{
-    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+.custom-butt-2 {
+    background-image: linear-gradient(to right, #0e1b4d, #f82249);
     color: #fff;
 
 }
 
-.custom-butt-2:hover
-{
-    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+.custom-butt-2:hover {
+    background-image: linear-gradient(to right, #0e1b4d, #f82249);
     color: #fff;
 
 }
+
+.custom-li a {
+    border-left: 3px solid #f82249;
+}
+
+/*
+.custom-li a i {
+    color: #f82249;
+}
+*/
