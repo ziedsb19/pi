@@ -28,9 +28,9 @@ gérer les evenements signalés
                 <td class="text-truncate"><i class="fa fa-plus-circle custom-icon" aria-hidden="true"></i>
                     {{e.evenement.titre}}</td>
                 <td class="text-truncate">{{e.user.nomPrenom}}</td>
-                <td class="text-truncate">{{e.evenement.date | date('d/m/yy')}}</td>
+                <td class="text-truncate">{{e.evenement.date | date('y/m/d')}}</td>
                 <td class="text-truncate">{{e.sujet}}</td>
-                <td>{{e.dateSignalisation | date('d/m/yy')}}</td>
+                <td>{{e.dateSignalisation | date('y/m/d')}}</td>
                 <td><a href="{{path('evenements_show_event',{id:e.evenement.id})}}">afficher</a> | <a
                         href="{{path('admin_evenement_block',{id: e.evenement.id})}}">bloquer</a></td>
             </tr>

@@ -24,15 +24,14 @@ gérer les evenements Bloques
         </thead>
         <tbody>
             {% for e in events %}
-            <tr >
+            <tr>
                 <td class="text-truncate"><i class="fa fa-plus-circle custom-icon" aria-hidden="true"></i>
                     {{e.titre}}</td>
                 <td class="text-truncate">{{e.user.nomPrenom}}</td>
-                <td class="text-truncate">{{e.date | date('d/m/yy')}}</td>
+                <td class="text-truncate">{{e.date | date('y/m/d')}}</td>
                 <td class="text-truncate">{{e.adresse}}</td>
-                <td>{{e.dateModification | date('d/m/yy')}}</td>
-                <td><a href="{{path('evenements_show_event',{id:e.id})}}">afficher</a> | <a
-                        href="{{path('admin_evenement_deblock',{id: e.id})}}">débloquer</a></td>
+                <td>{{e.dateModification | date('y/m/d')}}</td>
+                <td> <a href="{{path('admin_evenement_deblock',{id: e.id})}}">débloquer</a></td>
             </tr>
 
             {% endfor %}
