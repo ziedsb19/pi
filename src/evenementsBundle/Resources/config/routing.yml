@@ -75,3 +75,24 @@ evenements_pdf_export:
     defaults: { _controller: evenementsBundle:Evenement:renderPdf }    
     requirements:
         id: '[1-9][0-9]*'    
+
+#**********************partie mobile ******************************
+mobile_evenements_homepage:
+    path:     /mobile/
+    defaults: { _controller: evenementsBundle:EvenementMobile:index }
+
+mobile_evenements_add:
+    path:     /mobile/add
+    defaults: { _controller: evenementsBundle:EvenementMobile:add }
+
+mobile_evenements_show_event:
+    path:     /mobile/event/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:show }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_evenements_add_event:
+    path:     /mobile/add/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:add }
+    requirements:
+        id: '[1-9][0-9]*'

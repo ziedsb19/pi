@@ -21,7 +21,7 @@ security:
             security: false
 
         login :
-            pattern: ^/(login$|register|resetting)
+            pattern: ^/(login$|register|resetting|evenement/mobile)
             anonymous : true
             
 

@@ -102,6 +102,7 @@ class EvenementController extends Controller
         throw new NotFoundHttpException();
     }
 
+    //FIXME: fix views  
     public function showAction($id){
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository('evenementsBundle:Evenement');
