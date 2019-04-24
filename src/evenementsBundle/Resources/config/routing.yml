@@ -96,3 +96,28 @@ mobile_evenements_add_event:
     defaults: { _controller: evenementsBundle:EvenementMobile:add }
     requirements:
         id: '[1-9][0-9]*'
+
+mobile_evenements_add_image:
+    path:     /mobile/addImage/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:addImage }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_evenements_update:
+    path:     /mobile/update/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:update }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_evenements_delete:
+    path:     /mobile/delete/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:delete }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_evenements_inscri:
+    path:     /mobile/inscri/{id}/{userId}
+    defaults: { _controller: evenementsBundle:EvenementMobile:inscri }
+    requirements:
+        id: '[1-9][0-9]*'
+        userId : '[1-9][0-9]*'
