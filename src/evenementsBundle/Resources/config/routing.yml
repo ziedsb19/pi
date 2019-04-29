@@ -81,6 +81,11 @@ mobile_evenements_homepage:
     path:     /mobile/
     defaults: { _controller: evenementsBundle:EvenementMobile:index }
 
+mobile_evenements_categories:
+    path:     /mobile/categories
+    defaults: { _controller: evenementsBundle:EvenementMobile:getCategories }
+
+
 mobile_evenements_add:
     path:     /mobile/add
     defaults: { _controller: evenementsBundle:EvenementMobile:add }
@@ -121,3 +126,33 @@ mobile_evenements_inscri:
     requirements:
         id: '[1-9][0-9]*'
         userId : '[1-9][0-9]*'
+
+mobile_evenements_organises:
+    path:     /mobile/organises/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:evenementsOrganise }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_evenements_Inscris:
+    path:     /mobile/inscris/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:evenementsInscris }
+    requirements:
+        id: '[1-9][0-9]*'
+
+mobile_loggin:
+    path: /mobile/loggin
+    defaults: {_controller: evenementsBundle:EvenementMobile:connexion}        
+
+mobile_evenements_saved:
+    path:     /mobile/isSaved/{id}/{user_id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:isSaved }
+    requirements:
+        id: '[1-9][0-9]*'
+        user_id : '[1-9][0-9]*'    
+
+mobile_evenements_toggle_save:
+    path:     /mobile/toggleSaved/{id}/{user_id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:toggleSave }
+    requirements:
+        id: '[1-9][0-9]*'
+        user_id : '[1-9][0-9]*'            

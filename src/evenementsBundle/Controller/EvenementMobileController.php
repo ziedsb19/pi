@@ -28,6 +28,36 @@ class EvenementMobileController extends Controller
         return new response($jsonContent);
     }
 
+    public function evenementsOrganiseAction($id){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository("evenementsBundle:Evenement");
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+        $events = $repos->EventsOrganises($id);
+        $jsonContent = $serializer->serialize($events, 'json',
+            array("attributes"=>["id","titre","urlImage","date","adresse","user","prix","categories"]));
+        return new response($jsonContent);
+    }
+
+    public function evenementsInscrisAction($id){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository("evenementsBundle:Inscription");
+        $reposUser = $orm->getRepository("techEventsBundle:User");
+        $user = $reposUser->find($id);
+        $inscriptions = $repos->findBy(array("user"=>$user));
+        $evenements = array();
+        foreach ($inscriptions as $i)
+            array_push($evenements, $i->getEvenement());
+
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonResponse = $serializer->serialize($evenements, 'json',
+            array("attributes"=>["id","titre","urlImage","date","adresse","user","prix","categories"]));
+        return new Response ($jsonResponse);
+    }
+
     public function showAction($id){
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository('evenementsBundle:Evenement');
@@ -177,4 +207,70 @@ class EvenementMobileController extends Controller
         }
         throw new NotFoundHttpException();
     }
+
+    public function getCategoriesAction(){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Categorie');
+        $categories = $repos->findAll();
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers,$encoders);
+        return new JsonResponse($serializer->normalize($categories));
+    }
+
+    public function connexionAction(Request $req){
+            $orm= $this->getDoctrine()->getManager();
+            $user = $orm->getRepository('techEventsBundle:User')
+            ->findOneBy(array("username"=>$req->query->get("username")));
+            if ($user){
+                $encoder_service = $this->get('security.encoder_factory');
+                $encoder = $encoder_service->getEncoder($user);
+                if ($encoder->isPasswordValid($user->getPassword(), $req->query->get("password"), $user->getSalt())){
+                    $encoders = [new JsonEncoder()];
+                    $normalizers = [new ObjectNormalizer()];
+                    $serializer = new Serializer($normalizers,$encoders);
+                    return new JsonResponse($serializer->normalize($user, 'json',
+                        array("attributes"=>["id","username","email", "nomPrenom", "adresse", "numeroTel"]) ));
+                }
+            }
+
+        return new Response("no");
+    }
+
+    public function isSavedAction($id,$user_id){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $reposUser = $orm->getRepository('techEventsBundle:User');
+        $event = $repos->find($id);
+        $user = $reposUser->find($user_id);
+        if ($event and $user){
+            if (in_array($user,$event->getEvenementSauvegardes()->toArray()))
+                return new Response("yes");
+            else
+                return new Response("no");
+        }
+        throw new NotFoundHttpException();
+    }
+    
+    public function toggleSaveAction($id,$user_id){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $reposUser = $orm->getRepository('techEventsBundle:User');
+        $event = $repos->find($id);
+        $user = $reposUser->find($user_id);
+        if ($event and $user){
+            if (in_array($user,$event->getEvenementSauvegardes()->toArray())){
+                $event->removeEvenementSauvegarde($user);
+                $orm->flush();
+                return new Response("no");
+            }
+            else{
+                $event->addEvenementSauvegarde($user);
+                $orm->flush();
+                return new Response("yes");
+            }
+        }
+        throw new NotFoundHttpException();
+    }
+
 }
