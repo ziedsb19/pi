@@ -58,6 +58,25 @@ class EvenementMobileController extends Controller
         return new Response ($jsonResponse);
     }
 
+    public function evenementsFavorisAction($id){
+        $orm= $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository("evenementsBundle:Evenement");
+        $reposUser = $orm->getRepository("techEventsBundle:User");
+        $user = $reposUser->find($id);
+        $evenements = $repos->findBy(array("disponibilite"=>1));
+        $evenements_fav = array();
+        foreach ($evenements as $event){
+            if (in_array($user,$event->getEvenementSauvegardes()->toArray()))
+                array_push($evenements_fav, $event);
+        }
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonResponse = $serializer->serialize($evenements_fav, 'json',
+            array("attributes"=>["id","titre","urlImage","date","adresse","user","prix","categories"]));
+        return new Response ($jsonResponse);
+    }
+
     public function showAction($id){
         $orm= $this->getDoctrine()->getManager();
         $repos = $orm->getRepository('evenementsBundle:Evenement');
@@ -269,6 +288,18 @@ class EvenementMobileController extends Controller
                 $orm->flush();
                 return new Response("yes");
             }
+        }
+        throw new NotFoundHttpException();
+    }
+
+    public function deleteImageAction($id){
+        $orm = $this->getDoctrine()->getManager();
+        $repos = $orm->getRepository('evenementsBundle:Evenement');
+        $event = $repos->find($id);
+        if ($event){
+            $event->setUrlImage(null);
+            $orm->flush();
+            return new Response("ok");
         }
         throw new NotFoundHttpException();
     }

@@ -1,0 +1,40 @@
+{% extends'ActualBundle::tempFront.html.twig' %}
+{%block actual_body%}
+    <!-- Card affiche -->
+    <h1>Les Opportunites </h1></br></br></br>
+
+<div class="container form-ajout">
+    <table border="1" class="table table-hover">
+        <thead>
+        <tr class="table-primary">
+
+            <th>offre</th>
+            <th>description</th>
+
+            <th>avant le date</th>
+
+
+        </tr>
+        </thead>
+        {% for o in opp %}
+            <tr class="table-warning">
+
+                <td>{{ o.offre }}</td>
+                <td>{{ o.description }}</td>
+
+
+                <td>{{ o.date|date('Y-m-d') }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    <li>
+        <a href="{{ path('export') }}">Export Data</a>
+
+    </li>
+
+</div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(opp) }}
+    </div>
+{%endblock%}

@@ -25,6 +25,8 @@ class AppKernel extends Kernel
             new techEventsBundle\techEventsBundle(),
             new evenementsBundle\evenementsBundle(),
             new AdminBundle\AdminBundle(),
+            new ActualBundle\ActualBundle(),
+            new Egyg33k\CsvBundle\Egyg33kCsvBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

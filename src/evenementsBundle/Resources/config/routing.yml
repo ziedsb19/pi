@@ -139,6 +139,12 @@ mobile_evenements_Inscris:
     requirements:
         id: '[1-9][0-9]*'
 
+mobile_evenements_favoris:
+    path:     /mobile/favoris/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:evenementsFavoris }
+    requirements:
+        id: '[1-9][0-9]*'        
+
 mobile_loggin:
     path: /mobile/loggin
     defaults: {_controller: evenementsBundle:EvenementMobile:connexion}        
@@ -156,3 +162,9 @@ mobile_evenements_toggle_save:
     requirements:
         id: '[1-9][0-9]*'
         user_id : '[1-9][0-9]*'            
+
+mobile_evenement_delete_image:
+    path: /mobile/deleteImage/{id}
+    defaults: { _controller: evenementsBundle:EvenementMobile:deleteImage }        
+    requirements:
+        id: '[1-9][0-9]*'    

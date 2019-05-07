@@ -85,6 +85,19 @@ class User extends BaseUser
      */
     protected $status;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="admin", type="smallint", nullable=true)
+     */
+    protected $admin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="connecte", type="string", length=255, nullable=true)
+     */
+    protected $connecte;
 
     public function __construct()
     {
@@ -317,5 +330,53 @@ class User extends BaseUser
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set admin
+     *
+     * @param integer $admin
+     *
+     * @return User
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    /**
+     * Get admin
+     *
+     * @return integer
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * Set connecte
+     *
+     * @param string $connecte
+     *
+     * @return User
+     */
+    public function setConnecte($connecte)
+    {
+        $this->connecte = $connecte;
+
+        return $this;
+    }
+
+    /**
+     * Get connecte
+     *
+     * @return string
+     */
+    public function getConnecte()
+    {
+        return $this->connecte;
     }
 }

@@ -1,0 +1,68 @@
+{% extends'ActualBundle::tempFront.html.twig' %}
+{%block actual_body%}
+    <!-- Card affiche detail -->
+    <h1>Detail d'actualité </h1></br></br></br>
+    <div class="card mb-3">
+        <h3 class="card-header">{{ Actual.titre }}</h3>
+        <div class="card-body">
+            <h5 class="card-title">{{ Actual.source }}</h5>
+            <h6 class="card-subtitle text-muted">{{ Actual.auteur }}</h6>
+        </div>
+        <img style="height: 200px; width: 100%; display: block;" src={{ Actual.urlImage }} alt="Card image">
+                <script>
+                   function apiPintrest() {
+                       var api='https://api.pinterest.com/oauth/?\n' +
+                           '    response_type=code&\n' +
+                           '    redirect_uri=https://mywebsite.com/connect/pinterest/&\n' +
+                           '    client_id=12345&\n' +
+                           '    scope=read_public,write_public&\n' +
+                           '    state=768uyFys';
+                       XMLHttpRequest(api);
+                       request.send();
+                       $image=request.getById(Actual.urlImage);
+                   }
+                </script>
+        <div class="card-body">
+            <p class="card-text">{{ Actual.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+            <a href={{ Actual.url }} class="card-link">Actualite link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+        <div class="card-footer text-muted">
+            {{ socialButtons() }}
+        </div>
+    </div>
+
+    <!-- commentaire -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Commentaire</h4>
+            <h6 class="card-subtitle mb-2 text-muted">list de commataire</h6>
+
+                <div class="card">
+
+                    <p class="card-text">
+                    <div class="form-group has-success">
+                        <label class="form-control-label" for="inputSuccess1">commentaire</label>
+                        <input type="text" placeholder="commentaire" class="form-control is-valid" id="commentaire">
+                        <div class="valid-feedback">Success! You've done it.</div>
+
+                    </div>
+                        <button class="btn btn-outline-info">Ajouter</button>
+                    </p>
+
+                </div>
+
+        </div>
+    </div>
+
+{%endblock%}

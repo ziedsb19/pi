@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+    {% block css %}
+        <style>
+            #sidebar a 
+            {
+                color: black;
+            }
+        </style>
+    {% endblock %}
+{% block body %}
+    <div class="row m-2 mt-3 mb-3" style="min-height: 500px">
+        <div class="col-md-3">
+            <ul class="nav flex-column agregate" id="sidebar">
+                <li class="nav-item ">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('ActCard') }}">List d'Actualite  </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('afficheOpp') }}">List Opportunite </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('ajoutOpportunite') }}">Ajout Opportunite </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="row">
+                {% block actual_body %}        
+                {% endblock %}
+            </div>    
+        </div>    
+    </div>
+{% endblock %}

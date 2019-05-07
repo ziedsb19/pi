@@ -1,0 +1,47 @@
+actual_homepage:
+    path:     /
+    defaults: { _controller: ActualBundle:Default:index }
+
+ajoutOpportunite:
+    path:     /ajoutOpp
+    defaults: { _controller: ActualBundle:opportunite:ajoutOpp }
+
+afficheActualite:
+    path:     /afficheActual
+    defaults: { _controller: ActualBundle:opportunite:ajoutOpp }
+
+afficheOpp:
+    path:     /afficheOpp
+    defaults: { _controller: ActualBundle:opportunite:AfficheOpp }
+
+delete:
+    path:     /delete
+    defaults: { _controller: ActualBundle:opportunite:delete}
+
+update:
+    path:     /update/{id}
+    defaults: { _controller: ActualBundle:opportunite:update2}
+
+ActCard:
+    path:     /ActCard
+    defaults: { _controller: ActualBundle:opportunite:ActualCard}
+
+detailActual:
+    path:     /detailActual/{id}
+    defaults: { _controller: ActualBundle:opportunite:detailActual}
+
+export:
+    path:     /export
+    defaults: { _controller: ActualBundle:opportunite:export}
+
+admin:
+    path:     /admin
+    defaults: { _controller: ActualBundle:opportunite:admin}
+
+webSerOppAjout:
+    path:     /webSerOppAjout
+    defaults: { _controller: ActualBundle:webSerOpp:new}
+
+webSerOpp:
+    path:     /webSerOpp
+    defaults: { _controller: ActualBundle:webSerOpp:all}

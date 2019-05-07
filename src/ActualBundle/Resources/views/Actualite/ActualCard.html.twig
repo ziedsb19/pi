@@ -1,0 +1,73 @@
+{% extends'ActualBundle::tempFront.html.twig' %}
+{%block actual_body%}
+    <!-- Card affiche -->
+   <h2 class="col-md-12">Les Actualites </h2>
+   <div class="col-md-12">
+   <div class="row">
+
+
+
+   {% for act in Actual %}
+
+   <div class="card text-white bg-info m-1 col-md-4" style="max-width: 20rem;">
+      <div class="card-header">{{ act.titre }}</div>
+      <div class="card-body">
+         <h4 class="card-title">{{ act.source }}</h4>
+         <p class="card-text">{{ act.description }}</p>
+      </div>
+      <a href="{{ path('detailActual', {'id': act.idActualite }) }}" class="btn btn-dark btn-block">afficher details</a>
+   </div>
+
+   {% endfor %}
+   </div>
+   </div>
+   <div class="navigation text-center col-md-6 offset-3 mt-2">
+      {{ knp_pagination_render(Actual) }}
+   </div>
+   <script>
+
+      var getJSON = function(url, callback) {
+
+         var xhr = new XMLHttpRequest();
+         xhr.open('GET', 'https://newsapi.org/v2/top-headlines?category=technology&apiKey=a70126d154a44c98a98da5ebcfc7a155' +
+                 '&fbclid=IwAR3X6JqycLAKGPskHQ4wTOHswRIOzdDRREIm2I5NghfizZwgp6nMrYUqX04', true);
+         xhr.responseType = 'json';
+
+         xhr.onload = function() {
+
+            var status = xhr.status;
+
+            if (status == 200) {
+               callback(null, xhr.response);
+            } else {
+               callback(status);
+            }
+         };
+
+         xhr.send();
+      };
+
+      getJSON('https://newsapi.org/v2/top-headlines?category=technology&apiKey=a70126d154a44c98a98da5ebcfc7a155' +
+                 '&fbclid=IwAR3X6JqycLAKGPskHQ4wTOHswRIOzdDRREIm2I5NghfizZwgp6nMrYUqX04',
+              function(err, data) {
+
+         if (err != null) {
+            console.error(err);
+         } else {
+            console.log("yeeees");
+            {% for act in Actual %}
+         <div class="card text-white bg-primary m-3 col-md-4" style="max-width: 20rem;">
+                    <div class="card-header">{{ act.titre }}</div>
+                    <div class="card-body">
+                    <h4 class="card-title">{{ act.source }}</h4>
+                    <p class="card-text">{{ act.description }}</p>
+                    </div>
+                    <a href="{{ path('detailActual', {'id': act.idActualite }) }}" class="btn btn-dark">afficher details</a>
+            </div>
+            {% endfor %}
+
+         }
+      });
+
+   </script>
+{%endblock%}
