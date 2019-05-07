@@ -1,0 +1,84 @@
+
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+    <li><div class="header-wrapicon2">
+
+            <img src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block dhia %}
+
+    <main id="main" class="main-page">
+
+        <!--==========================
+          Speaker Details Section
+        ============================-->
+        <section id="speakers-details" class="wow fadeIn">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Logiciel Details</h2>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ asset('uploads/images/' ~ log.urlphoto) }}"  class="img-fluid">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="details">
+                            <h2>{{ log.nom }}</h2>
+
+                            <p>Type Logiciel : {{ log.typeLog.libelle }}</p>
+                            <p>Prix : {{ log.prix }}</p>
+                            <p>Nombre de Licence : {{ log.nbrlicence }}</p>
+                            <p>Nom du fournisseur : {{ log.fournisseurLog.nom }}</p>
+                            {% if log.fablab !="" %}
+                            <p>Nom du fablab : {{ log.fablab.nom }}</p>
+                                {% else %}
+                            {% endif %}
+
+                            <p>Date Sortie : {{ log.datesortie|date }}</p>
+                            <p>Description : {{ log.description }}</p>
+
+
+                            <ul class="nav-menu">
+
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+
+{% endblock %}

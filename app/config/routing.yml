@@ -1,3 +1,7 @@
+fab:
+    resource: "@FabBundle/Resources/config/routing.yml"
+    prefix:   /fablab
+
 actual:
     resource: "@ActualBundle/Resources/config/routing.yml"
     prefix:   /actual

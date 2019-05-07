@@ -1,0 +1,47 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Catégorie Materiel </h1>
+
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+<div class="col-6 offset-3">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" class = "btn btn-primary"/>
+    {{ form_end(form) }}
+
+    <table class ="table table-condenced">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for catgMateriel in catgMateriels %}
+            <tr>
+                <td><a href="{{ path('catgmateriel_show', { 'id': catgMateriel.id }) }}">{{ catgMateriel.id }}</a></td>
+                <td>{{ catgMateriel.libelle }}</td>
+
+
+                <td>
+                    <a href="{{ path('catgmateriel_show', { 'id': catgMateriel.id }) }}" class = "btn btn-info">show</a>
+                </td>
+                <td>
+                    <a href="{{ path('catgmateriel_edit', { 'id': catgMateriel.id }) }}" class = "btn btn-danger">edit</a>
+                </td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>{{ knp_pagination_render(catgMateriels) }}</div>
+
+</div>
+{% endblock %}

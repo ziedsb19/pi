@@ -59,12 +59,71 @@
 
         <ul class="app-menu">
         {% block sidebar %} 
-            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span
+            <li><a class="app-menu__item" href="{{path('admin_evenement')}}"><i class="app-menu__icon fa fa-dashboard"></i><span
                 class="app-menu__label">Dashboard</span></a></li>
         {% endblock %}
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Fablab</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ path('fab_ajout') }}"><i
+                                class="icon fa fa-circle-o"></i>Ajouter Fablab</a></li>
+                    <li><a class="treeview-item" href="{{ path('fab_affichageback') }}"><i
+                                class="icon fa fa-circle-o"></i>Afficher Fablabs</a></li>
+
+                </ul>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Materiel</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ path('mat_ajout') }}"><i
+                                class="icon fa fa-circle-o"></i>Ajouter Materiel</a></li>
+                    <li><a class="treeview-item" href="{{ path('mat_affichageback') }}"><i
+                                class="icon fa fa-circle-o"></i>Afficher Materiels</a></li>
+                </ul>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Logiciel</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ path('log_ajout') }}"><i
+                                class="icon fa fa-circle-o"></i>Ajouter Logiciel</a></li>
+                    <li><a class="treeview-item" href="{{ path('log_affichageback') }}"><i
+                                class="icon fa fa-circle-o"></i>Afficher Logiciel</a></li>
+                </ul>
+
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Paramètres</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ path('catgmateriel_new') }}"><i
+                                class="icon fa fa-circle-o"></i>Ajouter catégorie matériels</a></li>
+                    <li><a class="treeview-item" href="{{ path('catgmateriel_index') }}"><i
+                                class="icon fa fa-circle-o"></i>Liste catégorie matériels</a></li>
+                    <li><a class="treeview-item" href="{{ path('typelog_new') }}"><i
+                                class="icon fa fa-circle-o"></i>Ajouter Type logiciel</a></li>
+                    <li><a class="treeview-item" href="{{ path('typelog_index') }}"><i
+                                class="icon fa fa-circle-o"></i>Liste Type logiciel</a></li>
+
+
+
+
+                </ul>
+            </li>
+
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Statistiques</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ path('stat') }}"><i class="icon fa fa-circle-o"></i>Afficher
+                            les stats</a></li>
+
+                </ul>
+            </li>
         </ul>
     </aside>
-    
+{% block dhiabody %}    
     <main class="app-content">
         <div class="app-title">
             <div>
@@ -81,6 +140,7 @@
         {% block body %}
         {% endblock %}
     </main>
+{% endblock %}    
     <!-- Essential javascripts for application to work-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

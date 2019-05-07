@@ -1,0 +1,106 @@
+{% extends 'tempAdmin.html.twig' %}
+
+
+{% block body %}
+    <main class="app-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="row">
+                        <center><input class="form-control" id="inputDefault"  type="text" name="search" placeholder="Recherche"></center></br></br></br></br>
+
+
+                        <table  id="contenu" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Stock</th>
+                                <th>Categorie</th>
+                                <th>Fablab</th>
+                                <th>Description</th>
+
+                            </tr>
+                            </thead>
+
+                            {% for mat in mats %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ mat.nom }}</td>
+                                    <td>{{ mat.prix }}</td>
+                                    <td>{{ mat.stock }}</td>
+                                    {% if mat.CatgMateriel== "" %}
+                                <td></td>
+                            {% else %}
+                                    <td>{{ mat.CatgMateriel.libelle }}
+                                        {% endif %}
+                                    {% if mat.Fablab== "" %}
+                                    <td></td>
+                                    {% else %}
+                                    <td>{{ mat.Fablab.nom }}</td>
+                                        {% endif %}
+                                    <td>{{ mat.description }}</td>
+
+                                    <td><a href="{{ path('modifier_materiel', {'id':mat.id}) }}">Modifier</a></td>
+                                    <td><a href="{{ path('supprimer_materiel', {'id':mat.id}) }}">Supprimer</a></td>
+
+                                </tr>
+                                </tbody>
+
+
+                            {% endfor %}
+                        </table>
+                        <div class="text-center">{{ knp_pagination_render(mats) }}</div>
+
+                        <script src="{{ asset('jquery-3.2.1.js') }}"></script>
+
+                        <script>
+                            $(document).ready( function() {
+                                // déterminer l'index des colonnes les colonnes
+                                var colonnes = {};
+                                $("#contenu thead th").each(function(index, th)
+                                    {
+                                        colonnes[index] = $(th).text();
+                                    }
+                                );
+
+// faire la recherche dans le tableau
+                                $("#inputDefault").keyup(function()
+                                {
+                                    var mots = $(this).val().toLowerCase().split(" ");
+                                    $("#contenu tbody tr").each(function(index, tr)
+                                    {
+
+                                        if (mots[0].length > 0) $(tr).hide(); else $(tr).show();
+                                        $("td", tr).each(function(index, td)
+                                        {
+                                            if (colonnes[index] in {'Nom':true,'Prix':true,'Fablab':true,'Categorie':true})
+                                            {
+                                                for (mot in mots)
+                                                {
+                                                    if (mots[mot].length > 0 && $(td).text().toLowerCase().indexOf(mots[mot])>= 0)
+                                                    {
+                                                        $(tr).show();
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                });
+
+                            });
+                        </script>
+                        </br>
+                        </br>
+                        </br>
+
+                    </div>
+                </div></div></div></div>
+    </main>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

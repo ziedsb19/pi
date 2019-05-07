@@ -1,0 +1,43 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+
+
+<div class="col-6 offset-3">
+       <h1>Ajout materiels</h1>
+       {% for message in app.flashes('success') %}
+           <div class="flash-notice">
+               {{ message }}
+           </div>
+       {% endfor %}
+
+       <h1>Materiel creation</h1>
+
+       {{ form_start(form) }}
+       {{ form_widget(form) }}
+       <input type="submit" value="Create" />
+       {{ form_end(form) }}
+
+</div>
+
+    <script txt="text/javascript">
+
+        $("form").submit(function (e) {
+
+
+            if ($('#Fabbundle_materiels_prix').val().length <0 )
+            {
+                e.preventDefault();
+                alert(" veuillez saisir un prix positif  ");
+
+            }
+
+
+
+
+        });
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+
+    <li><div class="header-wrapicon2">
+
+            <img  src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+                {% for p in matpanier %}
+                    <ul class="header-cart-wrapitem">
+                        <li class="header-cart-item">
+                            <div class="header-cart-item-img">
+
+                            </div>
+
+                            <div class="header-cart-item-txt">
+                                <a href="#" class="header-cart-item-name">
+
+                                </a>
+
+                                <span class="header-cart-item-info">
+
+                            </span>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                {% endfor %}
+
+
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </li>
+
+{% endblock %}
+
+{% block dhia %}
+
+
+
+    <section id="speakers" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>LISTE DES FABLABS</h2>
+
+            </div>
+
+            <span class="float-right" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
+                  aria-controls="filter"></span>
+
+            <div class="p-3 shadow mb-4" id="filter-block">
+                <h5 class="custom-contact">Recherche  :</h5>
+                <form action="{{path('filtreFab')}}" method="post">
+                    <div class="form-group">
+                        <label for="nom_filtre">Nom du FabLab</label>
+                        <input type="text" name="nom" id="nom_filtre" class="form-control"
+                               placeholder="chercher par nom" {% if post_array is defined %}value="{{post_array.nom}}"{% endif %}>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="ville_filtre">Ville</label>
+                        <input type="text" name="ville" id="ville_filtre" class="form-control"
+                               placeholder="chercher par ville" {% if post_array is defined %}value="{{post_array.ville}}"{% endif %}>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="responsable_filtre">Responsable</label>
+                        <input type="text" name="responsable" id="responsable_filtre" class="form-control"
+                               placeholder="chercher par responsabl" {% if post_array is defined %}value="{{post_array.responsable}}"{% endif %}>
+
+                    </div>
+                    <button class="btn custom-butt-2 btn-block"><i class="fa fa-search"></i>Rechercher</button>
+                </form>
+            </div>
+
+            <div class="row">
+
+                {% for fab in fabs %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="speaker">
+                            <img src="{{ asset('uploads/images/' ~ fab.image) }}"  width="200" height="200">
+                            <div class="details">
+                                <h3><a href="{{ path('detail_fablab', {'id':fab.id}) }}">{{ fab.nom }}</a></h3>
+                                {{ fab.adresse }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    </section>
+{% endblock %}

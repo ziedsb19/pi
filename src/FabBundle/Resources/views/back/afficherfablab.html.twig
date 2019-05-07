@@ -1,0 +1,96 @@
+{% extends 'tempAdmin.html.twig' %}
+{% block body %}
+<main class="app-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="row">
+    <center><input class="form-control" id="inputDefault"  type="text" name="search" placeholder="Recherche"></center></br></br></br></br>
+
+
+    <table  id="contenu" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Numero Tel</th>
+            <th>Responsable</th>
+            <th>Description</th>
+
+        </tr>
+        </thead>
+
+        {% for fab in fabs %}
+            <tbody>
+            <tr>
+                <td>{{ fab.nom }}</td>
+                <td>{{ fab.adresse }}</td>
+                <td>{{ fab.ville }}</td>
+                <td>{{ fab.numerotel }}</td>
+                <td>{{ fab.responsable }}</td>
+                <td>{{ fab.description }}</td>
+
+                <td><a href="{{ path('modifier_fablab', {'id':fab.id}) }}">Modifier</a></td>
+                <td><a href="{{ path('supprimer_fablab', {'id':fab.id}) }}">Supprimer</a></td>
+
+            </tr>
+            </tbody>
+
+
+        {% endfor %}
+    </table>
+                    <div class="text-center">{{ knp_pagination_render(fabs) }}</div>
+
+    <script src="{{ asset('jquery-3.2.1.js') }}"></script>
+
+    <script>
+        $(document).ready( function() {
+            // déterminer l'index des colonnes les colonnes
+            var colonnes = {};
+            $("#contenu thead th").each(function(index, th)
+                {
+                    colonnes[index] = $(th).text();
+                }
+            );
+
+// faire la recherche dans le tableau
+            $("#inputDefault").keyup(function()
+            {
+                var mots = $(this).val().toLowerCase().split(" ");
+                $("#contenu tbody tr").each(function(index, tr)
+                {
+
+                    if (mots[0].length > 0) $(tr).hide(); else $(tr).show();
+                    $("td", tr).each(function(index, td)
+                    {
+                        if (colonnes[index] in {'Nom':true,'Adresse':true,'Ville':true,'Responsable':true})
+                        {
+                            for (mot in mots)
+                            {
+                                if (mots[mot].length > 0 && $(td).text().toLowerCase().indexOf(mots[mot])>= 0)
+                                {
+                                    $(tr).show();
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+    </br>
+    </br>
+    </br>
+
+                </div>
+            </div></div></div></div>
+</main>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

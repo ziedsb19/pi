@@ -1,0 +1,17 @@
+{% for log in logs %}
+    <div class="col-lg-4 col-md-6">
+        <div class="hotel">
+            <div class="hotel-img">
+                <img src="{{ asset('uploads/images/' ~ log.urlphoto) }}" alt="Speaker 1" class="img-fluid">
+            </div>
+            <h3><a href="#">{{ log.nom }}</a></h3>
+            <p>Prix : {{ log.prix }}</p>
+            <ul class="nav-menu">
+
+                </li> <li class="buy-tickets"><a href="{{ path('detail_logiciel', {'id':log.id}) }}">    Detail     </a></li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endfor %}

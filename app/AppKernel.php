@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new AdminBundle\AdminBundle(),
             new ActualBundle\ActualBundle(),
             new Egyg33k\CsvBundle\Egyg33kCsvBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new FabBundle\FabBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

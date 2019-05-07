@@ -1,0 +1,42 @@
+{% extends 'tempAdmin.html.twig' %}
+
+
+{% block body %}
+    <h1>Fablab creation</h1>
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="col-6 offset-3">
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    </div>
+    <input type="submit" value="Create" id="submit" />
+    {{ form_end(form) }}
+
+
+
+    <script txt="text/javascript">
+
+        $("form").submit(function (e) {
+
+
+            if ($('#Fabbundle_fablab_nom').val().length == "" || $('#Fabbundle_fablab_ville').val().length == "" || $('#Fabbundle_fablab_adresse').val().length == "" || $('#Fabbundle_fablab_numerotel').val().length == ""   )
+            {
+                e.preventDefault();
+                alert("Champs vide ");
+
+
+            }
+
+
+
+
+        });
+
+    </script>
+
+{% endblock %}
+

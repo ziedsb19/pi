@@ -1,0 +1,250 @@
+fab_homepage:
+    path:     /cart
+    defaults: { _controller: FabBundle:Default:afficherPanier }
+
+fab_ajout:
+    path:    /admin/ajouterfablab
+    defaults: { _controller: FabBundle:Default:ajouterFablab }
+
+log_ajout:
+    path:     /admin/ajouterlogiciel
+    defaults: { _controller: FabBundle:Default:ajouterLogiciel }
+
+fab_affichageback:
+    path:     /admin/affichagebackfablab
+    defaults: { _controller: FabBundle:Default:listFablabBack }
+
+mat_affichageback:
+    path:     /admin/affichagebackmateriel
+    defaults: { _controller: FabBundle:Default:listMateirelBack }
+
+log_affichageback:
+    path:     /admin/affichagebacklogiciel
+    defaults: { _controller: FabBundle:Default:listLogicielBack }
+
+modifier_fablab:
+    path:     /admin/modifierfablab/{id}
+    defaults: { _controller: FabBundle:Default:modifierFablab}
+
+modifier_materiel:
+    path:     /admin/modifiermateriel/{id}
+    defaults: { _controller: FabBundle:Default:modifierMateriel}
+
+modifier_logiciel:
+    path:     /admin/modifierlogiciel/{id}
+    defaults: { _controller: FabBundle:Default:modifierLogiciel}
+
+supprimer_materiel:
+    path:     /admin/supprimermateriel/{id}
+    defaults: { _controller: FabBundle:Default:SupprimerMateriel}
+
+supprimer_panier:
+    path:     /supprimerpanier/{id}
+    defaults: { _controller: FabBundle:Default:SupprimerPanier}
+
+
+moin_panier:
+    path:     /moin/{id}
+    defaults: { _controller: FabBundle:Default:moinPanier}
+
+plus_panier:
+    path:     /plus/{id}
+    defaults: { _controller: FabBundle:Default:plusPanier}
+
+detail_fablab:
+    path:     /detailfablab/{id}
+    defaults: { _controller: FabBundle:Default:detailFablab}
+
+detail_materiel:
+    path:     /detailmateriel/{id}
+    defaults: { _controller: FabBundle:Default:detailMateriel}
+detail_logiciel:
+    path:     /detaillogiciel/{id}
+    defaults: { _controller: FabBundle:Default:detailLogiciel}
+supprimer_fablab:
+    path:     /admin/supprimerfablab/{id}
+    defaults: { _controller: FabBundle:Default:SupprimerFablab}
+supprimer_logiciel:
+    path:     /admin/supprimerlogiciel/{id}
+    defaults: { _controller: FabBundle:Default:SupprimerLogiciel}
+
+mat_ajout:
+    path:     /admin/ajoutermateriel
+    defaults: { _controller: FabBundle:Default:ajouterMateriel }
+
+catgmateriel_new:
+    path:     /admin/ajoutcat
+    defaults: { _controller: FabBundle:CatgMateriel:ajoutcat }
+
+catgmateriel_edit:
+    path:     /admin/modifcat/{id}
+    defaults: { _controller: FabBundle:CatgMateriel:modifierCat }
+
+catgmateriel_delete:
+    path:     /admin/supprimcat/{id}
+    defaults: { _controller: FabBundle:CatgMateriel: }
+
+catgmateriel_index:
+    path:     /admin/listcat
+    defaults: { _controller: FabBundle:CatgMateriel:listerCatg }
+
+catgmateriel_show:
+    path:     /admin/affichcat/{id}
+    defaults: { _controller: FabBundle:CatgMateriel:afficherCatg }
+
+typelog_index:
+    path:     /admin/listtypelog
+    defaults: { _controller: FabBundle:TypeLog:listerTypelog }
+
+typelog_show:
+    path:     /admin/affichtypelog/{id}
+    defaults: { _controller: FabBundle:TypeLog:afficherTypeLog }
+
+typelog_new:
+    path:     /admin/ajouttypelog
+    defaults: { _controller: FabBundle:TypeLog:ajouterTypelog }
+
+typelog_edit:
+    path:     /admin/modifTypelog/{id}
+    defaults: { _controller: FabBundle:TypeLog:edit }
+
+typelog_delete:
+    path:     /admin/supprimtypelog/{id}
+    defaults: { _controller: FabBundle:TypeLog:supprimerTypelog }
+
+
+
+
+fab_front_affichage:
+    path:     /afficherfrontfablab
+    defaults: { _controller: FabBundle:Default:afficherfrontfablab }
+
+
+mat_front_affichage:
+    path:     /afficherfrontmateriel
+    defaults: { _controller: FabBundle:Default:afficherfrontMateriel }
+log_front_affichage:
+    path:     /afficherfrontlogiciel
+    defaults: { _controller: FabBundle:Default:afficherfrontLogiciel }
+
+mat_fab_affichage:
+    path:     /afficherMaterielFablab/{id}
+    defaults: { _controller: FabBundle:Default:afficherMaterielFablab}
+log_fab_affichage:
+    path:     /afficherLogicielFablab/{id}
+    defaults: { _controller: FabBundle:Default:afficherLogicielFablab}
+
+mat_panier_ajout:
+    path:     /ajouterpanier/{id}
+    defaults: { _controller: FabBundle:Default:ajouterPanier}
+materiel_categorie:
+    path:     /affichageParType
+    defaults: { _controller: FabBundle:Default:afficherMaterielParType}
+
+logiciel_categorie:
+    path:     /affichageParTypeLogiciel
+    defaults: { _controller: FabBundle:Default:afficherLogicielParType}
+
+payment:
+    path:     /payment
+    defaults: { _controller: FabBundle:Default:payer }
+
+statistique:
+    path:     /stat
+    defaults: { _controller: FabBundle:Default:stat }
+
+stat:
+    path:     /statistique
+    defaults: { _controller: FabBundle:Default:statistiques }
+
+filtreFab:
+    path:     /filtreFab
+    defaults: { _controller: FabBundle:Default:filter }
+
+
+
+
+
+
+
+
+
+mobAfficherpanier:
+    path:     /mobaffpan/{id}
+    defaults: { _controller: FabBundle:mobile:afficherPanier }
+
+mobtotalPan:
+    path:     /mobtotpan/{id}
+    defaults: { _controller: FabBundle:mobile:total }
+
+
+mobAffichefrontfab:
+    path:     /mobaffFabf
+    defaults: { _controller: FabBundle:mobile:afficherfrontfablab }
+
+mobajouterpanier:
+    path:     /mobajoutpanier/{id}/{idUs}
+    defaults: { _controller: FabBundle:mobile:ajouterPanier }
+
+mobajoutpan:
+    path:     /mobajoutpan
+    defaults: { _controller: FabBundle:mobile:ajoutPan}
+
+
+
+mobAfficherMatFront:
+    path:     /mobaffmatf
+    defaults: { _controller: FabBundle:mobile:afficherfrontMateriel }
+
+mobAfficherLogicielFront:
+    path:     /mobafflogf
+    defaults: { _controller: FabBundle:mobile:afficherfrontLogiciel }
+
+mobAfficherMatFabF:
+    path:     /mobaffmatfabf/{id}
+    defaults: { _controller: FabBundle:mobile:afficherMaterielFablab }
+
+mobAffLogFabFront:
+    path:     /mobafflogfabf/{id}
+    defaults: { _controller: FabBundle:mobile:afficherLogicielFablab }
+
+mobmoinspanier:
+    path:     /mobmoinspanier/{id}
+    defaults: { _controller: FabBundle:mobile:moinPanier }
+
+mobpluspanier:
+    path:     /mobpluspanier/{id}
+    defaults: { _controller: FabBundle:mobile:plusPanier }
+
+mobsupppanier:
+    path:     /mobsupppanier/{id}
+    defaults: { _controller: FabBundle:mobile:SupprimerPanier }
+
+mobaffdetailFab:
+    path:     /mobaffdetailFab/{id}
+    defaults: { _controller: FabBundle:mobile:detailFablab }
+
+mobaffdetailMat:
+    path:     /mobaffdetailMat/{id}
+    defaults: { _controller: FabBundle:mobile:detailMateriel }
+
+mobaffdetailLog:
+    path:     /mobaffdetailLog/{id}
+    defaults: { _controller: FabBundle:mobile:detailLogiciel }
+
+connexion:
+    path:     /connexion
+    defaults: { _controller: FabBundle:mobile:connexion }
+
+login:
+    path:     /moblogin/{nom}/{mdp}
+    defaults: { _controller: FabBundle:mobile:Login }
+
+payement:
+    path:     /mobpayement
+    defaults: { _controller: FabBundle:mobile:payer }
+
+
+
+
+

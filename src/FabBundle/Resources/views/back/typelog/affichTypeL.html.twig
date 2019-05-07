@@ -1,0 +1,28 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+    <div class="col-6 offset-3">
+    <h1>Types Logiciels</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ typeLog.id }}</td>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            <td>{{ typeLog.libelle }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('typelog_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    </div>
+
+{% endblock  %}

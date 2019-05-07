@@ -1,0 +1,127 @@
+
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+    <script src="{{ asset('jquery-3.2.1.js') }}"></script>
+    <script>
+        function chargement(){
+            let p = document.getElementById('total').textContent;
+            let x = new XMLHttpRequest();
+            x.onreadystatechange = function()
+            {
+                if ((x.readyState==4)&&(x.status==200))
+                {
+                    window.location.href="{{path('payment')}}";
+                }
+            };
+            x.open('GET',"{{path('payment')}}"+"?x="+p,true);
+
+            x.send();
+        }
+    </script>
+
+
+    <li><div class="header-wrapicon2">
+            <img src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block dhia %}
+
+
+<!-- Cart -->
+<section class="cart bgwhite p-t-70 p-b-100">
+    <div class="container">
+        <!-- Cart item -->
+        <div class="container-table-cart pos-relative">
+            <div class="wrap-table-shopping-cart bgwhite">
+                <table class="table-shopping-cart">
+                    <tr class="table-head">
+                        <th class="column-1">Annuler</th>
+                        <th class="column-1">Image</th>
+                        <th class="column-2">Product</th>
+                        <th class="column-3">Price</th>
+                        <th class="column-4">Quantity</th>
+
+                    </tr>
+{% for p in panier %}
+                    <tr class="table-row">
+                        <td class="column-1">
+                            <a href="{{ path('supprimer_panier', {'id':p.id}) }}">
+                                annuler
+                            </a>
+                        </td>
+                        <td class="column-1">
+                            <div class="cart-img-product b-rad-4 o-f-hidden">
+                                <img src="{{ asset('uploads/images/' ~ p.materiel.image) }}" alt="IMG-PRODUCT">
+                            </div>
+                        </td>
+                        <td class="column-2">{{ p.materiel.nom }}</td>
+                        <td class="column-3">${{ p.materiel.prix }}</td>
+                        <td class="column-5">
+                            <a href="{{ path('moin_panier', {'id':p.id}) }}">
+                                moin
+                            </a>
+                            <br>
+                          {{ p.quantite }} <br>
+                            <a href="{{ path('plus_panier', {'id':p.id}) }}">
+                                plus
+                            </a>
+                        </td>
+
+                    </tr>
+
+{% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+
+        <!-- Total -->
+        <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+            <h5 class="m-text20 p-b-24">
+                Cart Totals
+            </h5>
+
+
+
+
+            <!--  -->
+            <div class="flex-w flex-sb-m p-t-26 p-b-30">
+					<span class="m-text22 w-size19 w-full-sm">
+						Total:
+					</span>
+
+                <span class="m-text21 w-size20 w-full-sm" id="total">
+						{{ total }}
+					</span>
+            </div>
+
+            <div class="size15 trans-0-4">
+                <!-- Button -->
+                <input type="button" value="Payer" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" onclick="chargement()">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

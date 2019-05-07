@@ -1,0 +1,99 @@
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+    <li><div class="header-wrapicon2">
+
+            <img src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block dhia %}
+    <main id="main" class="main-page">
+
+        <!--==========================
+          Speaker Details Section
+        ============================-->
+        <section id="speakers-details" class="wow fadeIn">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Statistiques</h2>
+
+                </div>
+
+                <div id="piechart" style="width: 900px; height: 500px;"></div>
+                <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+
+            </div>
+        </section>
+    </main>
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['PC',{{ pc }}],
+                ['Imprimante',{{ impr }}],
+
+            ]);
+
+            var options = {
+                title: 'Materiels par Categorie'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Type', 'Nombre de logiciels'],
+                ['Logiciel Open Source', {{ opensource }}],
+                ['Logiciel Payant', {{ payant }}],
+
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Logiciels par type',
+
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+{% endblock %}

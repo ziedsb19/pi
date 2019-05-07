@@ -1,0 +1,23 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+    <h1> Modifier types logiciels </h1>
+<div class="col-6 offset-3">
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input  type="button" class="btn btn-secondary disabled" type="submit" value="Edit" />
+     {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+
+            <button type="button" class="btn btn-outline-info"><a href="{{ path('typelog_index') }}">Back to the list</a></button>
+        </li>
+
+
+
+            <td> <button type="button" class="btn btn-outline-info"><a href="{{ path('typelog_delete', {'id': typeLog.id }) }}">Supprimer</a> </button></td>
+        </li>
+    </ul>
+</div>
+{% endblock %}

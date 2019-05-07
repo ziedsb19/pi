@@ -1,0 +1,98 @@
+
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+    <li><div class="header-wrapicon2">
+
+            <img src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block dhia %}
+
+
+
+<section id="hotels" class="section-with-bg wow fadeInUp">
+
+    <div class="container">
+        <div class="section-header">
+            <h2>LISTE DES MATERIELS</h2>
+
+        </div>
+        <form method="POST">
+        <select name="phase" id="p">
+            <option value="" selected disabled>Selectionner Catagorie</option>
+            {% for catg in catgs %}
+            <option value="{{ catg.id }}">{{ catg.libelle }}</option>
+            {% endfor %}
+        </select><BR>   <br><br>
+
+        <div class="row" id="categorie">
+            {% for mat in mats %}
+            <div class="col-lg-4 col-md-6">
+                <div class="hotel">
+                    <div class="hotel-img">
+                        <img src="{{ asset('uploads/images/' ~ mat.image) }}"  class="img-fluid">
+                    </div>
+                    <h3><a href="#">{{ mat.nom }}</a></h3>
+                    <p>Prix : {{ mat.prix }}</p>
+                    <ul class="nav-menu">
+                        {% if mat.Fablab =="" %}
+                        <li class="buy-tickets"><a href="{{ path('mat_panier_ajout', {'id':mat.id}) }}">
+                                Ajouter aux panier</a>
+                    {% endif %}
+                    </li> <li class="buy-tickets"><a href="{{ path('detail_materiel', {'id':mat.id}) }}">    Detail     </a></li>
+                    </ul>
+            </div>
+
+             </div>
+
+            {% endfor %}
+        </div>
+
+            <div class="text-center">{{ knp_pagination_render(mats) }}</div>
+
+
+</section>
+
+    <script src="{{ asset('jquery-3.2.1.js') }}"></script>
+    <script type="text/javascript">
+        $("document").ready(function () {
+
+            $("#p").change(function () {
+
+                $.ajax({
+                    url: '{{ path('materiel_categorie') }}',
+                    data: {
+                        type: $(this).val()
+                    },
+                    type: 'get',
+                    success: function (result, status) {
+
+                        $("#categorie").html(result)
+                    }
+                })
+            });
+        })
+    </script>
+    </form>
+{% endblock %}

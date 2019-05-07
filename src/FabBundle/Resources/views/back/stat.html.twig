@@ -1,0 +1,14 @@
+{% extends 'tempAdmin.html.twig' %}
+{% block body %}
+
+
+
+
+    <div class="col-md-8 offset-2" style="height: 400px;" id="chart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_language('fr') }}
+
+        {{ gc_draw(chart, 'chart') }}
+    </script>
+{% endblock %}

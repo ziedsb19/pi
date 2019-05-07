@@ -1,0 +1,41 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+<div class="col-6 offset-3">
+    <h1>Catgmateriels list</h1>
+
+    <table class = "table table-condensed">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for catgMateriel in catgMateriels %}
+            <tr>
+                <td><a href="{{ path('catgmateriel_show', { 'id': catgMateriel.id }) }}">{{ catgMateriel.id }}</a></td>
+                <td>{{ catgMateriel.libelle }}</td>
+                <td>
+
+                            <a href="{{ path('catgmateriel_show', { 'id': catgMateriel.id }) }}" class = "btn btn-info">show</a>
+
+                </td>
+                <td>
+                            <a href="{{ path('catgmateriel_edit', { 'id': catgMateriel.id }) }}" class = "btn btn-warning">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <div>{{ knp_pagination_render(catgMateriels) }}</div>
+    <ul>
+        <li>
+            <a href="{{ path('catgmateriel_new') }}">Create a new catgMateriel</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

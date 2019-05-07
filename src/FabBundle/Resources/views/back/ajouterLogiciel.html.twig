@@ -1,0 +1,19 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+
+
+       <h1>Logiciel creation</h1>
+
+       {% for message in app.flashes('success') %}
+           <div class="flash-notice">
+               {{ message }}
+           </div>
+       {% endfor %}
+       <div class="col-6 offset-3">
+       {{ form_start(form) }}
+       {{ form_widget(form) }}
+       <input type="submit" value="Create" class ="btn btn-success"/>
+       {{ form_end(form) }}
+
+   {% endblock %}

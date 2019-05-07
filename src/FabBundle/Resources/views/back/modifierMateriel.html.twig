@@ -1,0 +1,87 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+
+    <main class="app-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="row">
+
+                        <form action="" method="post">
+                            <table>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="nom">Nom : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="nom" value="{{ mat.nom }}" required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="prix">Prix : </label>
+                                        <input class="form-control" id="inputDefault" type="number" name="prix" value="{{ mat.prix }}" required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="stock">Stock : </label>
+                                        <input class="form-control" id="inputDefault" type="number" name="stock" value="{{ mat.stock }}" required>
+                                    </div>
+                                </tr>
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1">Categorie :</label>
+                                    <select class="form-control" id="exampleSelect1" name="cat">
+                                        {% if mat.CatgMateriel== "" %}
+                                            <option></option>
+                                        {% else %}
+                                            <option value="{{ mat.CatgMateriel.id }}">{{ mat.CatgMateriel.libelle }}</option>
+                                        {% endif %}
+                                        {% for cat in cats %}
+                                            <option  value="{{ cat.id }}">{{ cat.libelle }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1">Fablab :</label>
+                                    <select class="form-control" id="exampleSelect1" name="fab">
+                                        {% if mat.Fablab== "" %}
+                                            <option></option>
+                                        {% else %}
+                                            <option value="{{ mat.Fablab.id }}">{{ mat.Fablab.nom }}</option>
+                                        {% endif %}
+                                        {% for fab in fabs %}
+                                            <option value="{{ fab.id }}">{{ fab.nom }}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+
+
+                                <tr>
+                                    <div class="form-group">
+                                        <label for="desc">Description: </label>
+                                        <textarea class="form-control" id="exampleTextarea" name="desc"  >{{ mat.description }}</textarea>
+                                    </div>
+                                </tr>
+
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td >
+                                        <div class="modal-footer">
+                                            <input class="btn btn-outline-primary" type="submit" value="Modifier Materiel" name="ajouter">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+
+                    </div>
+                </div></div></div></div>
+    </main>
+
+{% endblock %}

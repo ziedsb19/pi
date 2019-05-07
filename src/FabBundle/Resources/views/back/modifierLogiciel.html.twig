@@ -1,0 +1,111 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+
+    <main class="app-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="row">
+
+                        <form action="" method="post">
+                            <table>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="nom">Nom : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="nom" value="{{ log.nom }}"  required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="prix">Prix : </label>
+                                        <input class="form-control" id="inputDefault" type="number" name="prix" value="{{ log.prix }}"  required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="stock">Nombre de licence : </label>
+                                        <input class="form-control" id="inputDefault" type="number" name="nbr" value="{{ log.nbrlicence }}" required>
+                                    </div>
+                                </tr>
+
+
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1">Type Logiciel :</label>
+                                    <select class="form-control" id="exampleSelect1" name="typelog">
+                                        {% if log.typeLog== "" %}
+                                            <option></option>
+                                        {% else %}
+                                            <option value="{{ log.typeLog.id }}">{{ log.typeLog.libelle }}</option>
+
+                                        {% endif %}
+                                        {% for type in types %}
+                                            <option  value="{{ type.id }}">{{ type.libelle }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1">Fablab :</label>
+                                    <select class="form-control" id="exampleSelect1" name="fab">
+                                        {% if log.Fablab== "" %}
+                                            <option></option>
+                                        {% else %}
+                                            <option value="{{ log.Fablab.id }}">{{ log.Fablab.nom }}</option>
+                                            <option></option>
+                                        {% endif %}
+                                        {% for fab in fabs %}
+                                            <option value="{{ fab.id }}">{{ fab.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleSelect1">Fournisseur :</label>
+                                    <select class="form-control" id="exampleSelect1" name="four">
+
+                                        {% if log.fournisseurLog== "" %}
+                                            <option></option>
+                                        {% else %}
+                                            <option value="{{ log.fournisseurLog.id }}">{{ log.fournisseurLog.nom }}</option>
+
+                                        {% endif %}
+                                        {% for four in fournisseur %}
+                                            <option value="{{ four.id }}">{{ four.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <tr>
+                                    <div class="form-group">
+                                        <label for="desc">Description: </label>
+                                        <textarea class="form-control" id="exampleTextarea" name="desc" required>{{ log.description }}</textarea>
+                                    </div>
+                                </tr>
+
+                                <tr>
+                                    <div class="form-group">
+                                        <td><label for="img">Image : </label></td>
+                                        <td><input class="btn btn-outline-primary" id="exampleInputFile" type="file" name="img" ></td>
+                                    </div>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td >
+                                        <div class="modal-footer">
+                                            <input class="btn btn-outline-primary" type="submit" value="Valider" name="ajouter">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </form>
+
+                    </div>
+                </div></div></div></div>
+    </main>
+
+{% endblock %}

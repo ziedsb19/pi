@@ -1,0 +1,79 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+
+    <main class="app-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="row">
+
+                        <form action="" method="post">
+                            <table>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="nom">Nom : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="nom" value="{{ fab.nom }}" required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="adr">Adresse : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="adr" value="{{ fab.adresse }}" required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="ville">Ville : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="ville" value="{{ fab.ville }}" required>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="tel">Numero Tel : </label>
+                                        <input class="form-control" id="inputDefault" type="number" name="tel" value="{{ fab.numerotel }}" required>
+                                    </div>
+                                </tr>
+
+                                <tr>
+                                    <div class="col-lg-6">
+                                        <label for="res">Responsable : </label>
+                                        <input class="form-control" id="inputDefault" type="text" name="res" value="{{ fab.responsable }}" required>
+                                    </div>
+                                </tr>
+
+
+                                <tr>
+                                    <div class="form-group">
+                                        <label for="desc">Description: </label>
+                                        <textarea class="form-control" id="exampleTextarea" name="desc"  >{{ fab.description }}</textarea>
+                                    </div>
+                                </tr>
+
+                                <tr>
+                                    <div class="form-group">
+                                        <td><label for="img">Image : </label></td>
+                                        <td><input class="btn btn-outline-primary" id="exampleInputFile" type="file" name="img" value="{{ fab.image }}" ></td>
+                                    </div>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td >
+                                        <div class="modal-footer">
+                                            <input class="btn btn-outline-primary" type="submit" value="Modifier Fablab" name="ajouter">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+
+                    </div>
+                </div></div></div></div>
+    </main>
+
+{% endblock %}
+
+

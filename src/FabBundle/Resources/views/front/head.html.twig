@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+    {% block aditional_meta %}
+    
+    <link rel="icon" type="image/png" href="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/favicon.png') }}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{  asset('fashe-colorlib/fashe-colorlib/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/fonts/themify/themify-icons.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/fonts/elegant-font/html-css/style.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/animate/animate.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/animsition/css/animsition.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/select2/select2.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/daterangepicker/daterangepicker.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/slick/slick.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/vendor/lightbox2/css/lightbox.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fashe-colorlib/fashe-colorlib/css/main.css') }}">
+    <!--===============================================================================================-->
+    {% endblock %}
+    
+    {% block body %}
+    <div class="row mt-3 mb-3 m-2">
+        <div class="col-md-3">
+            <ul class="nav flex-column agregate">
+                <li class="nav-item ">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('fab_front_affichage') }}"><i class="fas fa-fire"></i> Fablab <span class="float-right mt-1 badge badge-pill ">4</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('mat_front_affichage') }}"><i class="fas fa-rss"></i> Materiels <span class="float-right mt-1 badge badge-pill ">5</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('log_front_affichage') }}"><i class="fas fa-list"></i> Logiciels <span class="float-right mt-1 badge badge-pill ">85</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('statistique') }}"><i class="fas fa-bookmark"></i> Statistiques <span class="float-right mt-1 badge badge-pill ">10</span></a>
+                </li>
+            </ul>
+            <hr>
+        </div>
+        <div class="col-md-9">
+            {% block dhia %}
+            {% endblock %}
+        </div>
+    </div>
+    {% endblock %}

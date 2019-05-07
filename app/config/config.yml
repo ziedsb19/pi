@@ -6,12 +6,14 @@ imports:
     - { resource: "@AdminBundle/Resources/config/services.yml" }
     - { resource: "@VichUploaderBundle/Resources/config/namer.xml" }
     - { resource: "@ActualBundle/Resources/config/services.yml" }
+    - { resource: "@FabBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-
+    images_directory: '%kernel.root_dir%/../web/uploads/images'
+    
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }
@@ -41,6 +43,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -185,3 +188,6 @@ knp_snappy:
         enabled:    true
         binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" 
         options:    []
+
+cmen_google_charts:
+    version: "current"        

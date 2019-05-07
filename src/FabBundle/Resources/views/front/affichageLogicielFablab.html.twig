@@ -1,0 +1,74 @@
+
+{% extends 'FabBundle:Front:head.html.twig' %}
+
+{% block panier %}
+    <li><div class="header-wrapicon2">
+
+            <img src="{{ asset('fashe-colorlib/fashe-colorlib/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+            <span class="header-icons-noti"></span>
+
+            <!-- Header cart noti -->
+            <div class="header-cart header-dropdown">
+
+                <br>
+                <br>
+                <br>
+                <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="{{ path('fab_homepage')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Afficher le panier
+                        </a>
+                    </div>
+
+                    <div class="header-cart-wrapbtn">
+                        <!-- Button -->
+                        <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                            Check Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+{% endblock %}
+{% block dhia %}
+
+
+
+    <section id="hotels" class="section-with-bg wow fadeInUp">
+
+        <div class="container">
+            <div class="section-header">
+                <h2>LISTE DES LOGICIELS</h2>
+
+            </div>
+
+            <div class="row">
+                {% for log in logs %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="hotel">
+                            <div class="hotel-img">
+                                <img src="{{ asset('uploads/images/' ~ log.urlphoto) }}" alt="Speaker 1" class="img-fluid">
+                            </div>
+                            <h3><a href="#">{{ log.nom }}</a></h3>
+                            <p>Prix : {{ log.prix }}</p>
+                            <ul class="nav-menu">
+
+                                </li> <li class="buy-tickets"><a href="{{ path('detail_logiciel', {'id':log.id}) }}">    Detail     </a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <div class="text-center">{{ knp_pagination_render(logs) }}</div>
+
+    </section>
+
+
+{% endblock %}

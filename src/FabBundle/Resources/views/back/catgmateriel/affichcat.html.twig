@@ -1,0 +1,35 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+<div class="col-6 offset-3">
+    <h1>Catgmateriel</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ catgMateriel.id }}</td>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            <td>{{ catgMateriel.libelle }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('catgmateriel_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('catgmateriel_edit', { 'id': catgMateriel.id }) }}">Edit</a>
+        </li>
+        <li>
+
+            <td> <a href="{{ path('catgmateriel_delete', {'id': catgMateriel.id }) }}">Supprimer</a> </td>
+
+        </li>
+    </ul>
+
+</div>
+{% endblock %}

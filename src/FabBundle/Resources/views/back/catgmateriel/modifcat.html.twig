@@ -1,0 +1,22 @@
+{% extends 'tempAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Catgmateriel edit</h1>
+<div class="col-6 offset-3">
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('catgmateriel_index') }}">Back to the list</a>
+        </li>
+        <li>
+
+
+            <td> <a href="{{ path('catgmateriel_delete', {'id': catgMateriel.id }) }}">Supprimer</a> </td>
+        </li>
+    </ul>
+</div>
+{% endblock %}
