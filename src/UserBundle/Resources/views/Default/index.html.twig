@@ -1,0 +1,217 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Sponsoring Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+
+    <link href="{{ asset('lib/bootstrap/css/bootstrap.css')  }}" rel="stylesheet">
+
+    <link href="{{ asset('lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/prettyphoto/css/prettyphoto.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/hover/hoverex-all.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/jetmenu/jetmenu.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/owl-carousel/owl-carousel.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('csss/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('csss/colors/rose.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="{{ asset('test/style.css') }}">
+    <link rel="stylesheet" href="{{asset('css/search.css')}}">
+
+</head>
+
+<body>
+
+<section id="intro">
+    <div class="container">
+        <div class="ror">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Une plateforme de sponsoring.</h1>
+                <p>developée par Rania Antar</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section1">
+    <div class="container">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="servicebox text-center">
+                <div class="service-icon">
+                    <div class="dm-icon-effect-1" data-effect="slide-left">
+                        <a href="{{ path('ajoutDemande_page') }}" class=""> <i class="active dm-icon fa fa-bullhorn fa-3x"></i> </a>
+                    </div>
+                    <div class="servicetitle">
+                        <h4>Créer une demande de sponsoring</h4>
+                        <hr>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="servicebox text-center">
+                <div class="service-icon">
+                    <div class="dm-icon-effect-1" data-effect="slide-bottom">
+                        <a href="{{ path('ajoutOffre_page') }}" class=""> <i class="active dm-icon fa fa-handshake-o fa-3x"></i> </a>
+                    </div>
+                    <div class="servicetitle">
+                        <h4>Créer une offre de sponsoring</h4>
+                        <hr>
+                    </div>
+
+                </div>
+                <!-- service-icon -->
+            </div>
+            <!-- servicebox -->
+        </div>
+        <!-- large-4 -->
+
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="servicebox text-center">
+                <div class="service-icon">
+                    <div class="dm-icon-effect-1" data-effect="slide-right">
+                        <a href="{{ path('reclamation_page') }}" class=""> <i class="active dm-icon fa fa-envelope-open-o fa-3x"></i> </a>
+                    </div>
+                    <div class="servicetitle">
+                        <h4>Contactez nous</h4>
+                        <hr>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section4 text-center">
+    <div class="general-title">
+        <h3>Liste des Sponsors</h3>
+        <hr>
+    </div>
+    <section class="gallery-block cards-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/microsoft.jpg') }}"><img src="{{ asset('test/images/microsoft.jpg') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>MICROSOFT</h6>
+                            <p class="text-muted card-text">description.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/ESPRIT.png') }}"><img src="{{ asset('test/images/ESPRIT.png') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>ESPRIT</h6>
+                            <p class="text-muted card-text">description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/hp.png') }}"><img src="{{ asset('test/images/hp.png') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>HP</h6>
+                            <p class="text-muted card-text">decription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a class=" btn custom-butt-2 button large" href="{{ path('Offres_page') }}">Tous les Offres de Sponsoring</a>
+</section>
+<!-- end section1 -->
+
+<section class="section4 text-center">
+    <div class="general-title">
+        <h3>Liste des événements à sponsoriser </h3>
+        <hr>
+    </div>
+    <section class="gallery-block cards-gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/i6.jpg') }}"><img src="{{ asset('test/images/i6.jpg') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>Demande 1</h6>
+                            <p class="text-muted card-text">description.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/i2.jpg') }}"><img src="{{ asset('test/images/i2.jpg') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>Demande 2</h6>
+                            <p class="text-muted card-text">description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 transform-on-hover">
+                        <a class="lightbox" href="{{ asset('test/images/i3.jpeg') }}"><img src="{{ asset('test/images/i3.jpeg') }}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h6>Demande 3</h6>
+                            <p class="text-muted card-text">decription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a class="btn custom-butt-2 button large " href="{{ path('Demandes_page') }}">Tous les demandes de Sponsoring</a>
+</section>
+
+
+
+<!-- JavaScript Libraries -->
+
+<script src="{{ asset('lib/jquery/jquery.js') }}"></script>
+<script src="{{ asset('lib/bootstrap/js/bootstrap.js') }}"></script>
+<script src="{{ asset('lib/php-mail-form/validate.js') }}"></script>
+<script src="{{ asset('lib/prettyphoto/js/prettyphoto.js') }}"></script>
+<script src="{{ asset('lib/isotope/isotope.min.js') }}"></script>
+<script src="{{ asset('lib/hover/hoverdir.js') }}"></script>
+<script src="{{ asset('lib/hover/hoverex.min.js') }}"></script>
+<script src="{{ asset('lib/unveil-effects/unveil-effects.js') }}"></script>
+<script src="{{ asset('lib/owl-carousel/owl-carousel.js') }}"></script>
+<script src="{{ asset('lib/jetmenu/jetmenu.js') }}"></script>
+<script src="{{ asset('lib/animate-enhanced/animate-enhanced.min.js') }}"></script>
+<script src="{{ asset('lib/jigowatt/jigowatt.js') }}"></script>
+<script src="{{ asset('lib/easypiechart/easypiechart.min.js') }}"></script>
+
+<!-- Template Main Javascript File -->
+<script src="{{ asset('js/main.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.cards-gallery', {animation: 'slideIn'});
+</script>
+
+</body>
+</html>
+
+{% endblock %}
+

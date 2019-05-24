@@ -66,7 +66,7 @@ class mobileController extends Controller
     public function afficherfrontfablabAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $fabs = $em->getRepository('FabBundle:Fablab')->findAll();
+        $fabs = $em->getRepository('FabBundle:FabLab')->findAll();
 
 
         $serializer = new Serializer([new ObjectNormalizer()]);
@@ -112,7 +112,7 @@ class mobileController extends Controller
     public function ajoutPanAction(Request $request)
     {
         $mat = $this->getDoctrine()->getRepository('FabBundle:Materiels')->find($request->get('id'));
-        $us = $this->getDoctrine()->getRepository('FabBundle:User')->find($request->get('id'));
+        $us = $this->getDoctrine()->getRepository('techEventsBundle:User')->find($request->get('id'));
         $p = $this->getDoctrine()->getRepository('FabBundle:Panier')->findOneBy(array('materiel'=>$mat, 'iduser'=>$us));
         if($p == null)
         {
@@ -260,7 +260,7 @@ class mobileController extends Controller
 
     public function detailFablabAction($id,Request $request)
     {
-        $fab = $this->getDoctrine()->getRepository('FabBundle:Fablab')->find($id);
+        $fab = $this->getDoctrine()->getRepository('FabBundle:FabLab')->find($id);
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer -> normalize($fab);
         return new JsonResponse($formatted);
@@ -289,7 +289,7 @@ class mobileController extends Controller
 
     public function connexionAction(Request $req){
         $orm= $this->getDoctrine()->getManager();
-        $user = $orm->getRepository('FabBundle:User')
+        $user = $orm->getRepository('techEventsBundle:User')
             ->findOneBy(array("username"=>$req->query->get("username")));
         if ($user){
             $encoder_service = $this->get('security.encoder_factory');
@@ -311,7 +311,7 @@ class mobileController extends Controller
     public function LoginAction($nom, $mdp)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('FabBundle:User')->findBy(array('username' => $nom));
+        $user = $em->getRepository('techEventsBundle:User')->findBy(array('username' => $nom));
         
         if (!empty($user)) {
             $username = $user[0]->getUsername();

@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+
+    <link href="{{ asset('csss/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('csss/colors/rose.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{asset('css/search.css')}}">
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<div class="container form-ajout w-50 ">
+    <div class="row">
+        <div class="col-lg-12 col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-12 col-xs-12">
+            <div class="title mt-4">
+                <h1 style="text-align:center ; color:#e80d36">  Creation d'une reclamation</h1>
+            </div>
+
+                  {{form_start(form)}}
+                  {{form_widget(form)}}
+
+            <div class="mx-auto mb-5" style="width: 200px;">
+                <button type="submit" class="btn custom-butt-2 w-75 button large">Ajouter</button>
+            </div>
+
+                  {{form_end(form)}}
+        </div>
+    </div>
+</div>
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user_homepage') }}">
+            Retour à la liste
+        </a>
+    </li>
+</ul>
+{% endblock %}

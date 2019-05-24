@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Get ChechOut - Payment{% endblock %}
+
+{% block body %}
+
+<body>
+<form  method="POST">
+    <script
+            src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="pk_test_48JFkLrF8a33vw2wGnj9mKLW00buxazgdG"
+            data-amount="999"
+            data-name="techEvent"
+            data-description="Widget"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+            data-currency="eur">
+    </script>
+</form>
+</body>
+</html>
+
+{% endblock %}

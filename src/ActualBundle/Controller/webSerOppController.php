@@ -29,13 +29,19 @@ class webSerOppController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $task = new Opportunite();
-        $task->setOffre($request->get('offre'));
-        $task->setDescription($request->get('description'));
-        $em->persist($task);
+        $op = new Opportunite();
+
+        $dateDD = new \DateTime($request->get('date'));
+        $op->setDate($dateDD);
+        $op->setIdUtilisateur(1);
+        $op->setOffre($request->get('offre'));
+        $op->setDescription($request->get('description'));
+
+
+        $em->persist($op);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($task);
+        $formatted = $serializer->normalize($op);
         return new JsonResponse($formatted);
     }
 

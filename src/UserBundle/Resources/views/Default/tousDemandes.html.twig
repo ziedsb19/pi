@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel='stylesheet' id='bootstrap-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap/css/bootstrap.min.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='font-awesome-css'  href='http://demo.ovathemes.com/eventmana/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/font-awesome.min.css?ver=5.6' type='text/css' media='all' />
+    <link rel='stylesheet' id='bootstrap-select-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap-select/bootstrap-select.min.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='owl.carousel.min-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/owlcarousel2/assets/owl.carousel.min.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='owl.theme.default.min-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/owlcarousel2/assets/owl.theme.default.min.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='prettyPhoto-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/prettyphoto/css/prettyPhoto.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='animate-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/animate/animate.min.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='countdown-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/countdown/jquery.countdown.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='custom-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/css/custom.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='parent-stylesheet-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/style.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='theme-style-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana-child/style.css?ver=eventmana' type='text/css' media='all' />
+    <link rel='stylesheet' id='ova_add_fix-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/extend/css/fix.css?ver=5.1.1' type='text/css' media='all' />
+    <link rel='stylesheet' id='instag-slider-css'  href='http://demo.ovathemes.com/eventmana/wp-content/plugins/instagram-slider-widget/assets/css/instag-slider.css?ver=1.4.3' type='text/css' media='all' />
+    <link rel='stylesheet' id='theme-slug-fonts-css'  href='https://fonts.googleapis.com/css?family=Raleway%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%22%7CRoboto%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CRoboto+Slab%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="{{asset('css/search.css')}}">
+    <link href="{{ asset('lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+
+        a{ color: #ed4a43; }
+
+        body,
+        #main-slider .caption-subtitle,
+        .countdown-amount,
+        .featured-line .countdown-wrapper.countdown-featured,
+        .featured-line .countdown-wrapper.countdown-featured .countdown-amount,
+        .featured-line .countdown-wrapper.countdown-featured .countdown-period,
+        #main-slider .slide5 .countdown-wrapper,
+        #main-slider .slide5 .countdown-wrapper .countdown-amount,
+        #main-slider .slide5 .countdown-wrapper .countdown-period{
+            font-family: Raleway, sans-serif;
+        }
+
+        .multipage .sf-menu a,
+        #main-slider .slide5 h2,
+        .breadcrumbs .breadcrumb a,
+        .listing-meta .filters a,
+        .thumbnails.events .caption-category,
+        .thumbnails.events .caption-price,
+        .thumbnails.events .caption-text,
+        .page-section.create-new-event p
+
+        {
+            font-family: Roboto, sans-serif;
+        }
+
+        .btn-theme {
+            color: #ffffff;
+            background-color: #ed4a43;
+            border-color: #ed4a43;
+        }
+
+        .color .btn-theme {
+            color: #ed4a43;
+
+        }
+
+        .schedule-wrapper .schedule-tabs.lv2 .nav > li.active > a {
+            color: #ed4a43;
+        }
+
+        .timeline .post-title a {
+            color: #ed4a43;
+        }
+
+        .timeline .post-readmore a:hover {
+            color: #ed4a43;
+        }
+
+
+        .project-details .dl-horizontal dt {
+            color: #3c4547;
+        }
+
+        .color .testimonials.owl-theme .owl-dots .owl-dot span {
+            background-color: #ed4a43;
+            border: solid 2px #ffffff;
+        }
+
+        .widget-title:before {
+            background-color: #ed4a43;
+        }
+
+        .sidebar .widget-title {
+            color: #ed4a43;
+        }
+        .thumbnails.events .caption-title a:hover{
+            color: #ed4a43;
+        }
+        .thumbnails.events .caption-more .btn-theme:hover{
+            background-color: #ed4a43;
+            border-color: #ed4a43;
+        }
+
+        .thumbnails.hotels .caption-title a:hover{ color: #ed4a43; }
+        .timeline a{ color: #ed4a43!important; }
+        .faq-alt .panel-title a{ color: #ed4a43; }
+
+        ul li.current_page_item a{
+            color: #ed4a43!important;
+        }
+    </style>
+
+<body class="page-template page-template-templates page-template-event_list page-template-templatesevent_list-php page page-id-14 wide ltr body-light multipage woocommerce-no-js wpb-js-composer js-comp-ver-5.6 vc_responsive" >
+
+<div class="container_boxed">
+    <div class="wrapper">
+        <div class="page-section with-sidebar sidebar-right first-section">
+            <div class="container">
+
+                <div class="sidebar col-lg-3 col-md-4 col-sm-12 ">
+                    <div class="p-3 shadow mb-4" id="filter-block">
+                        <h5 class="custom-contact">Filter :</h5>
+
+                            <select class="form-control" id="tri">
+                                <option value="1" {% if (app.request.get('sortBy') != 3 or app.request.get('sortBy') != 2 ) %} selected
+                                        {% endif %}>Tous les Demandes</option>
+                                <option value="2" {% if app.request.get('sortBy') == 2 %} selected {% endif %}>
+                                    Demandes les plus récentes</option>
+                                <option value="3" {% if app.request.get('sortBy') == 3 %} selected {% endif %}>Demandes les plus proches</option>
+                            </select>
+                        </div>
+                        <span class="float-right" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
+                              aria-controls="filter"></span>
+
+                    <div class="p-3 shadow mb-4" id="filter-block">
+                        <h5 class="custom-contact">Recherche avancée :</h5>
+                        <form action="{{path('filterD')}}" method="post">
+                            <div class="form-group">
+                                <label for="organisateur_filtre">titre de la demande</label>
+                                <input type="text" name="titre" id="organisateur_filtre" class="form-control"
+                                       placeholder="titre de la demande" {% if post_array is defined %}value="{{post_array.titre}}"{% endif %}>
+                                <small class="form-text text-muted">chercher par titre</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="region_filtre">lieu</label>
+                                <input type="text" name="lieu" id="region_filtre" class="form-control"
+                                       placeholder="lieu" {% if post_array is defined %}value="{{post_array.lieu}}"{% endif %}>
+                                <small class="form-text text-muted">chercher par lieu</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="eMail_filtre">E-mail</label>
+                                <input type="text" name="eMail" id="eMail_filtre" class="form-control"
+                                       placeholder="E-mail" {% if post_array is defined %}value="{{post_array.eMail}}"{% endif %}>
+                                <small class="form-text text-muted">chercher par E-mail </small>
+                            </div>
+                            <button class="btn custom-butt-2 btn-block"><i class="fa fa-search"></i>Rechercher</button>
+                        </form>
+                    </div>
+                    <nav aria-label="navigation">
+                        <ul class="pager">
+                            <li class="previous"><a href="{{ path('user_homepage') }}" title="Précédent">Précédent</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-sm-12 mobile_clear nopadding_mobile">
+                    <h3 class="post-title">Liste des évènements à sponsoriser </h3>
+
+                    <div class="tab-content">
+
+                        <div id="list-view"  class="tab-pane fade active in" role="tabpanel">
+
+                            <div class="thumbnails events vertical">
+                                {% for d in demandes %}
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="media_img">
+                                                <img src="{{ asset('uploads/images/' ~ d.image) }}" alt=""/>
+                                                <!-- <div class="caption hovered"></div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <div class="caption">
+                                                <h3 class="caption-title"><a href="#">{{ d.titre }}</a></h3>
+                                                <p class="caption-category"><i class="fa fa-file-text-o"></i>Le {{ d.date |date('d/m/Y')}}  Lieu :  {{ d.lieu }} </p>
+                                                <p class="caption-price">{{ d.eMail }}</p>
+                                                <p class="caption-text">{{ d.descriptionEvenement }}</p>
+                                                <a class="caption-more"><a href="{{ path('OneD',{'id':d.id}) }}" class="btn btn-danger">Detail</a></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="page-divider half"/>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#tri").change(function () {
+            var val = $("#tri option:selected").attr("value");
+            if (val == "1")
+                window.location.href = "{{path('triD', {sortBy:1} )}}";
+            if (val == "2")
+                window.location.href = "{{path('triD', {sortBy:2} )}}";
+            if (val == "3")
+                window.location.href = "{{path('triD', {sortBy:3} )}}";
+        });
+    });
+</script>
+
+</body>
+</html>
+{% endblock %}
+
+

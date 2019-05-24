@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    {% for o in offres %}
+        <tr>
+            <td>{{ o.id }}</td>
+            <td>{{ o.nomSponsors }}</td>
+            <td>{{ o.descriptionOffre }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

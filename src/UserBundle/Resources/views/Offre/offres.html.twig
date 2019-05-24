@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sponsoring Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="{{ asset('test/style.css') }}">
+
+</head>
+<body>
+<section class="section4 text-center">
+        <section class="gallery-block cards-gallery">
+            <div class="container">
+                <div class="heading">
+                    <h2>Tous les offres de sponsoring</h2>
+                    <hr>
+                </div>
+                <div class="row">
+                    {% for o in offres %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 transform-on-hover">
+                            <a class="lightbox" href="{{ asset('uploads/images/' ~ o.image) }}"><img src="{{ asset('uploads/images/' ~ o.image) }}" class="card-img-top"></a>
+                            <div class="card-body">
+                                <td>{{ o.nomSponsors }}</td>
+                                <p class="text-muted card-text">{{ o.descriptionOffre }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    <a class="button large" href="#">Next</a>
+</section>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.cards-gallery', {animation: 'slideIn'});
+</script>
+
+</body>
+</html>
+
+{% endblock %}

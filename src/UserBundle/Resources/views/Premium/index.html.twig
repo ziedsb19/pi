@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Get Premium{% endblock %}
+
+{% block body %}
+  <p>Content labelled with {% include '@User/Premium/_label.html.twig' %} is only available to users with premium access.</p>
+  {% if app.user.premium %}
+    <p>You are already a premium user, congratulations!</p>
+  {% else %}
+    <p>You can gain access via one of the following methods:</p>
+    <a href="{{ path('premium_payment') }}" class="btn btn-default">Pay {{ payment_config.premium_amount|localizedcurrency(payment_config.currency) }} securely</a>
+  {% endif %}
+{% endblock %}

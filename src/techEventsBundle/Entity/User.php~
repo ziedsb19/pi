@@ -99,6 +99,21 @@ class User extends BaseUser
      */
     protected $connecte;
 
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    private $chargeId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="premium", type="boolean", nullable=false)
+     */
+    private $premium;
+
+
     public function __construct()
     {
         parent::__construct();

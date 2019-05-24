@@ -99,6 +99,21 @@ class User extends BaseUser
      */
     protected $connecte;
 
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    private $chargeId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="premium", type="boolean", nullable=false)
+     */
+    private $premium;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -378,5 +393,53 @@ class User extends BaseUser
     public function getConnecte()
     {
         return $this->connecte;
+    }
+
+    /**
+     * Set chargeId
+     *
+     * @param string $chargeId
+     *
+     * @return User
+     */
+    public function setChargeId($chargeId)
+    {
+        $this->chargeId = $chargeId;
+
+        return $this;
+    }
+
+    /**
+     * Get chargeId
+     *
+     * @return string
+     */
+    public function getChargeId()
+    {
+        return $this->chargeId;
+    }
+
+    /**
+     * Set premium
+     *
+     * @param boolean $premium
+     *
+     * @return User
+     */
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+
+        return $this;
+    }
+
+    /**
+     * Get premium
+     *
+     * @return boolean
+     */
+    public function getPremium()
+    {
+        return $this->premium;
     }
 }

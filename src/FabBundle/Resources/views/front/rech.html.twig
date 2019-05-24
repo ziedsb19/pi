@@ -1,0 +1,58 @@
+{% extends 'temgroup.html.twig' %}
+    {% block body %}
+        <div class="row">
+            <div class="col-md-3 mt-4">
+                <ul class="nav flex-column agregate">
+                    <li class="nav-item ">
+                        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('fab_front_affichage') }}"><i class="fas fa-fire"></i> Fablab <span class="float-right mt-1 badge badge-pill ">4</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('mat_front_affichage') }}"><i class="fas fa-rss"></i> Materiels <span class="float-right mt-1 badge badge-pill ">5</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('log_front_affichage') }}"><i class="fas fa-list"></i> Logiciels <span class="float-right mt-1 badge badge-pill ">85</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shadow p-3 mb-2 bg-white rounded" href="{{ path('statistique') }}"><i class="fas fa-bookmark"></i> Statistiques <span class="float-right mt-1 badge badge-pill ">10</span></a>
+                    </li>
+                    <hr>
+
+                    <br> <br>
+
+
+                    <li class="nav-item">
+                        <div class="p-3 shadow mb-4" id="filter-block">
+                            <h5 class="custom-contact">Recherche  :</h5>
+                            <form action="{{path('filtreFab')}}" method="post">
+                                <div class="form-group">
+                                    <label for="nom_filtre">Nom du FabLab</label>
+                                    <input type="text" name="nom" id="nom_filtre" class="form-control"
+                                           placeholder="chercher par nom" {% if post_array is defined %}value="{{post_array.nom}}"{% endif %}>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="ville_filtre">Ville</label>
+                                    <input type="text" name="ville" id="ville_filtre" class="form-control"
+                                           placeholder="chercher par ville" {% if post_array is defined %}value="{{post_array.ville}}"{% endif %}>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="responsable_filtre">Responsable</label>
+                                    <input type="text" name="responsable" id="responsable_filtre" class="form-control"
+                                           placeholder="chercher par responsabl" {% if post_array is defined %}value="{{post_array.responsable}}"{% endif %}>
+
+                                </div>
+                                <button class="btn custom-butt-2 btn-block"><i class="fa fa-search"></i>Rechercher</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-9">
+                {% block dhia %}
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}

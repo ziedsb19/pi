@@ -1,0 +1,175 @@
+homepage:
+    path:     /home
+    defaults: { _controller: UserBundle:Security:redirect }
+
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+
+test_homepage:
+    path:     /test
+    defaults: { _controller: UserBundle:Default:test }
+
+payment_homepage:
+    path:     /pay
+    defaults: { _controller: UserBundle:Default:payment }
+
+google_homepage:
+    path:     /google
+    defaults: { _controller: UserBundle:Default:google }
+
+sponsoring_contact:
+    path:     /contact
+    defaults: { _controller: UserBundle:Default:contact }
+
+adminOffres_homepage:
+    path:     /adoffres
+    defaults: { _controller: UserBundle:Offre:adAffiche }
+
+adminDemandes_homepage:
+    path:     /addemandes
+    defaults: { _controller: UserBundle:Demande:adAffiche }
+
+adminUsers_homepage:
+    path:     /adusers
+    defaults: { _controller: UserBundle:Offre:adAffiche }
+
+profil_homepage:
+    path:     /profil
+    defaults: { _controller: UserBundle:Offre:userOffres }
+
+ModifOffre_admin:
+    path:     /modifMO/{id}
+    defaults: { _controller: UserBundle:Offre:modify }
+
+reclamation_page:
+    path:     /contacterNous
+    defaults: { _controller: UserBundle:Default:contact }
+
+ajoutDemande_page:
+    path:     /ajoutDemande
+    defaults: { _controller: UserBundle:Demande:ajouter }
+
+ajoutPack_page:
+    path:     /ajoutPack/{id}
+    defaults: { _controller: UserBundle:Pack:ajouter }
+
+ajoutOffre_page:
+    path:     /ajoutOffre
+    defaults: { _controller: UserBundle:Offre:ajouter }
+
+SuprimOffre:
+    path:     /supoff/{id}
+    defaults: { _controller: UserBundle:Offre:supprim }
+SupriOffre:
+    path:     /supof/{id}
+    defaults: { _controller: UserBundle:Offre:suppri }
+ModifOffre:
+    path:     /modifOffre/{id}
+    defaults: { _controller: UserBundle:Offre:modif }
+UneOffre:
+    path:     /uneOffre/{id}
+    defaults: { _controller: UserBundle:Offre:uneOffre }
+Une:
+    path:     /une/{id}
+    defaults: { _controller: UserBundle:Offre:une }
+OneOff:
+    path:     /oneOff/{id}
+    defaults: { _controller: UserBundle:Offre:one }
+
+Offres_page:
+    path:     /offres
+    defaults: { _controller: UserBundle:Offre:affiche }
+
+Demandes_page:
+    path:     /demandes
+    defaults: { _controller: UserBundle:Demande:affiche }
+
+mesDemandes_homepage:
+    path:     /mesD
+    defaults: { _controller: UserBundle:Demande:userDemandes }
+UneD:
+    path:     /uneD/{id}
+    defaults: { _controller: UserBundle:Demande:une }
+OneD:
+    path:     /oneD/{id}
+    defaults: { _controller: UserBundle:Demande:One }
+ModifDemande:
+    path:     /modifDemande/{id}
+    defaults: { _controller: UserBundle:Demande:modif }
+SuprimDemande:
+    path:     /suprimdemande/{id}
+    defaults: { _controller: UserBundle:Demande:supprim }
+
+premium_payment:
+    path:     /payment
+    defaults: { _controller: UserBundle:Premium:payment }
+
+premium_pay:
+    path:     /payer
+    defaults: { _controller: UserBundle:Default:pay }
+
+premium_index:
+    path:     /prem
+    defaults: { _controller: UserBundle:Premium:index }
+
+premium_check:
+    path:     /check
+    defaults: { _controller: UserBundle:Premium:check }
+
+filter:
+    path:     /find
+    defaults: {_controller: UserBundle:Offre:findDQL }
+
+filterD:
+    path:     /findD
+    defaults: {_controller: UserBundle:Demande:filter }
+searchD:
+    path:     /searchD
+    defaults: {_controller: UserBundle:Demande:recherche }
+triD:
+    path:     /triD
+    defaults: {_controller: UserBundle:Demande:tri }
+
+filterO:
+    path:     /findO
+    defaults: {_controller: UserBundle:Offre:filter }
+searchO:
+    path:     /searchO
+    defaults: {_controller: UserBundle:Offre:recherche }
+triO:
+    path:     /triO
+    defaults: {_controller: UserBundle:Offre:tri }
+
+create_reclamation:
+    path:     /adreclamation
+    defaults: {_controller: UserBundle:Reclamation:create }
+
+adminReclamations_homepage:
+    path:     /adminreclamation
+    defaults: {_controller: UserBundle:ReclamationAdmin:affiche }
+
+reclamationsadmin_edit:
+    path:     /adminreclamationedit/{id}
+    defaults: {_controller: UserBundle:ReclamationAdmin:edit }
+
+reclamationsadmin_delete:
+    path:     /adminreclamationdelete/{id}
+    defaults: {_controller: UserBundle:ReclamationAdmin:delete }
+
+uneD:
+    path:     /uneDem/{id}
+    defaults: {_controller: UserBundle:Demande:d }
+
+Modifdemande_admin:
+    path:     /moddDem/{id}
+    defaults: {_controller: UserBundle:Demande:mo }
+
+
+sponsoring_api_new:
+    path:     /offres/new
+    defaults: { _controller: UserBundle:Offre:new }
+
+sponsoring_api_all:
+    path:     /offres/all
+    defaults: { _controller: UserBundle:Offre:all }

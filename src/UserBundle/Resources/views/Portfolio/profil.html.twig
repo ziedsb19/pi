@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <!-- SITE TITTLE -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil</title>
+
+    <!-- PLUGINS CSS STYLE -->
+    <link href="{{ asset('profil/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/slick-carousel/slick/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/fancybox/jquery.fancybox.pack.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('profil/css/style.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="body-wrapper">
+
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+                <div class="sidebar">
+                    <div class="widget user-dashboard-profile">
+                        <div class="profile-thumb">
+                            <img src="{{ asset('profil/prof.jpg') }}" alt="" class="rounded-circle">
+                        </div>
+                        <h5 class="text-center">Rania Antar</h5>
+                    </div>
+                    <div class="widget user-dashboard-menu">
+                        <ul>
+                            <li class="active"><a href="{{ path('profil_homepage') }}"><i class="fa fa-bookmark-o"></i> Mes Offres </a></li>
+                            <li><a href="{{ path('mesDemandes_homepage') }}"><i class="fa fa-bookmark-o"></i> Mes Demandes </a></li>
+                            <li><a href="{{ path('ajoutOffre_page') }}"><i class="fa fa-star"></i> Créer une offre de sponsoring </a></li>
+                            <li><a href="{{ path('ajoutDemande_page') }}"><i class="fa fa-star"></i> Créer une demande de sponsoring </a></li>
+                            <li><a href="{{ path('create_reclamation') }}"><i class="fa fa-star"></i> Créer une lettre de reclamation </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                <div class="widget dashboard-container my-adslist">
+                    <h3 class="widget-header">Mes Offres</h3>
+
+                    <form  action="{{ path('searchO') }}" method="post">
+                        <div class="input-group md-form form-sm form-2 pl-0 mb-3">
+                            <input name="nomSponsors" class="form-control my-0 py-1 red-border" type="text" placeholder="Recherche" aria-label="Search">
+                            <div class="input-group-append">
+                                <span name="keyword" value="Rechercher" class="input-group-text red lighten-3" style="background-color:#f82249 ; color:#ffffff" id="basic-text1"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-responsive product-dashboard-table">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Details</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                    <!-- Begining -->
+                    {% for o in offres %}
+                        <tr>
+                            <td class="product-thumb">
+                                <img width="80px" height="auto" src="{{ asset('uploads/images/' ~ o.image) }}" ></td>
+                            <td class="product-details">
+                                <h3 class="title">{{ o.nomSponsors }}</h3>
+                                <span class="add-id"><strong>ID:</strong>{{ o.id }}</span>
+                                <span><strong>Créée le: </strong><time>{{ o.dateModif |date('d/m/Y')}}</time> </span>
+                                <span class="status active"><strong>Email</strong>{{ o.eMail }}</span>
+                                <span class="location"><strong>Adresse</strong>{{ o.adresse }}</span>
+                            </td>
+                            <td class="product-category"><span class="categories">{{ o.descriptionOffre }}</span></td>
+                            <td class="action" data-title="Action">
+                                <div class="">
+                                    <ul class="list-inline justify-content-center">
+                                        <li class="list-inline-item">
+                                            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="{{ path('Une',{'id':o.id}) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="edit" href="{{ path('ModifOffre',{'id':o.id}) }}">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class = "delete" data-id="{{o.id}} " data-toggle="modal" data-target="#delete_cat_{{o.id}}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="delete_cat_{{o.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Supprimer l'offre : {{o.nomSponsors}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                        Attention vous êtes en train de
+                                        supprimer
+                                        cette offre !
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="{{ path('SupriOffre',{'id':o.id}) }}" class="btn btn-danger"><i
+                                                    class="fas fa-trash-alt"></i> Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    <!-- END -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JAVASCRIPTS -->
+<script src="{{ asset('profil/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/tether/js/tether.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/raty/jquery.raty-fa.js') }}"></script>
+<script src="{{ asset('profil/plugins/bootstrap/dist/js/popper.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/slick-carousel/slick/slick.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('profil/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+<script src="{{ asset('profil/plugins/smoothscroll/SmoothScroll.min.js') }}"></script>
+<script src="{{ asset('profil/js/scripts.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+
+</body>
+
+</html>
+
+{% endblock %}

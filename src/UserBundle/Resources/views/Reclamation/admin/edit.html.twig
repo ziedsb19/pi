@@ -1,0 +1,19 @@
+
+    <h1>Creation Reclamations </h1>
+<div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+      <div class="signup-form" >
+    {{ form(edit_form) }}
+      </div>
+            </div>
+</div>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('reclamationsadmin') }}">
+            Retour à la liste
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+

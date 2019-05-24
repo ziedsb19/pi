@@ -40,3 +40,25 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+
+    
+    
+    UserBundle\Form\Extension\ImageTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+    
+    offre.image_uploader:
+        class: UserBundle\ImageUpload
+        arguments: ['%images_directory%']
+
+    offre.doctrine_image_listener:
+        class: UserBundle\EventListener\UploadImageListener
+        arguments: ['@offre.image_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            
+    app.client.stripe:
+        public: true
+        class: UserBundle\Client\StripeClient
+        arguments: ['%stripe_secret_key%', '%payment%', '@doctrine.orm.entity_manager', '@logger']            

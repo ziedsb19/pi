@@ -1,0 +1,13 @@
+{% block subject %}Confirmation de transaction{% endblock %}
+
+    {% block body_text %}
+        {% autoescape false %}
+
+            Bonjour {{ user.username }} !
+
+            Votre transaction a été bien envoyé. Merci
+
+            Amicalement,
+            TechEvent
+        {% endautoescape %}
+    {% endblock %}

@@ -38,6 +38,12 @@ admin:
     path:     /admin
     defaults: { _controller: ActualBundle:opportunite:admin}
 
+
+
+
+
+
+    
 webSerOppAjout:
     path:     /webSerOppAjout
     defaults: { _controller: ActualBundle:webSerOpp:new}
@@ -45,3 +51,7 @@ webSerOppAjout:
 webSerOpp:
     path:     /webSerOpp
     defaults: { _controller: ActualBundle:webSerOpp:all}
+
+webSerAct:
+    path:     /webSerAct
+    defaults: { _controller: ActualBundle:webSerAct:all}    

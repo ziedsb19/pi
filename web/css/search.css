@@ -1,0 +1,222 @@
+.agregate a {
+    color: #0e1b4d;
+}
+
+.agregate span {
+    background-color: #0e1b4d;
+    color: white;
+}
+
+#evenementsbundle_evenement_captcha
+{
+    margin-left: 0.5rem !important;
+}
+
+div.form-check-inline label
+{
+    margin-bottom: 0;
+}
+#searchList
+{
+    position: absolute;
+    display: none;
+    left: 0px;
+    z-index: 1000;
+    min-width: 10rem;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+#searchList ul li span
+{
+    font-size: 0.9rem;
+}
+#searchList ul li:hover
+{
+    background-color: #ECECEC;
+    cursor: pointer;
+}
+#searchList > div
+{
+    background-color: #ECECEC;
+    font-size: 0.9rem;
+}
+
+.custom_label
+{
+    position:absolute ;
+    top: 10px;
+    right: 10px;
+}
+
+#icon_toolbar a
+{
+    color: #2a4d69;
+    cursor: pointer;
+}
+
+.share_link
+{
+    z-index: 1000;
+    position: absolute;
+    display: none;
+    margin: 0.125rem 0 0;
+    font-size: 0.9rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.share_link_2
+{
+    z-index: 1000;
+    position: absolute;
+    right: 0;
+    display: none;
+    margin: 0.125rem 0 0;
+    font-size: 0.9rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    width: 50%
+}
+
+.maps
+{
+    position: absolute;
+    top: 20px;
+    left: 250px;
+    height: 250px;
+    width: 300px;
+    display: none;
+    z-index: 500;
+}
+
+#vues_evenements
+{
+    padding-right: 0px;
+}
+
+#details_bar
+{
+    font-size: 14px;
+}
+
+#details_bar .custom
+{
+    color: #0e1b4d;
+}
+
+#icon_bar_toolbar a
+{
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-custom
+{
+    background-color: #0e1b4d;
+    color: #fff;
+}
+
+.btn-custom-pink
+{
+    background-color: #f82249;
+    color: #fff;
+}
+
+.btn-custom-pink:hover
+{
+    background-color: #f82249;
+    color: #fff;
+}
+
+.btn-custom:hover
+{
+    background-color: #0e1b4d;
+    color: #fff;
+}
+
+.custom-contact
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f82249;
+}
+
+.bookmark-info
+{
+    background-color:#0e1b4d;
+    color: #f82249;
+    display: none;
+}
+.times
+{
+    position: absolute;
+    right: 0;
+    top:0;
+    color: white;
+    background-color: #212529;
+    opacity:0.8;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.images
+{
+    width: 22%;
+    position: relative;
+}
+
+#galery-container
+{
+    margin-top: -30px;
+}
+
+#filter-block
+{
+}
+
+#filter-block div
+{
+    margin-bottom: 0.7rem;
+}
+
+.custom-butt-2
+{
+    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+    color: #fff;
+
+}
+
+.custom-butt-2:hover
+{
+    background-image: linear-gradient(to right, #0e1b4d , #f82249);
+    color: #fff;
+
+}
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+.input-group.md-form.form-sm.form-2 input.red-border  {
+    border: 1px solid #ef9a9a;
+}

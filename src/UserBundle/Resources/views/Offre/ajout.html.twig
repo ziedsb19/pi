@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('csss/colors/rose.css') }}">
+    <link rel="stylesheet" href="{{asset('css/search.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{asset('css/search.css')}}">
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container form-ajout w-50">
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-12 col-xs-12">
+                <div class="title mt-4 ">
+                    <h1 style="text-align:center ; color:#e80d36">  Ajout d'une nouvelle offre</h1>
+                </div>
+                {{form_start(form)}}
+                {{form_widget(form)}}
+                {{ form_row(form.imageFile) }}
+<div class="mx-auto mb-5" style="width: 200px;">
+                <button type="submit" class="btn custom-butt-2 w-75 button large">Ajouter</button>
+</div>
+                {{form_end(form)}}
+
+                <nav aria-label="navigation">
+                    <ul class="pager">
+                        <li class="previous"><a href="{{ path('user_homepage') }}" title="Précédent">Précédent</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

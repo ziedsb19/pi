@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <!DOCTYPE html>
+    <html lang="fr">
+
+
+    <head>
+
+        <title>Tous les sponsors</title>
+
+        <link rel='stylesheet' id='bootstrap-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap/css/bootstrap.min.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='font-awesome-css'  href='http://demo.ovathemes.com/eventmana/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/font-awesome.min.css?ver=5.6' type='text/css' media='all' />
+        <link rel='stylesheet' id='bootstrap-select-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap-select/bootstrap-select.min.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='owl.carousel.min-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/owlcarousel2/assets/owl.carousel.min.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='owl.theme.default.min-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/owlcarousel2/assets/owl.theme.default.min.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='prettyPhoto-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/prettyphoto/css/prettyPhoto.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='animate-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/animate/animate.min.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='countdown-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/countdown/jquery.countdown.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='custom-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/css/custom.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='parent-stylesheet-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/style.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='theme-style-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana-child/style.css?ver=eventmana' type='text/css' media='all' />
+        <link rel='stylesheet' id='ova_add_fix-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/extend/css/fix.css?ver=5.1.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='instag-slider-css'  href='http://demo.ovathemes.com/eventmana/wp-content/plugins/instagram-slider-widget/assets/css/instag-slider.css?ver=1.4.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='theme-slug-fonts-css'  href='https://fonts.googleapis.com/css?family=Raleway%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%22%7CRoboto%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CRoboto+Slab%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+        <link rel='stylesheet' id='parent-style-css'  href='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/style.css?ver=5.1.1' type='text/css' media='all' />
+
+        <style type="text/css">
+
+            a{ color: #ed4a43; }
+            .btn-theme {
+                color: #ffffff;
+                background-color: #ed4a43;
+                border-color: #ed4a43;
+            }
+
+            .color .btn-theme {
+                color: #ed4a43;
+
+            }
+
+            .logo a:hover {
+                color: #ed4a43;
+            }
+
+            #main-slider.owl-theme .owl-controls .owl-dots .owl-dot:hover span,
+            #main-slider.owl-theme .owl-controls .owl-dots .owl-dot.active span {
+                background-color: #ed4a43;
+                border: solid 2px #ffffff;
+            }
+
+
+            .img-carousel .owl-controls .owl-page span,
+            .img-carousel .owl-controls .owl-buttons div {
+                background-color: #ed4a43;
+            }
+
+
+            .row.faq .nav li.active a,
+            .row.faq .nav li a:hover {
+                background-color: #ed4a43;
+                border-color: #ed4a43;
+                color: #ffffff;
+            }
+
+            .post-title a:hover {
+                color: #ed4a43;
+            }
+
+
+            .post-header .post-meta a:hover {
+                color: #ed4a43;
+            }
+
+
+            .timeline .post-title a {
+                color: #ed4a43;
+            }
+
+
+            .timeline .post-readmore a:hover {
+                color: #ed4a43;
+            }
+
+            .project-details .dl-horizontal dt {
+                color: #3c4547;
+            }
+
+            .thumbnail:hover {
+                border: solid 1px #ed4a43;
+            }
+
+            .caption-category {
+                color: #ed4a43;
+            }
+
+            .color .testimonials.owl-theme .owl-dots .owl-dot span {
+                background-color: #ed4a43;
+                border: solid 2px #ffffff;
+            }
+
+            .widget-title:before {
+                background-color: #ed4a43;
+            }
+
+            .sidebar .widget-title {
+                color: #ed4a43;
+            }
+            .widget.categories li.active a,
+            .widget.categories li a:hover {
+                background-color: #ed4a43;
+                color: #ffffff;
+            }
+
+            .body-dark .color .btn-theme {
+                background-color: #ed4a43;
+                border-color: #ed4a43;
+            }
+
+            .feature .title-inner span.title{color: #ed4a43;}
+            .filtrable .current a, .filtrable .active a, .filtrable .current a:hover, .filtrable .active a:hover{
+                color: #ed4a43;
+                border-bottom-color: #ed4a43;
+            }
+            .filtrable a:hover, .thumbnails.events .caption-price{
+                color: #ed4a43;
+            }
+            .thumbnails.events .caption-title a:hover{
+                color: #ed4a43;
+            }
+            .thumbnails.events .caption-more .btn-theme:hover{
+                background-color: #ed4a43;
+                border-color: #ed4a43;
+            }
+
+            .timeline a{ color: #ed4a43!important; }
+            .faq-alt .panel-title a{ color: #ed4a43; }
+
+
+            ul li.current_page_item a{
+                color: #ed4a43!important;
+            }
+        </style>
+
+
+
+    <body class="page-template page-template-templates page-template-event_grid page-template-templatesevent_grid-php page page-id-16 wide ltr body-light multipage woocommerce-no-js wpb-js-composer js-comp-ver-5.6 vc_responsive" >
+
+    <div class="container_boxed">
+        <div class="wrapper">
+
+
+            <div class="page-section with-sidebar sidebar-right first-section">
+                <div class="container">
+
+                    <div id="sidebar" class="sidebar col-lg-3 col-md-4 col-sm-12">
+                        <div class="widget"><h4 class="widget-title">Filter</h4>
+                                {{ form_start(form) }}
+                                <tr>
+                                    <td>Sponsor</td>
+                                    <td>{{ form_widget(form.nomSponsors) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_widget(form.find) }}</td>
+                                </tr>
+                                {{ form_end(form) }}
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-12 mobile_clear nopadding_mobile">
+                        <div class="listing-meta list-short">
+                            <div class="filters">
+                                <h3 class="post-title">Liste des sponsors</h3>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+
+
+                            <div id="grid-view"  class="tab-pane fade in active" role="tabpanel">
+
+                                <div class="row thumbnails events">
+                                    {% for o in offres %}
+                                        <div class="col-md-4 col-sm-6 " >
+                                            <div class="thumbnail no-padding border border-info">
+                                                <div class="media_img">
+                                                    <img src="{{ asset('uploads/images/' ~ o.image) }}" alt="">
+                                                </div>
+                                                <div class="caption">
+                                                    <h3 class="caption-title"><a href="#">{{ o.nomSponsors }}</a></h3>
+                                                    <p class="caption-category"><i class="fa fa-file-text-o"></i> Le {{ o.dateModif |date('d/m/Y')}} Lieu :  {{ o.adresse }}</p>
+                                                    <p class="caption-price">{{ o.eMail }}</p>
+                                                    <p class="caption-text">{{ o.descriptionOffre }}</p>
+                                                    <p class="caption-more"><a href="{{ path('OneOff',{'id':o.id}) }}" class="btn btn-theme">Detail</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /Wrapper -->
+    </div> <!-- /container_boxed -->
+
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.5.7'></script>
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBgWJCe6mtlKDB6W3NQ4uZ9dyPjcbhZUXU&#038;ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/modernizr.custom.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap/js/bootstrap.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/bootstrap-select/bootstrap-select.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/superfish/js/superfish.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/plugins/woocommerce/assets/js/prettyPhoto/jquery.prettyPhoto.min.js?ver=3.1.6'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/jquery.smoothscroll.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/jquery.easing.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/smooth-scrollbar.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/owlcarousel2/owl.carousel.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min.js?ver=5.6'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/countdown/jquery.plugin.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/plugins/countdown/jquery.countdown.min.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/plugins/js_composer/assets/lib/bower/isotope/dist/isotope.pkgd.min.js?ver=5.6'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/js/theme.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/js/custom.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-content/themes/eventmana/assets/js/theme_init.js?ver=5.1.1'></script>
+    <script type='text/javascript' src='http://demo.ovathemes.com/eventmana/wp-includes/js/wp-embed.min.js?ver=5.1.1'></script>
+    </body>
+    </html>
+
+{% endblock %}
+
+
